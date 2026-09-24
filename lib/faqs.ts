@@ -91,6 +91,11 @@ export const faqGroups: FaqGroup[] = [
           "The organization lists 40+ hiring partners including Infosys, Accenture, TCS, Capgemini, HPE, Vedang Cellular Services, OLA Tech Solutions and Concentrix.",
       },
       {
+        question: "Do you provide proxy interview support?",
+        answer:
+          "No. Tungabadra Networks does not attend interviews on a candidate's behalf, provide live assistance during an interview, or misrepresent anyone's identity, experience or work. Placement support is preparation only: mock interviews, portfolio and resume review, and introductions to hiring partners. Candidates attend their own interviews and answer for their own work. Anyone found arranging or accepting proxy attendance is removed from the program and from placement support.",
+      },
+      {
         question: "What results does Tungabadra Networks report?",
         answer:
           "The organization publishes these figures: 3,000+ engineers trained, 950+ students placed, a 96% career success rate, a 150% average salary hike and a highest package of Rs 26.5L.",

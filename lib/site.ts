@@ -133,6 +133,7 @@ export const primaryNav: NavItem[] = [
     description: "Network architecture, managed services, NOC and IT staffing.",
     children: [
       { label: "Technology Services", href: "/technology-services" },
+      { label: "Project Support", href: "/project-support" },
       { label: "Corporate Training", href: "/corporate-training" },
     ],
   },
@@ -162,6 +163,7 @@ export const footerNav: { title: string; links: NavItem[] }[] = [
     title: "Enterprise",
     links: [
       { label: "Technology Services", href: "/technology-services" },
+      { label: "Project Support", href: "/project-support" },
       { label: "Corporate Training", href: "/corporate-training" },
     ],
   },

@@ -148,6 +148,14 @@ export default function AboutPage() {
             Tungabadra Networks is not an authorized training partner of any certification vendor,
             and does not guarantee employment.
           </p>
+          <p>
+            We do not provide proxy interview support of any kind. We do not attend interviews on a
+            candidate&rsquo;s behalf, assist during a live interview, or misrepresent anyone&rsquo;s
+            identity, experience or work. Placement support is preparation: mock interviews,
+            portfolio and resume review, and introductions to hiring partners. Candidates attend
+            their own interviews and answer for their own work, because a role obtained any other
+            way does not survive the first month of it.
+          </p>
         </Prose>
       </PageBody>
       <Faq />

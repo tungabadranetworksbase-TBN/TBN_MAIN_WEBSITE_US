@@ -146,6 +146,10 @@ export default function TermsPage() {
                 <li>Share account credentials or resell access to course materials.</li>
                 <li>Submit work that is not your own without attribution.</li>
                 <li>
+                  Arrange, accept or act as a proxy in any interview, assessment or examination,
+                  whether for a TBN program or for an employer.
+                </li>
+                <li>
                   Use lab environments, tools or techniques taught in a course against any system
                   you do not own or have written authorization to test.
                 </li>
@@ -196,6 +200,14 @@ export default function TermsPage() {
                 pass any third-party certification exam. No placement rates, salary figures or
                 outcome statistics are published on this site, and none should be inferred from any
                 statement on it.
+              </p>
+              <p>
+                Placement support is preparation only. TBN does not provide proxy interview
+                support: we do not attend interviews on a participant&rsquo;s behalf, assist during
+                a live interview, or represent a participant&rsquo;s identity, experience or work as
+                anything other than what it is. Arranging or accepting proxy attendance is a breach
+                of these terms and results in removal from the program and from placement support,
+                without refund.
               </p>
 
               <h2 id="third-party" style={{ scrollMarginTop: "calc(var(--header-h) + 20px)" }}>

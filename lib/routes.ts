@@ -43,6 +43,7 @@ const staticRoutes: RouteGroup[] = [
     title: "Business",
     routes: [
       { path: "/corporate-training", label: "Corporate Training", description: "Cohort training for US engineering and IT teams.", priority: 0.8, changeFrequency: "monthly" },
+      { path: "/project-support", label: "Project Support", description: "Engineers working alongside your team on a live network project, from design review through rollout.", priority: 0.8, changeFrequency: "monthly" },
       { path: "/technology-services", label: "Technology Services", description: "Network, cloud, automation and documentation engagements.", priority: 0.8, changeFrequency: "monthly" },
     ],
   },
