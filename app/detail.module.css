@@ -1,0 +1,232 @@
+/* Shared layout for course, internship and article detail pages. */
+
+.layout {
+  display: grid;
+  gap: clamp(32px, 4vw, 56px);
+  align-items: start;
+  grid-template-columns: 1fr;
+  padding-block: clamp(40px, 5vw, 72px);
+}
+
+.main { min-width: 0; display: flex; flex-direction: column; gap: clamp(40px, 5vw, 64px); }
+
+.block { display: flex; flex-direction: column; gap: 18px; scroll-margin-top: calc(var(--header-h) + 20px); }
+
+.blockTitle {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.5rem, 1.3rem + 0.9vw, 2rem);
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  color: var(--ink);
+}
+
+/* ------------------------------------------------------------- sidebar --- */
+.aside { display: flex; flex-direction: column; gap: 18px; }
+
+.asideCard {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: clamp(20px, 2.4vw, 26px);
+}
+
+.price {
+  font-family: var(--font-display);
+  font-size: 2.25rem;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+}
+.priceNote { font-size: 0.8125rem; color: var(--fg-faint); margin-top: 6px; }
+
+.specs { display: flex; flex-direction: column; gap: 0; }
+.spec {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.875rem;
+}
+.spec:last-child { border-bottom: 0; }
+.specLabel { font-family: var(--font-ui); color: var(--ink-3); letter-spacing: 0; flex: none; }
+.specValue { color: var(--ink); text-align: right; }
+
+.asideActions { display: flex; flex-direction: column; gap: 10px; }
+
+/* --------------------------------------------------------- curriculum --- */
+.modules { display: flex; flex-direction: column; gap: 10px; }
+
+.module {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  overflow: hidden;
+}
+.module[open] { border-color: var(--line-strong); }
+
+.moduleSummary {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  cursor: pointer;
+  list-style: none;
+}
+.moduleSummary::-webkit-details-marker { display: none; }
+.moduleSummary:hover { background: var(--surface-2); }
+
+.moduleIndex {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent-800);
+  font-family: var(--font-ui);
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+.moduleName {
+  flex: 1;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  min-width: 0;
+}
+.moduleHours {
+  font-family: var(--font-ui);
+  font-size: 0.8125rem;
+  color: var(--ink-3);
+  white-space: nowrap;
+  letter-spacing: 0;
+}
+.moduleChevron { flex: none; color: var(--ink-3); transition: transform 0.25s var(--ease); }
+.module[open] .moduleChevron { transform: rotate(180deg); }
+
+.moduleTopics {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 2px 18px 18px 62px;
+}
+.moduleTopics li {
+  list-style: none;
+  position: relative;
+  padding-left: 16px;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+.moduleTopics li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--ink-4);
+}
+
+/* ---------------------------------------------------------- two column --- */
+.duo {
+  display: grid;
+  gap: clamp(18px, 2.4vw, 28px);
+  grid-template-columns: 1fr;
+}
+
+.miniCard {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+}
+.miniTitle {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.miniBody { font-size: 0.9375rem; line-height: 1.6; color: var(--ink-2); }
+
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+
+/* ------------------------------------------------------------- article --- */
+.articleMeta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+  font-family: var(--font-ui);
+  font-size: 0.8125rem;
+  letter-spacing: 0;
+  color: var(--ink-3);
+}
+.articleMeta .dot { opacity: 0.5; }
+
+.toc {
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+}
+.tocTitle {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 10px;
+}
+.tocList { display: flex; flex-direction: column; gap: 8px; }
+.tocList a { font-size: 0.9375rem; color: var(--ink-2); }
+.tocList a:hover { color: var(--accent-800); text-decoration: underline; text-underline-offset: 3px; }
+
+@media (min-width: 640px) {
+  .duo { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (min-width: 1024px) {
+  .layout { grid-template-columns: minmax(0, 1fr) 340px; }
+  .aside { position: sticky; top: calc(var(--header-h) + 20px); }
+}
+
+/* Programme outline: phase cards on the internship detail page. */
+.phaseIndex {
+  margin: 0 0 6px;
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+.phaseTopics {
+  margin: 10px 0 0;
+  padding-left: 18px;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+.phaseTopics li { margin-bottom: 4px; }
+
+/* Marks a bundled extra that carries no separate charge. */
+.freeTag {
+  margin-left: 8px;
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold);
+}

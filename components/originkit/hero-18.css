@@ -1,0 +1,41 @@
+/* hero-18 — Zentra tornado particle hero (from sridhar-raj/Tornado-Section) */
+
+/* The section shipped with four Google-hosted faces. They are mapped onto the
+   brand's own faces instead: one type system across the site, and no external
+   font request from a section that sits above the fold. */
+@theme {
+  --font-inter: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-inter-tight: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-lato: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-instrument-serif: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+}
+
+.h18-background {
+  background-image: linear-gradient(90deg, rgb(11, 11, 13) 0%, rgb(11, 11, 13) 100%),
+    url("data:image/svg+xml;utf8,<svg viewBox='0 0 1440 769' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%25' width='100%25' fill='url(%23grad)' opacity='1'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(4.4087e-15 38.45 -72 2.3544e-15 720 384.5)'><stop stop-color='rgba(58,44,6,1)' offset='0'/><stop stop-color='rgba(31,25,6,1)' offset='0.5'/><stop stop-color='rgba(13,12,10,1)' offset='1'/></radialGradient></defs></svg>");
+}
+
+.h18-logo-fade {
+  mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+}
+
+.h18-logo-track {
+  animation: h18-logo-scroll 32s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .h18-logo-track {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes h18-logo-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+

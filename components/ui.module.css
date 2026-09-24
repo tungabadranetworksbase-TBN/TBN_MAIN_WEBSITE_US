@@ -1,0 +1,211 @@
+/* ---------------------------------------------------------------- hero --- */
+.hero {
+  position: relative;
+  isolation: isolate;
+  background-color: var(--dark);
+  color: var(--on-dark);
+  overflow: hidden;
+}
+
+.heroArt {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  object-fit: cover;
+  opacity: 0.55;
+}
+
+/* Keeps display text legible over the artwork at every viewport size. */
+.heroScrim {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(120% 90% at 50% 0%, rgba(15, 21, 18, 0.25) 0%, rgba(15, 21, 18, 0.82) 62%, var(--dark) 100%),
+    linear-gradient(to bottom, rgba(15, 21, 18, 0.35), rgba(15, 21, 18, 0.9));
+}
+
+.heroInner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  text-align: center;
+  padding-block: clamp(64px, 11vw, 132px) clamp(56px, 8vw, 104px);
+  max-width: 860px;
+  margin-inline: auto;
+}
+.heroInner--left { align-items: flex-start; text-align: left; margin-inline: 0; }
+
+.heroTitle { color: #fff; }
+.heroLede { color: var(--on-dark-2); font-size: clamp(1rem, 0.94rem + 0.35vw, 1.1875rem); }
+
+.heroActions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+.heroInner--left .heroActions { justify-content: flex-start; }
+
+/* Compact page header used on interior pages. */
+.pageHead {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding-block: clamp(36px, 5vw, 60px) clamp(40px, 6vw, 72px);
+  max-width: 760px;
+}
+
+/* --------------------------------------------------------- breadcrumbs --- */
+.crumbs { padding-top: 18px; }
+.crumbsList {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-ui);
+  font-size: 0.8125rem;
+  letter-spacing: 0;
+  color: var(--ink-3);
+}
+.crumbsList li { list-style: none; display: flex; align-items: center; gap: 6px; }
+/* WCAG 2.2 AA 2.5.8: keep breadcrumb links at least 24px tall. */
+.crumbsList a { display: inline-flex; align-items: center; min-height: 24px; }
+.crumbsList a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+.crumbsList [aria-current="page"] { color: var(--ink-2); }
+.sep { opacity: 0.5; }
+
+.crumbs--dark .crumbsList { color: var(--on-dark-3); }
+.crumbs--dark .crumbsList [aria-current="page"] { color: var(--on-dark-2); }
+.crumbs--dark .crumbsList a:hover { color: #fff; }
+
+/* ----------------------------------------------------------------- faq --- */
+.faq { display: flex; flex-direction: column; gap: 10px; }
+
+.item {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: border-color 0.25s var(--ease);
+}
+.item[open] { border-color: var(--line-strong); }
+
+.summary {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 20px;
+  cursor: pointer;
+  list-style: none;
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.summary::-webkit-details-marker { display: none; }
+.summary:hover { background: var(--surface-2); }
+
+.summaryIcon { flex: none; margin-top: 2px; color: var(--ink-3); transition: transform 0.25s var(--ease); }
+.item[open] .summaryIcon { transform: rotate(180deg); }
+
+.answer {
+  padding: 0 20px 20px;
+  color: var(--ink-2);
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  max-width: 37em;
+}
+
+:global(.on-dark) .item { background: rgba(255, 255, 255, 0.04); border-color: var(--on-dark-line); }
+:global(.on-dark) .summary { color: #fff; }
+:global(.on-dark) .summary:hover { background: rgba(255, 255, 255, 0.07); }
+:global(.on-dark) .answer { color: var(--on-dark-2); }
+
+/* ------------------------------------------------------------ cta band --- */
+.cta {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background-color: var(--dark);
+  color: var(--on-dark);
+  padding: clamp(36px, 6vw, 72px) clamp(24px, 5vw, 64px);
+  text-align: center;
+}
+.ctaArt { position: absolute; inset: 0; z-index: -1; object-fit: cover; opacity: 0.42; }
+.ctaScrim {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(115deg, rgba(15, 21, 18, 0.94), rgba(15, 21, 18, 0.62));
+}
+.ctaInner { display: flex; flex-direction: column; align-items: center; gap: 18px; max-width: 640px; margin-inline: auto; }
+.ctaActions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+
+/* --------------------------------------------------------- fact / meta --- */
+.facts {
+  display: grid;
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  grid-template-columns: 1fr;
+}
+.fact { background: var(--surface); padding: 18px 20px; }
+.factLabel {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 6px;
+}
+.factValue { font-size: 0.9375rem; color: var(--ink); line-height: 1.45; }
+
+:global(.on-dark) .facts { background: var(--on-dark-line); border-color: var(--on-dark-line); }
+:global(.on-dark) .fact { background: var(--dark-2); }
+:global(.on-dark) .factLabel { color: var(--on-dark-3); }
+:global(.on-dark) .factValue { color: #fff; }
+
+/* ----------------------------------------------------- answer callout ---- */
+.answerBox {
+  /* Card, not an accent stripe - see the note on .tbn-answer in tbn.css. */
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--ink-2);
+  max-width: 40em;
+}
+.answerBox strong { color: var(--ink); }
+
+/* ------------------------------------------------------- sticky mobile --- */
+.stickyCta {
+  position: fixed;
+  inset: auto 0 0 0;
+  z-index: 90;
+  display: flex;
+  gap: 10px;
+  padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+  background: rgba(233, 236, 234, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-top: 1px solid var(--line);
+}
+.stickyCta > * { flex: 1; }
+
+@media (min-width: 768px) {
+  .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .stickyCta { display: none; }
+}
+@media (min-width: 1024px) {
+  .facts--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+/* Sticky bar overlaps the footer on mobile, so lift the page bottom. */
+.stickyPad { padding-bottom: 76px; }
+@media (min-width: 768px) { .stickyPad { padding-bottom: 0; } }

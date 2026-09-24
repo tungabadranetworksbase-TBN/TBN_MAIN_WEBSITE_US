@@ -1,0 +1,290 @@
+/* ===========================================================================
+   Interior-page utilities.
+
+   The course, internship, policy and resource pages are written against a
+   utility vocabulary (.container, .card, .prose, .table-wrap, .h2 ...) that
+   came from the old stylesheet. Rather than leave them unstyled while each
+   page gets its own redesign, the same class names are re-expressed here in
+   brand tokens, so every route is coherent and nothing overflows.
+
+   These are transitional. As each page moves onto the brand components, its
+   utilities drop out of this file.
+   =========================================================================== */
+
+.container {
+  width: 100%;
+  max-width: calc(var(--shell) + var(--gutter) * 2);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section-head {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 62ch;
+  margin-bottom: clamp(28px, 3.5vw, 44px);
+}
+.section-head--center { margin-inline: auto; text-align: center; align-items: center; }
+
+.h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 1.6rem + 2.6vw, 3.4rem);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+.h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 1.4rem + 1.6vw, 2.5rem);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+.h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 1.18rem + 0.6vw, 1.6rem);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+.h4 { font-family: var(--font-display); font-size: 1.125rem; font-weight: 600; letter-spacing: -0.01em; }
+.h5 { font-family: var(--font-display); font-size: 1rem; font-weight: 600; letter-spacing: -0.01em; }
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  padding: 6px 11px;
+  border: 1px solid var(--gold-line);
+  border-radius: var(--r-chip);
+  background: var(--gold-dim);
+}
+
+.grid { display: grid; gap: clamp(14px, 1.8vw, 20px); }
+/* auto-fit alone lets a "--3" grid render four columns on a wide viewport, so
+   each modifier is capped at the column count its name promises. */
+.grid--2 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); }
+.grid--3 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); }
+.grid--4 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); }
+@media (min-width: 900px) {
+  .grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (min-width: 1100px) {
+  .grid--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+.stack { display: flex; flex-direction: column; gap: 14px; }
+.row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  background: var(--ink-900);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  padding: clamp(20px, 2.3vw, 28px);
+  transition: border-color 0.3s var(--ease), background-color 0.3s var(--ease);
+}
+.card--link:hover { border-color: var(--gold-line); background: var(--ink-850); }
+.card--muted { background: var(--ink-1000); }
+.card__meta {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fg-faint);
+}
+.card__body { color: var(--fg-muted); font-size: 0.9375rem; line-height: 1.62; text-wrap: pretty; }
+.stretched::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
+
+.icon-tile {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  flex: none;
+  border-radius: var(--r-chip);
+  background: var(--gold-dim);
+  color: var(--gold);
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  padding: 5px 10px;
+  border-radius: var(--r-chip);
+  border: 1px solid var(--line);
+  background: var(--ink-850);
+  color: var(--fg-muted);
+  white-space: nowrap;
+}
+.tag--accent { border-color: var(--gold-line); background: var(--gold-dim); color: var(--gold); }
+
+.checklist { display: flex; flex-direction: column; gap: 10px; }
+.checklist li {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--fg-muted);
+}
+.checklist li::before {
+  content: "";
+  flex: none;
+  width: 6px;
+  height: 6px;
+  margin-top: 9px;
+  border-radius: 50%;
+  background: var(--gold);
+}
+
+/* Wide content scrolls inside its own box so the page never does. */
+.table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  background: var(--ink-900);
+}
+.table { width: 100%; border-collapse: collapse; font-size: 0.9375rem; min-width: 560px; }
+.table th,
+.table td {
+  text-align: left;
+  padding: 13px 17px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+.table thead th {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-faint);
+  background: var(--ink-850);
+}
+.table tbody tr:last-child td { border-bottom: 0; }
+.table td { color: var(--fg-muted); }
+.table th[scope="row"] { color: var(--fg); font-weight: 600; }
+
+.prose { max-width: 70ch; color: var(--fg-muted); font-size: 1.0625rem; line-height: 1.72; }
+.prose > * + * { margin-top: 1.05em; }
+.prose h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.18;
+  font-size: clamp(1.4rem, 1.2rem + 0.9vw, 1.9rem);
+  color: var(--fg);
+  margin-top: 2em;
+  scroll-margin-top: calc(var(--nav-h) + 24px);
+}
+.prose h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.15rem;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+  margin-top: 1.7em;
+}
+.prose ul, .prose ol { padding-left: 1.2em; display: flex; flex-direction: column; gap: 0.5em; }
+.prose li { list-style: disc; }
+.prose ol li { list-style: decimal; }
+.prose a { color: var(--gold); text-decoration: underline; text-underline-offset: 3px; }
+.prose strong { color: var(--fg); font-weight: 600; }
+.prose code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  background: var(--ink-850);
+  padding: 2px 6px;
+  border-radius: 5px;
+  color: var(--gold);
+}
+
+/* The older .btn modifiers map onto the brand's two button styles. */
+.btn--primary,
+.btn--dark,
+.btn--on-dark { background: var(--gold); color: var(--ink-1000); font-weight: 600; }
+.btn--primary:hover,
+.btn--dark:hover,
+.btn--on-dark:hover { background: var(--gold-bright); }
+.btn--ghost-dark { border-color: var(--line-strong); color: var(--fg); background: transparent; }
+.btn--ghost-dark:hover { border-color: var(--gold); color: var(--gold); }
+.btn--sm { padding: 10px 17px; min-height: 40px; font-size: 0.875rem; }
+.btn--block { width: 100%; }
+
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  /* WCAG 2.2 target size (2.5.8): standalone links need 24px of height. */
+  min-height: 24px;
+  gap: 6px;
+  color: var(--gold);
+  font-weight: 500;
+  font-size: 0.9375rem;
+}
+
+.on-dark { background: var(--ink-1000); border-block: 1px solid var(--line); }
+
+/* A pull-quote lifts by scale and colour, not by a coloured edge stripe. */
+.pullquote {
+  margin: 1.6em 0;
+  padding: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 1.05rem + 0.7vw, 1.5rem);
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+  color: var(--fg);
+  max-width: 46ch;
+}
+.pullquote::before {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 2px;
+  margin-bottom: 0.7em;
+  background: var(--gold);
+}
+
+/* Label/value pairs on the About and detail pages. */
+.specs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  overflow: hidden;
+  margin: 1.6em 0;
+}
+.specs--3 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr)); }
+.spec {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 16px 18px;
+  background: var(--ink-900);
+}
+.spec dt {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-faint);
+}
+.spec dd { margin: 0; color: var(--fg); font-size: 0.9375rem; line-height: 1.5; }

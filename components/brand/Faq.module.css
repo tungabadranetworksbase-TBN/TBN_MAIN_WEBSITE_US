@@ -1,0 +1,26 @@
+.list { display: flex; flex-direction: column; gap: 9px; max-width: 820px; }
+.item {
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  background: var(--ink-900);
+  overflow: hidden;
+  transition: border-color 0.25s var(--ease);
+}
+.item[open] { border-color: var(--gold-line); }
+.summary {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 19px 22px;
+  cursor: pointer;
+  list-style: none;
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+.summary::-webkit-details-marker { display: none; }
+.summary:hover { color: var(--gold); }
+.icon { flex: none; margin-top: 3px; color: var(--gold); transition: transform 0.25s var(--ease); }
+.item[open] .icon { transform: rotate(45deg); }
+.answer { padding: 0 22px 21px; color: var(--fg-muted); font-size: 0.9375rem; line-height: 1.68; max-width: 68ch; }

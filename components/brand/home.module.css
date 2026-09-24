@@ -1,0 +1,258 @@
+/* Homepage sections. Each block below is a distinct layout family - no two
+   sections on the page share one, per the section-repetition rule. */
+
+/* --- 1. figures: a hairline row, not cards ------------------------------- */
+.figures {
+  display: grid;
+  gap: 1px;
+  background: var(--line);
+  border-block: 1px solid var(--line);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.figure {
+  display: flex;
+  /* dt must precede dd in the DOM; reverse puts the figure above its label */
+  flex-direction: column-reverse;
+  justify-content: flex-end;
+  gap: 9px;
+  background: var(--ink-950);
+  padding: clamp(22px, 3vw, 34px) clamp(16px, 2vw, 26px);
+}
+.figureValue {
+  margin: 0;
+  white-space: nowrap;
+  font-family: var(--font-mono);
+  font-size: clamp(1.75rem, 1.3rem + 2vw, 2.75rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--gold);
+  font-variant-numeric: tabular-nums;
+}
+.figureLabel {
+  font-size: 0.8125rem;
+  color: var(--fg-faint);
+  line-height: 1.4;
+}
+
+/* --- 2. offer: asymmetric bento, 4 items -> 4 cells ---------------------- */
+.offer { display: grid; gap: 14px; grid-template-columns: 1fr; }
+.offerCell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: var(--ink-900);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  padding: clamp(24px, 2.6vw, 34px);
+  overflow: hidden;
+  transition: border-color 0.3s var(--ease), background-color 0.3s var(--ease);
+}
+.offerCell:hover { border-color: var(--gold-line); background: var(--ink-850); }
+/* The lead cell carries the brand material so the grid is not four flat boxes. */
+.offerCell--lead {
+  background:
+    radial-gradient(120% 140% at 8% 0%, rgba(252, 192, 0, 0.16), transparent 58%),
+    var(--ink-900);
+}
+.offerIcon { color: var(--gold); }
+.offerBody { color: var(--fg-muted); font-size: 0.9375rem; line-height: 1.6; }
+.offerMeta {
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--fg-faint);
+}
+
+/* --- 3. courses: a dense index, not a card grid -------------------------- */
+.courseHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: clamp(28px, 3.5vw, 44px);
+}
+.courseGrid { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line);
+  border-radius: var(--r-card); overflow: hidden; grid-template-columns: 1fr; }
+.course {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  background: var(--ink-950);
+  padding: 17px 20px;
+  transition: background-color 0.25s var(--ease);
+}
+.course:hover { background: var(--ink-850); }
+.courseCode {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--gold);
+  letter-spacing: 0.08em;
+  min-width: 30px;
+}
+.courseName { font-weight: 500; font-size: 0.9375rem; flex: 1; }
+.courseTag { font-family: var(--font-mono); font-size: 0.6875rem; color: var(--fg-faint); }
+
+/* --- 4. why: sticky heading beside a scrolling list ---------------------- */
+.why { display: grid; gap: clamp(32px, 4vw, 56px); grid-template-columns: 1fr; }
+.whySticky { align-self: start; }
+.whyList { display: flex; flex-direction: column; }
+.whyItem {
+  display: grid;
+  gap: 6px;
+  padding-block: clamp(22px, 2.6vw, 30px);
+  border-top: 1px solid var(--line);
+  grid-template-columns: auto 1fr;
+  column-gap: 18px;
+}
+.whyItem:last-child { border-bottom: 1px solid var(--line); }
+.whyNum {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--gold);
+  padding-top: 5px;
+}
+.whyBody { color: var(--fg-muted); font-size: 0.9375rem; line-height: 1.62; grid-column: 2; }
+
+/* --- 5. enterprise: full-bleed band -------------------------------------- */
+.band {
+  background:
+    radial-gradient(80% 120% at 88% 12%, rgba(252, 192, 0, 0.11), transparent 60%),
+    var(--ink-1000);
+  border-block: 1px solid var(--line);
+}
+.bandInner { display: grid; gap: clamp(30px, 4vw, 60px); grid-template-columns: 1fr; align-items: center; }
+.services { display: grid; gap: 10px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.service {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 0.875rem;
+  color: var(--fg-muted);
+  padding: 11px 13px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-chip);
+  background: var(--ink-900);
+}
+.serviceDot { color: var(--gold); flex: none; }
+
+/* --- 6. faq -------------------------------------------------------------- */
+.faq { display: flex; flex-direction: column; gap: 9px; max-width: 820px; }
+.faqItem {
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  background: var(--ink-900);
+  overflow: hidden;
+  transition: border-color 0.25s var(--ease);
+}
+.faqItem[open] { border-color: var(--gold-line); }
+.faqSummary {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 19px 22px;
+  cursor: pointer;
+  list-style: none;
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+.faqSummary::-webkit-details-marker { display: none; }
+.faqSummary:hover { color: var(--gold); }
+.faqIcon { flex: none; margin-top: 3px; color: var(--gold); transition: transform 0.25s var(--ease); }
+.faqItem[open] .faqIcon { transform: rotate(45deg); }
+.faqAnswer { padding: 0 22px 21px; color: var(--fg-muted); font-size: 0.9375rem; line-height: 1.68; max-width: 68ch; }
+
+/* --- 7. closing cta ------------------------------------------------------ */
+.cta {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--gold-line);
+  border-radius: var(--r-card);
+  background:
+    radial-gradient(90% 160% at 50% 0%, rgba(252, 192, 0, 0.18), transparent 62%),
+    var(--ink-900);
+  padding: clamp(40px, 6vw, 78px) clamp(24px, 5vw, 56px);
+  text-align: center;
+}
+.ctaInner { display: flex; flex-direction: column; align-items: center; gap: 20px; max-width: 620px; margin-inline: auto; }
+.ctaActions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+
+@media (min-width: 640px) {
+  .figures { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .courseGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 1024px) {
+  .figures { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .offer { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  /* 4 items, 4 cells, deliberately uneven: lead is wider than the rest. */
+  .offerCell--lead { grid-column: span 3; }
+  .offerCell--b { grid-column: span 3; }
+  .offerCell--c { grid-column: span 2; }
+  .offerCell--d { grid-column: span 4; }
+  .courseGrid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .why { grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); }
+  .whySticky { position: sticky; top: calc(var(--nav-h) + 40px); }
+  .bandInner { grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); }
+  .services { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+/* Section head with the brand mark set beside it. */
+.offerHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(24px, 4vw, 64px);
+  margin-bottom: clamp(30px, 3.5vw, 46px);
+}
+.offerHeadText { display: flex; flex-direction: column; gap: 14px; max-width: 52ch; }
+.offerHeadText h2 { max-width: 18ch; }
+/* Where the brand mark sat. The flare is a canvas with no intrinsic size, so
+   the box has to carry the dimensions: a panel on the section's own radius and
+   hairline, sized off the heading beside it rather than fixed in pixels. */
+.offerMark {
+  position: relative;
+  flex: none;
+  width: clamp(180px, 22vw, 300px);
+  aspect-ratio: 5 / 4;
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  overflow: hidden;
+  /* Its own layer. Without this the canvas repaints the border and radius
+     under it on every frame. */
+  isolation: isolate;
+}
+
+/* The logo over the flare.
+
+   The file has black baked in - no alpha - so dropped in normally it would be
+   an opaque square with the flare hidden behind it. `screen` composites it
+   against the flare instead: pure black contributes nothing and disappears,
+   the gold and its glow stay, and the light moving behind reads through the
+   mark as if it were lighting it. Which is the only reason the flare is worth
+   having under a logo at all. */
+.offerMarkLogo {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  /* The logo is square and the panel is not, so it is contained rather than
+     sized on width - at 86% of a 5:4 box a square mark is taller than the box
+     and loses its top and bottom to the crop. */
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 16px 16px 20px;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+@media (max-width: 720px) {
+  .offerHead { flex-direction: column; align-items: flex-start; gap: 22px; }
+  .offerMark { width: 100%; max-width: 320px; order: -1; }
+}

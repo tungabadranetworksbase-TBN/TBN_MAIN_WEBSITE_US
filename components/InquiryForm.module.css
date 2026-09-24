@@ -1,0 +1,74 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: clamp(20px, 3vw, 32px);
+}
+
+.row { display: grid; gap: 18px; grid-template-columns: 1fr; }
+
+.field { display: flex; flex-direction: column; gap: 7px; }
+
+.label {
+  font-family: var(--font-ui);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--ink);
+}
+.optional { font-weight: 400; color: var(--ink-3); }
+
+.control {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--surface-2);
+  font-size: 0.9375rem;
+  color: var(--ink);
+  transition: border-color 0.2s var(--ease), background-color 0.2s var(--ease);
+}
+.control:hover { border-color: var(--ink-4); }
+.control:focus { background: var(--surface); }
+.control[aria-invalid="true"] { border-color: #b3261e; }
+
+textarea.control { min-height: 132px; resize: vertical; line-height: 1.55; }
+
+.hint { font-size: 0.8125rem; color: var(--ink-3); }
+.error { font-size: 0.8125rem; color: #b3261e; font-weight: 500; }
+
+.consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+/* The <label> wraps the input, so the whole row is the click target; the box
+   itself is sized for comfortable direct tapping. */
+.consent input {
+  width: 20px;
+  height: 20px;
+  margin-top: 1px;
+  flex: none;
+  accent-color: var(--accent-700);
+}
+.consent { min-height: 24px; }
+.consent a { color: var(--accent-800); text-decoration: underline; text-underline-offset: 3px; }
+
+.status {
+  padding: 14px 16px;
+  border-radius: var(--radius);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+.status[data-tone="ok"] { background: var(--accent-soft); color: var(--accent-800); }
+.status[data-tone="error"] { background: rgba(179, 38, 30, 0.08); color: #8c1d18; }
+
+@media (min-width: 640px) {
+  .row--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

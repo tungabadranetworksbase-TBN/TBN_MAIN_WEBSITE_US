@@ -1,0 +1,122 @@
+.footer {
+  position: relative;
+  background-color: var(--dark);
+  color: var(--on-dark);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Fintra's footer artwork, anchored bottom-centre so the glow sits behind the
+   legal row on every viewport width. */
+.footer::before {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: min(70%, 420px);
+  background: url("/images/footer-bg.png") bottom center / cover no-repeat;
+  opacity: 0.5;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.top {
+  display: grid;
+  gap: clamp(32px, 5vw, 64px);
+  padding-block: clamp(48px, 7vw, 88px) clamp(32px, 4vw, 56px);
+  grid-template-columns: 1fr;
+}
+
+.brand { display: flex; flex-direction: column; gap: 18px; max-width: 380px; }
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-ui);
+  font-size: 1rem;
+  color: #fff;
+}
+.logo strong { font-weight: 600; }
+
+.blurb { color: var(--on-dark-2); font-size: 0.9375rem; line-height: 1.6; }
+
+.contact { display: flex; flex-direction: column; gap: 10px; margin-top: 4px; }
+.contact a,
+.contact p {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 26px;
+  font-size: 0.9375rem;
+  color: var(--on-dark-2);
+}
+.contact svg { flex: none; }
+.contact a:hover { color: #fff; }
+
+.columns {
+  display: grid;
+  gap: clamp(24px, 4vw, 40px);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.colTitle {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--on-dark-3);
+  margin-bottom: 14px;
+}
+
+.colList { display: flex; flex-direction: column; gap: 10px; }
+.colList a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  font-size: 0.9375rem;
+  color: var(--on-dark-2);
+}
+.colList a:hover { color: #fff; }
+
+.bottom {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 24px;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: 22px 30px;
+  border-top: 1px solid var(--on-dark-line);
+  font-size: 0.8125rem;
+  color: var(--on-dark-3);
+}
+
+.social { display: flex; gap: 10px; }
+.social a {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--on-dark-line);
+  border-radius: 50%;
+  color: var(--on-dark-2);
+}
+.social a:hover { color: #fff; border-color: rgba(255, 255, 255, 0.4); }
+
+.note {
+  padding: 14px 16px;
+  margin-bottom: 22px;
+  border: 1px dashed var(--on-dark-line);
+  border-radius: var(--radius);
+  font-size: 0.8125rem;
+  line-height: 1.55;
+  color: var(--on-dark-3);
+}
+
+@media (min-width: 720px) {
+  .columns { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+@media (min-width: 1024px) {
+  .top { grid-template-columns: minmax(0, 1fr) minmax(0, 1.7fr); }
+}

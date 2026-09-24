@@ -1,0 +1,94 @@
+/* ===========================================================================
+   Tailwind, scoped to the Originkit sections that need it.
+
+   The Hero 18 section is Tailwind-styled, so Tailwind has to be present. What
+   must NOT be present is Tailwind's preflight: it resets margins, borders,
+   heading sizes and list styles globally, which would flatten Fintra's
+   stylesheet on every page of the site.
+
+   Importing theme + utilities directly (rather than the `tailwindcss`
+   barrel, which pulls preflight in with them) gives the utilities Hero 18
+   needs and leaves the rest of the site untouched.
+   =========================================================================== */
+
+@layer theme, base, components, utilities;
+
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+/* Tailwind v4 discovers classes by scanning source; these are the only trees in
+   this project that use them. Anything dropped outside them gets no utilities
+   generated at all - the classes are simply absent from the stylesheet, with no
+   error to say so - so a new folder of Tailwind-styled components has to be
+   listed here before it will render. */
+@source "../components/originkit";
+@source "../components/ui";
+
+/* @theme tokens the sections reference (font-instrument-serif, the iphone:
+   and ipad: breakpoints, authored spacing). Hoisted here by the Originkit CLI. */
+@import "./originkit-section-theme.css";
+@import "./originkit-section-themes.css";
+
+/* ---------------------------------------------------------------------------
+   Hero 18 adjustments for TBN copy.
+
+   The section was authored around its own labels ("Explore AI", 10 chars). Its
+   CTA links are flex children without `shrink-0`, so a longer label gets
+   squeezed and `overflow-clip` silently cuts it - "Explore Courses" rendered as
+   "Explore Course". Sizing them to their content fixes it for any label.
+   --------------------------------------------------------------------------- */
+.h18-background a[href="/courses"],
+.h18-background a[href="/contact"] {
+  flex-shrink: 0;
+  /* The desktop CTA carries a hardcoded `w-[136px]` from the Figma export,
+     measured for "Explore AI". Keep that as the floor so the designed
+     proportions hold, and let a longer label grow the button instead of being
+     clipped by `overflow-clip`. */
+  width: auto;
+  min-width: 136px;
+}
+
+/* The marquee is masked at both edges; without side padding the first and last
+   items are cut mid-word rather than fading out. */
+.h18-logo-fade .h18-logo-track {
+  padding-inline: 8px;
+}
+
+/* Fintra's nav is `position: fixed`, and Fintra's own hero carries 68-76px of
+   top padding to clear it. Hero 18 was authored with its own in-flow nav, so
+   removing that nav (the site already has one) left its mobile and tablet
+   content sitting underneath Fintra's. Desktop needs nothing - that content is
+   absolutely positioned well below the nav. The tornado layers are absolutely
+   positioned, so padding moves only the copy. */
+@media (max-width: 1023px) {
+  .h18-background {
+    padding-top: 76px;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Laptop screens.
+
+   The desktop hero is an absolutely positioned 1440-wide frame scaled on WIDTH
+   alone - the copy sits 207px from the top with a 72px gap before the stats
+   line and the logo ticker. Those were measured against the 1024px-tall
+   artboard. A 1366x768 laptop, the most common desktop screen there is, leaves
+   about 720px of viewport once the browser has taken its share, so the block
+   ran roughly 100px past the fold and the ticker was never seen.
+
+   Height is what is short, so the two numbers key off height rather than a
+   breakpoint - a breakpoint would snap, and every laptop is short by a
+   different amount. The block runs 645px from the eyebrow to the foot of the
+   ticker at the designed gap, under a 68px nav, so it needs about 920px of
+   viewport before the designed 207px offset fits; each clamp holds that value
+   above there and tightens below it. Both floors are reached around 690px,
+   which is as far as moving things gets you - under that the ticker goes below
+   the fold, and buying it back would mean shrinking the headline rather than
+   repositioning it.
+   --------------------------------------------------------------------------- */
+@media (min-width: 1024px) {
+  .h18-background .pointer-events-auto {
+    top: clamp(48px, calc(100vh - 715px), 207px);
+    gap: clamp(28px, calc(100vh - 712px), 72px);
+  }
+}
