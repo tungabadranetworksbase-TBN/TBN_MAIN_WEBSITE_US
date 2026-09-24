@@ -49,6 +49,12 @@ export const site = {
     phoneHref: "tel:+10000000000",
     hours: "Monday to Friday, 9:00 AM to 6:00 PM ET",
     portal: "https://sms.tungabadranetworks.in/student/login",
+    /**
+     * Where enrollment and payment happen. The site itself takes no payment -
+     * every Enroll button hands off here, and the portal is the system of
+     * record for what a student has bought.
+     */
+    enroll: "https://sms.tungabadranetworks.in/#courses",
     address: {
       // EDIT ME: US office address.
       street: "",

@@ -7,6 +7,17 @@ import type { Faq } from "@/lib/courses";
 import type { Crumb } from "@/lib/schema";
 import styles from "./ui.module.css";
 
+/**
+ * An absolute http(s) href leaves the site, so it opens in a new tab with the
+ * opener severed. Detected from the href rather than declared per call site,
+ * so every external link on the site behaves the same without each component
+ * growing a prop for it.
+ */
+const isExternal = (href: string) => /^https?:\/\//i.test(href);
+export const extProps = (href: string) =>
+  isExternal(href) ? ({ target: "_blank", rel: "noopener noreferrer" } as const) : {};
+
+
 /* ------------------------------------------------------------------ hero -- */
 
 type HeroProps = {
@@ -192,11 +203,11 @@ export function CtaBand({
             </h2>
             <p className="lede">{lede}</p>
             <div className={styles.ctaActions}>
-              <Link href={primary.href} className="btn btn--on-dark">
+              <Link href={primary.href} {...extProps(primary.href)} className="btn btn--on-dark">
                 {primary.label}
                 <ArrowRight size={17} />
               </Link>
-              <Link href={secondary.href} className="btn btn--ghost-dark">
+              <Link href={secondary.href} {...extProps(secondary.href)} className="btn btn--ghost-dark">
                 {secondary.label}
               </Link>
             </div>
@@ -277,10 +288,10 @@ export function StickyCta({
 }) {
   return (
     <div className={styles.stickyCta}>
-      <Link href={primary.href} className="btn btn--primary btn--sm">
+      <Link href={primary.href} {...extProps(primary.href)} className="btn btn--primary btn--sm">
         {primary.label}
       </Link>
-      <Link href={secondary.href} className="btn btn--ghost btn--sm">
+      <Link href={secondary.href} {...extProps(secondary.href)} className="btn btn--ghost btn--sm">
         {secondary.label}
       </Link>
     </div>

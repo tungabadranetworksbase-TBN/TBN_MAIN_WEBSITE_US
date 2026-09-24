@@ -5,7 +5,9 @@ import JsonLd from "@/components/JsonLd";
 import { CourseCard } from "@/components/cards";
 import { AnswerBox, CtaBand, FaqList, Hero, StickyCta, stickyPadClass } from "@/components/ui";
 import { ArrowRight, Certificate, ChevronDown } from "@/components/Icons";
+import { extProps } from "@/components/ui";
 import { buildMetadata } from "@/lib/seo";
+import { site } from "@/lib/site";
 import { breadcrumbSchema, courseSchema, faqSchema, graph, webPageSchema } from "@/lib/schema";
 import { courses, getCourse, getRelatedCourses } from "@/lib/courses";
 import { coursePrice, formatUsd } from "@/lib/pricing";
@@ -68,7 +70,7 @@ export default async function CoursePage({ params }: Params) {
         align="left"
         image="/images/section-bg-dark.png"
         actions={[
-          { label: "Enroll or Inquire", href: inquiryHref },
+          { label: "Enroll Now", href: site.contact.enroll },
           { label: "See curriculum", href: "#curriculum", variant: "ghost-dark" },
         ]}
       />
@@ -325,12 +327,16 @@ export default async function CoursePage({ params }: Params) {
               </dl>
 
               <div className={styles.asideActions}>
-                <Link href={inquiryHref} className="btn btn--primary btn--block">
-                  Enroll or Inquire
+                <Link
+                  href={site.contact.enroll}
+                  {...extProps(site.contact.enroll)}
+                  className="btn btn--primary btn--block"
+                >
+                  Enroll Now
                   <ArrowRight size={17} />
                 </Link>
-                <Link href="/internships" className="btn btn--ghost btn--block">
-                  Find a matching internship
+                <Link href={inquiryHref} className="btn btn--ghost btn--block">
+                  Ask about this course
                 </Link>
               </div>
             </div>
@@ -361,7 +367,7 @@ export default async function CoursePage({ params }: Params) {
       />
 
       <StickyCta
-        primary={{ label: "Enroll or Inquire", href: inquiryHref }}
+        primary={{ label: "Enroll Now", href: site.contact.enroll }}
         secondary={{ label: "Curriculum", href: "#curriculum" }}
       />
     </div>

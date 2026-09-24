@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { extProps } from "../ui";
 import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
 import styles from "./PageHero.module.css";
 
@@ -45,7 +46,7 @@ export default function PageHero({
         <p className="lede">{subtitle}</p>
 
         <div className={styles.foot}>
-          <Link href={ctaHref} className="btn btn--gold">
+          <Link href={ctaHref} {...extProps(ctaHref)} className="btn btn--gold">
             {ctaLabel}
             <ArrowRight size={15} weight="bold" />
           </Link>

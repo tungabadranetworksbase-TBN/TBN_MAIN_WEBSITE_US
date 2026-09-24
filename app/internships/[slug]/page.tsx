@@ -6,7 +6,9 @@ import { InternshipCard } from "@/components/cards";
 import { AnswerBox, CtaBand, FaqList, Hero, StickyCta, stickyPadClass } from "@/components/ui";
 import InquiryForm from "@/components/InquiryForm";
 import { ArrowRight, Certificate, Users } from "@/components/Icons";
+import { extProps } from "@/components/ui";
 import { buildMetadata } from "@/lib/seo";
+import { site } from "@/lib/site";
 import { breadcrumbSchema, faqSchema, graph, webPageSchema } from "@/lib/schema";
 import { getInternship, getRelatedInternships, internships } from "@/lib/internships";
 import { formatUsd, internshipPrice } from "@/lib/pricing";
@@ -73,7 +75,7 @@ export default async function InternshipPage({ params }: Params) {
         align="left"
         image="/images/texture-wide-1.png"
         actions={[
-          { label: "Apply Now", href: "#apply" },
+          { label: "Enroll Now", href: site.contact.enroll },
           { label: "Check eligibility", href: "#eligibility", variant: "ghost-dark" },
         ]}
       />
@@ -303,11 +305,15 @@ export default async function InternshipPage({ params }: Params) {
               </dl>
 
               <div className={styles.asideActions}>
-                <Link href="#apply" className="btn btn--primary btn--block">
-                  Apply Now
+                <Link
+                  href={site.contact.enroll}
+                  {...extProps(site.contact.enroll)}
+                  className="btn btn--primary btn--block"
+                >
+                  Enroll Now
                   <ArrowRight size={17} />
                 </Link>
-                <Link href="/contact" className="btn btn--ghost btn--block">
+                <Link href="#apply" className="btn btn--ghost btn--block">
                   Ask a question first
                 </Link>
               </div>
@@ -340,7 +346,7 @@ export default async function InternshipPage({ params }: Params) {
       />
 
       <StickyCta
-        primary={{ label: "Apply Now", href: "#apply" }}
+        primary={{ label: "Enroll Now", href: site.contact.enroll }}
         secondary={{ label: "Eligibility", href: "#eligibility" }}
       />
     </div>
