@@ -141,7 +141,7 @@ export const resources: Resource[] = [
     ],
     related: ["network-plus-vs-ccna", "what-to-expect-in-a-tech-internship"],
     ctaCourses: ["ccna-advanced-training", "python-for-network-automation"],
-    ctaInternships: ["network-fresher-internship"],
+    ctaInternships: ["enterprise-networking-internship"],
   },
 
   {
@@ -281,7 +281,7 @@ export const resources: Resource[] = [
     ],
     related: ["network-plus-vs-ccna", "how-to-prepare-for-a-technical-internship-interview"],
     ctaCourses: ["aws-cloud-practitioner"],
-    ctaInternships: ["network-automation-internship"],
+    ctaInternships: ["data-center-automation-internship"],
   },
 
   {
@@ -355,7 +355,7 @@ export const resources: Resource[] = [
       },
     ],
     related: ["how-to-prepare-for-a-technical-internship-interview", "how-to-start-a-career-in-network-engineering"],
-    ctaInternships: ["network-automation-internship", "advanced-core-internship"],
+    ctaInternships: ["data-center-automation-internship", "data-center-networking-internship"],
   },
 
   {
@@ -433,7 +433,7 @@ export const resources: Resource[] = [
       },
     ],
     related: ["what-to-expect-in-a-tech-internship", "how-to-start-a-career-in-network-engineering"],
-    ctaInternships: ["network-automation-internship", "network-fresher-internship"],
+    ctaInternships: ["data-center-automation-internship", "enterprise-networking-internship"],
   },
 
   {

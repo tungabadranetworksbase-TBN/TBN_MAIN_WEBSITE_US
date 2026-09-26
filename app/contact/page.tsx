@@ -6,6 +6,7 @@ import { CtaBand, FaqList, PageHead, SectionHead } from "@/components/ui";
 import InquiryForm from "@/components/InquiryForm";
 import ContactFormWithQuery from "@/components/ContactFormWithQuery";
 import { Clock, Mail, MapPin, Phone } from "@/components/Icons";
+import { WhatsappLogo } from "@phosphor-icons/react/dist/ssr";
 import { buildMetadata } from "@/lib/seo";
 import { breadcrumbSchema, faqSchema, graph, webPageSchema } from "@/lib/schema";
 import { site } from "@/lib/site";
@@ -93,6 +94,19 @@ export default function ContactPage() {
                     <a href={site.contact.phoneHref} className="row" style={{ gap: 10 }}>
                       <Phone size={18} />
                       {site.contact.phone}
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href={site.contact.whatsapp}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="row"
+                      style={{ gap: 10 }}
+                    >
+                      <WhatsappLogo size={18} />
+                      WhatsApp group
+                      <span className="card__meta">(public, anyone with the link can join)</span>
                     </a>
                   </li>
                   <li className="row" style={{ gap: 10, color: "var(--ink-2)" }}>

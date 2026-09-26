@@ -5,6 +5,7 @@ import { ArrowRight, ChevronDown } from "./Icons";
 import BrandPageHero from "./brand/PageHero";
 import type { Faq } from "@/lib/courses";
 import type { Crumb } from "@/lib/schema";
+import { site } from "@/lib/site";
 import styles from "./ui.module.css";
 
 /**
@@ -14,8 +15,25 @@ import styles from "./ui.module.css";
  * growing a prop for it.
  */
 const isExternal = (href: string) => /^https?:\/\//i.test(href);
-export const extProps = (href: string) =>
-  isExternal(href) ? ({ target: "_blank", rel: "noopener noreferrer" } as const) : {};
+
+/**
+ * Attributes for a link, decided from its href.
+ *
+ * The booking link is special-cased: Cal.com's embed watches for
+ * `data-cal-link` and opens the booking flow in a modal over the page,
+ * calling preventDefault itself, so the href stays as the fallback for when
+ * the embed has not loaded. Every other absolute link leaves the site and
+ * opens in a new tab with the opener severed.
+ */
+export const extProps = (href: string) => {
+  if (href === site.contact.consultation) {
+    return {
+      "data-cal-link": site.contact.consultationPath,
+      "data-cal-config": '{"layout":"month_view"}',
+    } as const;
+  }
+  return isExternal(href) ? ({ target: "_blank", rel: "noopener noreferrer" } as const) : {};
+};
 
 
 /* ------------------------------------------------------------------ hero -- */
@@ -52,8 +70,8 @@ export function Hero({ eyebrow, title, lede, crumbs, actions = [], children }: H
         statOneLabel={stats(eyebrow)[1]}
         statTwoValue="3,000+"
         statTwoLabel="Trained"
-        ctaLabel={cta ? cta.label : "Book a Demo"}
-        ctaHref={cta ? cta.href : "/contact"}
+        ctaLabel={cta ? cta.label : "Book a Consultation"}
+        ctaHref={cta ? cta.href : site.contact.consultation}
       />
       {(crumbs || children) && (
         <div className="container" style={{ paddingBlock: 20 }}>
@@ -103,8 +121,8 @@ export function PageHead({
         statOneLabel={stats(eyebrow)[1]}
         statTwoValue="3,000+"
         statTwoLabel="Trained"
-        ctaLabel="Book a Demo"
-        ctaHref="/contact"
+        ctaLabel="Book a Consultation"
+        ctaHref={site.contact.consultation}
       />
       <div className="container" style={{ paddingBlock: 20 }}>
         <Breadcrumbs items={crumbs} />

@@ -7,6 +7,7 @@ import { AnswerBox, Breadcrumbs, CtaBand } from "@/components/ui";
 import BrandPageHero from "@/components/brand/PageHero";
 import { ArrowRight } from "@/components/Icons";
 import { buildMetadata } from "@/lib/seo";
+import { site } from "@/lib/site";
 import { articleSchema, breadcrumbSchema, graph, webPageSchema } from "@/lib/schema";
 import {
   formatDate,
@@ -167,8 +168,8 @@ export default async function ResourcePage({ params }: Params) {
         statOneLabel="Min read"
         statTwoValue={resource.category}
         statTwoLabel="Category"
-        ctaLabel="Book a Demo"
-        ctaHref="/contact"
+        ctaLabel="Book a Consultation"
+        ctaHref={site.contact.consultation}
       />
 
       <div className="container">

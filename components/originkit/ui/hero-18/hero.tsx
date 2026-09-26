@@ -15,6 +15,11 @@ function asset(file: string) {
   return `/originkit/hero-18/${file}`;
 }
 
+/** Booking happens on Cal.com; see site.contact.consultation. */
+const CONSULTATION_PATH =
+  "tungabadranetworks/welcome-to-tungabadranetworks-usa-consultation-call";
+const CONSULTATION_URL = `https://cal.com/${CONSULTATION_PATH}`;
+
 const imgDiagonalLines = asset("diagonal-lines.png");
 const imgDiagonalLines1 = asset("diagonal-lines-1.svg");
 const imgDiagonalLines2 = asset("diagonal-lines-2.svg");
@@ -275,7 +280,7 @@ export default function Hero() {
               </div>
             </div>
             <p className={`${lato} text-[15px] text-white tracking-[-0.3px] whitespace-nowrap md:text-[17px]`}>
-              Industry-focused networking training
+              Networking, cloud and automation training
             </p>
             <BorderOrbit />
           </div>
@@ -284,7 +289,7 @@ export default function Hero() {
               The Network You Build Is The Net Worth You Earn
             </h1>
             <p className={`${lato} max-w-[320px] text-[15px] leading-[1.4] opacity-70 md:max-w-[440px] md:text-[18px]`}>
-              Hands-on networking training on real enterprise equipment, with internships and placement support until you are hired.
+              Hands-on networking and automation training on real enterprise equipment, with internship tracks that end in production-style project work.
             </p>
           </div>
           <div className="flex items-center gap-[12px] md:gap-[16px]">
@@ -311,11 +316,13 @@ export default function Hero() {
               <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_1px_1px_0px_rgba(255,255,255,0.3)]" />
             </a>
             <a
-              href="/contact"
+              href={CONSULTATION_URL}
+              data-cal-link={CONSULTATION_PATH}
+              data-cal-config='{"layout":"month_view"}'
               className="bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.1)] border-solid flex items-center justify-center gap-[10px] rounded-[10px] py-[12px] pl-[18px] pr-[12px] transition-colors duration-150 hover:bg-[rgba(255,255,255,0.08)] hover:border-[rgba(255,255,255,0.2)] md:py-[14px] md:pl-[24px] md:pr-[14px]"
             >
               <p className={`${lato} text-[13px] text-white tracking-[-0.35px] whitespace-nowrap md:text-[14px]`}>
-                Book a Demo
+                Book a Consultation
               </p>
               <div className="relative shrink-0 size-[18px] md:size-[22px]">
                 <div className="absolute inset-[28.66%_35.71%_23.78%_35.72%]">
@@ -353,7 +360,7 @@ export default function Hero() {
                 </div>
               </div>
               <p className={`${lato} font-normal leading-[normal] relative shrink-0 text-[17px] text-white tracking-[-0.34px] whitespace-nowrap`}>
-                Industry-focused networking training
+                Networking, cloud and automation training
               </p>
             </div>
             <BorderOrbit />
@@ -364,7 +371,7 @@ export default function Hero() {
                 The Network You Build Is The Net Worth You Earn
               </p>
               <p className={`${lato} font-normal leading-[normal] opacity-70 relative shrink-0 text-[20px] tracking-[-0.4px] w-[474px]`}>
-                Hands-on networking training on real enterprise equipment, with internships and placement support until you are hired.
+                Hands-on networking and automation training on real enterprise equipment, with internship tracks that end in production-style project work.
               </p>
             </div>
             <div className="content-stretch flex gap-[16px] items-center relative shrink-0">
@@ -391,11 +398,13 @@ export default function Hero() {
                 <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_1px_1px_0px_rgba(255,255,255,0.3)]" />
               </a>
               <a
-                href="/contact"
+                href={CONSULTATION_URL}
+              data-cal-link={CONSULTATION_PATH}
+              data-cal-config='{"layout":"month_view"}'
                 className="bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.1)] border-solid content-stretch flex gap-[10px] h-full items-center justify-center pl-[24px] pr-[14px] py-[14px] relative rounded-[10px] shrink-0 transition-colors duration-150 hover:bg-[rgba(255,255,255,0.08)] hover:border-[rgba(255,255,255,0.2)]"
               >
                 <p className={`${lato} font-normal leading-[1.5] relative shrink-0 text-[14px] text-white tracking-[-0.42px] whitespace-nowrap`}>
-                  Book a Demo
+                  Book a Consultation
                 </p>
                 <div className="relative shrink-0 size-[22px]">
                   <div className="absolute inset-[28.66%_35.71%_23.78%_35.72%]">

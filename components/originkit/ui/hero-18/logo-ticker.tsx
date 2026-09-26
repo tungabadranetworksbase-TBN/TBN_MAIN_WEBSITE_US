@@ -19,12 +19,17 @@ const technologies = [
   "Palo Alto NGFW",
   "Aruba ACA",
   "Juniper JNCIA",
-  "Cisco DevNet",
+  "Cisco Meraki",
+  "VMware ESXi",
   "AWS Cloud",
   "Linux",
   "Python",
   "Netmiko",
   "Ansible",
+  "Git & CI/CD",
+  "Prometheus",
+  "Grafana",
+  "Zabbix",
   "Wireshark",
 ];
 

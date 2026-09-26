@@ -205,14 +205,16 @@
   .aside { position: sticky; top: calc(var(--header-h) + 20px); }
 }
 
-/* Programme outline: phase cards on the internship detail page. */
-.phaseIndex {
-  margin: 0 0 6px;
-  font-size: 0.6875rem;
-  letter-spacing: 0.12em;
+/* The track positioning line, under the heading on an internship page. */
+.trackLine {
+  margin: 0 0 14px;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--fg-muted);
+  color: var(--gold);
 }
+
+/* Skill-area cards on the internship detail page. */
 .phaseTopics {
   margin: 10px 0 0;
   padding-left: 18px;

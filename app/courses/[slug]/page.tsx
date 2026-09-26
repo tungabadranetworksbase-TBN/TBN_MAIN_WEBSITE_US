@@ -274,7 +274,7 @@ export default async function CoursePage({ params }: Params) {
             <div className={styles.asideCard}>
               <div>
                 <p className={styles.price}>
-                  {price ? formatUsd(price.usd) : "Free demo"}
+                  {price ? formatUsd(price.usd) : "Free consultation"}
                   {price?.wasUsd && (
                     <s
                       style={{

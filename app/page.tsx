@@ -24,7 +24,7 @@ import s from "@/components/brand/home.module.css";
 export const metadata: Metadata = buildMetadata({
   title: `${site.name}: Networking Training, Internships and Placements`,
   description:
-    "Hands-on networking training on real enterprise equipment. CCNA, CCNP, Palo Alto, Aruba, Juniper, AWS and automation, with placement support until you are hired.",
+    "Hands-on networking, cloud and automation training on real enterprise equipment. CCNA, CCNP, Palo Alto, Aruba, Juniper, AWS, Python, Ansible and CI/CD, with internship tracks from NOC to network automation engineer.",
   path: "/",
 });
 
@@ -33,15 +33,15 @@ const offer = [
   {
     icon: GraduationCap,
     title: "Networking courses",
-    body: "Twelve courses from CCNA through CCNP, security, cloud and automation. Every module is taught on equipment, not slides.",
+    body: "Twelve courses from CCNA and CCNP through security, cloud, Linux, Python and network automation. Every module is taught on equipment, not slides.",
     meta: "12 courses",
     cls: "offerCell--lead",
   },
   {
     icon: Briefcase,
-    title: "Internship programs",
-    body: "Live project work and lab sessions alongside placement support. The Advanced CCNA internship is the main track.",
-    meta: "Live projects",
+    title: "Internship tracks",
+    body: "Three career paths: enterprise networking, data center operations, and data center with automation. Each ends in real-time project work.",
+    meta: "3 tracks",
     cls: "offerCell--b",
   },
   {
@@ -74,21 +74,22 @@ const why = [
     body: "Wireshark analysis runs through the training rather than being bolted on at the end. You learn to read what the wire is doing.",
   },
   {
-    title: "No coding background needed",
-    body: "Python for Network Automation and Cisco DevNet start from first principles. Networking knowledge is the prerequisite, not software experience.",
+    title: "Automation taught as the job, not an add-on",
+    body: "Python, Netmiko, Ansible, REST APIs and CI/CD pipelines run against real devices, and they start from first principles. Networking knowledge is the prerequisite, not software experience.",
   },
 ];
 
 const services = [
   "Network architecture",
   "Implementation",
+  "Infrastructure automation",
+  "Cloud & hybrid connectivity",
   "Managed services",
   "24/7 NOC",
   "Network security",
   "Firewall deployment",
   "Monitoring & SLA",
   "IT staffing",
-  "Payroll",
 ];
 
 export default function HomePage() {
@@ -176,7 +177,7 @@ export default function HomePage() {
               The catalog
             </h2>
             <p className="lede" style={{ marginTop: 12 }}>
-              Fees are shared on the demo call, with the current syllabus and batch dates.
+              Fees are shared on the consultation call, with the current syllabus and batch dates.
             </p>
           </div>
           <Link href="/courses" className="link-gold">
@@ -276,13 +277,18 @@ export default function HomePage() {
       <section className="section section--tight shell">
         <Reveal className={s.cta}>
           <div className={s.ctaInner}>
-            <h2 className="d2">Start with a free demo</h2>
+            <h2 className="d2">Start with a free consultation</h2>
             <p className="lede" style={{ marginInline: "auto" }}>
               See the labs, the syllabus and the equipment before you commit to anything.
             </p>
             <div className={s.ctaActions}>
-              <Link href="/contact" className="btn btn--gold">
-                Book a Demo
+              <Link
+                href={site.contact.consultation}
+                data-cal-link={site.contact.consultationPath}
+                data-cal-config='{"layout":"month_view"}'
+                className="btn btn--gold"
+              >
+                Book a Consultation
                 <ArrowRight size={15} weight="bold" />
               </Link>
               <a href={site.contact.phoneHref} className="btn btn--ghost mono">

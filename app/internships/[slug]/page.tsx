@@ -95,6 +95,7 @@ export default async function InternshipPage({ params }: Params) {
                 {internship.commitment} Work is reviewed by a named engineer, and a completion
                 certificate is issued at the end.
               </AnswerBox>
+              <p className={`mono ${styles.trackLine}`}>{internship.track}</p>
               {internship.overview.map((para) => (
                 <p key={para.slice(0, 40)} className="lede" style={{ maxWidth: "40em" }}>
                   {para}
@@ -156,19 +157,16 @@ export default async function InternshipPage({ params }: Params) {
               </ul>
             </section>
 
-            <section className={styles.block} aria-labelledby="phases">
-              <h2 className={styles.blockTitle} id="phases">
-                Programme outline
+            <section className={styles.block} aria-labelledby="curriculum">
+              <h2 className={styles.blockTitle} id="curriculum">
+                Skills covered
               </h2>
               <div className={styles.duo}>
-                {internship.phases.map((p, i) => (
-                  <article key={p.title} className={styles.miniCard}>
-                    <p className={`mono ${styles.phaseIndex}`}>
-                      Phase {String(i + 1).padStart(2, "0")}
-                    </p>
-                    <h3 className={styles.miniTitle}>{p.title}</h3>
+                {internship.curriculum.map((m) => (
+                  <article key={m.title} className={styles.miniCard}>
+                    <h3 className={styles.miniTitle}>{m.title}</h3>
                     <ul className={styles.phaseTopics}>
-                      {p.topics.map((t) => (
+                      {m.topics.map((t) => (
                         <li key={t}>{t}</li>
                       ))}
                     </ul>

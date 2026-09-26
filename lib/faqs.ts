@@ -27,6 +27,11 @@ export const faqGroups: FaqGroup[] = [
           "No. The courses are networking-first and hands-on from day one. Python for Network Automation and Cisco DevNet introduce scripting from the beginning, so no prior coding experience is assumed.",
       },
       {
+        question: "Do you teach network automation?",
+        answer:
+          "Yes, and it runs against real devices rather than sample output. Python, Netmiko, Paramiko and Ansible are taught from first principles, alongside REST APIs, JSON and YAML, Git, and CI/CD pipelines in Jenkins, GitHub Actions and GitLab CI. The Data Center and Automation internship is the dedicated track for it, and Python for Network Automation and Cisco DevNet are available as standalone courses.",
+      },
+      {
         question: "What equipment will I train on?",
         answer:
           "Physical Cisco, Palo Alto and Aruba equipment in real enterprise labs, with 24/7 rack access. Wireshark packet-level analysis runs throughout the training rather than being treated as an add-on.",
@@ -66,7 +71,7 @@ export const faqGroups: FaqGroup[] = [
       {
         question: "How much do the courses cost?",
         answer:
-          "Fees are not published online. They are shared on the free demo call, along with the current syllabus and batch dates. A 50% discount on CCNA is offered to fee reimbursement candidates.",
+          "Fees are not published online. They are shared on the free consultation call, along with the current syllabus and batch dates. A 50% discount on CCNA is offered to fee reimbursement candidates.",
       },
       {
         question: "Is there online delivery?",
@@ -83,7 +88,7 @@ export const faqGroups: FaqGroup[] = [
       {
         question: "What do the internships involve?",
         answer:
-          "Each internship bundles several courses into one program, with live project work, lab sessions, communication skills training and placement support. The Network Fresher Internship is the usual entry point; Advanced Core adds CCNP depth and real-time project training, and Network Automation is the widest program, carrying Python, Ansible and CI/CD on top of the networking sequence.",
+          "Each internship bundles several courses into one career track, with real-time project work and lab sessions. Enterprise Networking is the usual entry point, covering the NOC to network engineer path; Data Center Networking covers infrastructure, virtualization and operations; and Data Center and Automation adds Python, Ansible, CI/CD and cloud on top. The Elite Career Path Bundle carries all three.",
       },
       {
         question: "Which companies hire your students?",
@@ -128,6 +133,7 @@ export const allFaqs: Faq[] = faqGroups.flatMap((g) => g.faqs);
 export const homeFaqQuestions = [
   "What is Tungabadra Networks?",
   "Do I need a coding background?",
+  "Do you teach network automation?",
   "What equipment will I train on?",
   "Do you help with placement?",
   "How is the training delivered?",

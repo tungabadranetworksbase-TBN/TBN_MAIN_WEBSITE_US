@@ -9,6 +9,9 @@
  * The site publishes no course fees, so none are stated anywhere.
  */
 
+/** Cal.com booking, as a path. Used both as a URL and as an embed target. */
+const CAL_PATH = "tungabadranetworks/welcome-to-tungabadranetworks-usa-consultation-call";
+
 export const site = {
   name: "Tungabadra Networks",
   shortName: "Tungabadra",
@@ -40,14 +43,31 @@ export const site = {
     "Industry-focused networking training with real enterprise labs, physical Cisco and Palo Alto equipment, and placement support. Courses in CCNA, CCNP, Palo Alto, Aruba, Juniper, AWS, Linux and network automation.",
 
   contact: {
-    email: "info@tungabadranetworks.in",
-    admissions: "info@tungabadranetworks.in",
-    corporate: "info@tungabadranetworks.in",
-    // EDIT ME: US contact details. Left as placeholders rather than invented -
-    // fill these in and every page that renders them updates at once.
-    phone: "(000) 000-0000",
-    phoneHref: "tel:+10000000000",
+    email: "ussupport@tungabadranetworks.com",
+    admissions: "ussupport@tungabadranetworks.com",
+    corporate: "ussupport@tungabadranetworks.com",
+    phone: "+1 (940) 377-0034",
+    /**
+     * Where every Book a Consultation button goes. Scheduling happens on
+     * Cal.com rather than on this site, so the button hands off directly
+     * instead of routing through the contact form first.
+     */
+    consultation: `https://cal.com/${CAL_PATH}`,
+    /**
+     * The same booking as a Cal.com embed path. Elements carrying this in
+     * `data-cal-link` open the booking flow in a modal over the page instead
+     * of navigating away.
+     */
+    consultationPath: CAL_PATH,
+    phoneHref: "tel:+19403770034",
     hours: "Monday to Friday, 9:00 AM to 6:00 PM ET",
+    /**
+     * Public WhatsApp group invite. A contact channel rather than a social
+     * profile, so it stays out of `social` - that object feeds the schema's
+     * sameAs, which is for profiles that represent the organisation.
+     */
+    whatsapp:
+      "https://chat.whatsapp.com/CYrZanCp3jj1xV1W2UMYCz?s=sh&p=i&mlu=4&ilr=4",
     portal: "https://sms.tungabadranetworks.in/student/login",
     /**
      * Where enrollment and payment happen. The site itself takes no payment -

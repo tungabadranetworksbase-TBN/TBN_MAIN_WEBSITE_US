@@ -157,7 +157,7 @@ export default function ProgramsPage() {
                 <aside className={styles.aside} aria-label={`${program.title} details`}>
                   <div className={styles.asideCard}>
                     <div>
-                      <p className={styles.price}>Free demo</p>
+                      <p className={styles.price}>Free consultation</p>
                       <p className={styles.priceNote}>
                         Fees, duration and batch dates are shared on the call.
                       </p>

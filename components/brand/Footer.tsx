@@ -1,6 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowUpRight, InstagramLogo, LinkedinLogo, YoutubeLogo } from "@phosphor-icons/react/dist/ssr";
+import {
+  ArrowUpRight,
+  InstagramLogo,
+  LinkedinLogo,
+  WhatsappLogo,
+  YoutubeLogo,
+} from "@phosphor-icons/react/dist/ssr";
 import { footerNav, site } from "@/lib/site";
 import styles from "./Footer.module.css";
 
@@ -41,6 +47,9 @@ export default function Footer() {
               </a>
               <a href={site.social.linkedin} target="_blank" rel="noopener noreferrer" aria-label={`${site.name} on LinkedIn`}>
                 <LinkedinLogo size={19} />
+              </a>
+              <a href={site.contact.whatsapp} target="_blank" rel="noopener noreferrer" aria-label={`Join the ${site.name} WhatsApp group`}>
+                <WhatsappLogo size={19} />
               </a>
             </div>
           </div>

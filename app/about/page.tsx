@@ -142,7 +142,7 @@ export default function AboutPage() {
             count) are Tungabadra Networks&rsquo; own published figures, reproduced as claims we make
             about ourselves rather than independently audited results. We publish no awards,
             accreditations, rankings or reviews, and no course fees or fixed durations, because
-            those are set per batch and confirmed on the demo call.
+            those are set per batch and confirmed on the consultation call.
           </p>
           <p>
             Tungabadra Networks is not an authorized training partner of any certification vendor,

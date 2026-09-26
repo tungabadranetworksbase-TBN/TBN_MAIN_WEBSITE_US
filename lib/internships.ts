@@ -1,34 +1,34 @@
 /**
  * Internship catalog.
  *
- * An internship here is what the organisation actually sells: a bundle of the
- * individual courses in courses.ts, plus project training, communication
- * skills and placement support, priced as one programme. `coursesIncluded`
- * names the bundle and `phases` is the programme outline the organisation
- * publishes for it.
+ * Three career-path programmes plus the bundle that carries all three. Each
+ * one is a set of the individual courses in courses.ts sequenced into a
+ * track, with real-time project work at the end.
  *
- * Fees live in pricing.ts, keyed by the slugs below, and are converted from
- * the published rupee price at a rate the site controls.
+ * Fees live in pricing.ts, keyed by the slugs below. Unlike the courses,
+ * these are published directly in US dollars rather than converted from a
+ * rupee price.
  *
  * As with courses.ts: nothing is stated that the organisation does not
  * publish. No stipend figures, no cohort dates and no fixed week counts
- * appear here. Salary bands are published against these programmes in India
- * but are deliberately not carried over - app/terms states that this site
- * publishes no salary or placement statistics, so `careerRoles` names the
- * roles without attaching a number to them.
+ * appear here, and `careerRoles` names the roles these tracks target without
+ * attaching salary figures to them - app/terms states that this site
+ * publishes no salary or placement statistics.
  */
 
-import type { Faq } from "./courses";
+import type { Faq, Module } from "./courses";
 
 export type InternshipCategory =
-  | "Foundation"
-  | "Advanced Networking"
+  | "Enterprise Networking"
+  | "Data Center"
   | "Automation"
-  | "Career Transition";
+  | "Career Bundle";
 
 export type Internship = {
   slug: string;
   title: string;
+  /** The positioning line shown under the title. */
+  track: string;
   category: InternshipCategory;
   shortDescription: string;
   /** First paragraph answers "what is this internship?" directly. */
@@ -40,13 +40,13 @@ export type Internship = {
   eligibility: string[];
   skillsRequired: string[];
   technologies: string[];
-  /** The courses bundled into this programme. `free` marks an included extra. */
+  /** The courses this track bundles. */
   coursesIncluded: { title: string; free?: boolean }[];
-  /** The programme outline published for this track. */
-  phases: { title: string; topics: string[] }[];
+  /** Skill areas covered, as published for the track. */
+  curriculum: Module[];
   projects: { title: string; summary: string }[];
   outcomes: string[];
-  /** Roles this programme is aimed at. No salary figures - see the file note. */
+  /** Roles this track targets. No salary figures - see the file note. */
   careerRoles: string[];
   mentorship: string;
   certificate: string;
@@ -56,39 +56,56 @@ export type Internship = {
 };
 
 export const internshipCategories: { name: InternshipCategory; blurb: string }[] = [
-  { name: "Foundation", blurb: "A first route into networking, from fundamentals to a first role." },
-  { name: "Advanced Networking", blurb: "Enterprise and service provider depth for working engineers." },
-  { name: "Automation", blurb: "Networking plus Python, Git and the tooling that configures a fleet." },
-  { name: "Career Transition", blurb: "A structured route into IT from a non-IT background." },
+  {
+    name: "Enterprise Networking",
+    blurb: "The NOC to network engineer route, from fundamentals to production operations.",
+  },
+  {
+    name: "Data Center",
+    blurb: "Data center infrastructure and operations for L1 to L3 roles.",
+  },
+  {
+    name: "Automation",
+    blurb: "Data center and cloud infrastructure with automation and DevOps on top.",
+  },
+  {
+    name: "Career Bundle",
+    blurb: "All three tracks, taken as one sequence.",
+  },
 ];
 
 const DURATION_NOTE =
-  "Length is agreed at the start of the programme and confirmed on the demo call.";
+  "Length is agreed at the start of the programme and confirmed on the consultation call.";
 const ACCESS_NOTE = "Programme access runs for one year from enrollment.";
 const APPLY_NOTE =
   "Apply through the contact form or by calling us. Selection is based on a short technical conversation, not a written test.";
-const COMMS = { title: "Communication Skills & Personality Development", free: true };
+const RTP = {
+  title: "Real-Time Project Version 2.0",
+  summary:
+    "TAC-level work against production-style enterprise, data center and service provider environments, rather than a lab exercise with a known answer.",
+};
 
 export const internships: Internship[] = [
   {
-    slug: "network-fresher-internship",
-    title: "Network Fresher Internship",
-    category: "Foundation",
+    slug: "enterprise-networking-internship",
+    title: "Enterprise Networking Internship",
+    track: "NOC to Network Engineer career path, L1 to L3 roles",
+    category: "Enterprise Networking",
     featured: true,
     shortDescription:
-      "The entry programme: CCNA, JNCIA, Aruba, Linux and cloud fundamentals bundled together, taught on real equipment and aimed at a first networking role.",
+      "The enterprise route: routing and switching through CCNP level, wireless, firewall, hybrid cloud and the monitoring and ticketing work an operations role actually runs on.",
     overview: [
-      "The Network Fresher Internship is the starting point for someone entering networking with no professional background in it. It bundles CCNA Advanced, JNCIA, Aruba, Linux for Networking and the AWS Cloud Practitioner course into one programme, so the sequence is decided for you rather than assembled course by course.",
-      "The work is practical throughout. Every topic is paired with a lab on real Cisco, Juniper and Aruba equipment, and the packet-level habit (capture it, read it, explain it) is built in from the first weeks rather than bolted on at the end.",
-      "Communication skills and personality development are included at no extra cost, because the gap that stops most capable freshers at interview is not protocol knowledge.",
+      "The Enterprise Networking Internship is built to make you employable in enterprise networking roles, from NOC engineer through to network engineer, with the foundation to move into cloud, security and automation later.",
+      "It runs the full enterprise stack: CCNA Advanced with BGP fundamentals, CCNP Enterprise at ENCOR level, Cisco Meraki and Aruba wireless, Palo Alto NGFW, Linux, and AWS networking for hybrid connectivity.",
+      "What separates it from a certification course is the operations half. Monitoring, ticketing, incident severity, SLA workflow, root cause analysis and change management are taught as the job, because that is what an L1 or L2 role is made of.",
     ],
     duration: DURATION_NOTE,
     commitment: "Structured sessions alongside lab access throughout the programme.",
     format: "Hybrid",
     eligibility: [
-      "Open to freshers, no professional networking background required",
-      "Graduates entering IT, including from non-computing degrees",
-      "Comfortable reading and writing clear English",
+      "Open to freshers and to engineers already working a support role",
+      "No professional networking background required",
+      "Graduates from any discipline, including non-computing degrees",
     ],
     skillsRequired: [
       "No prior networking knowledge assumed",
@@ -97,562 +114,488 @@ export const internships: Internship[] = [
     ],
     technologies: [
       "Cisco routers and switches",
-      "Juniper vLabs and Junos CLI",
-      "Aruba CX switches, APs and Aruba Central",
-      "Wireshark",
-      "Cisco CML, EVE-NG, GNS3 and Packet Tracer",
-      "PRTG and Zabbix",
-      "Linux terminal and SSH",
-      "AWS Console, VPC, EC2, IAM and CloudWatch",
+      "Cisco Meraki cloud wireless",
+      "Aruba controllers and instant APs",
+      "Juniper Junos",
+      "Palo Alto NGFW",
+      "AWS VPC and hybrid connectivity",
+      "Zabbix, SNMP and syslog",
+      "GLPI, ServiceNow and JIRA",
     ],
     coursesIncluded: [
-      { title: "CCNA Advanced (200-301)" },
-      { title: "JNCIA (JN0-105)" },
-      { title: "Aruba Certified Associate" },
-      { title: "Linux for Networking" },
-      { title: "AWS Certified Cloud Practitioner (CLF-C02)" },
-      COMMS,
+      { title: "CCNA Advanced (200-301, with BGP fundamentals)" },
+      { title: "CCNP Enterprise (ENCOR level)" },
+      { title: "Cisco Meraki Wireless (cloud managed networking)" },
+      { title: "Aruba Wireless Networking (enterprise Wi-Fi)" },
+      { title: "JNCIA (Juniper, certification assistance)" },
+      { title: "Palo Alto NGFW (next-generation firewall)" },
+      { title: "Linux for Networking Engineers" },
+      { title: "AWS Cloud for Networking (VPC and hybrid connectivity)" },
+      { title: "Monitoring and Ticketing Tools" },
+      { title: "Real-Time Project Version 2.0" },
     ],
-    phases: [
+    curriculum: [
       {
         title: "Networking Fundamentals",
         topics: [
-          "OSI and TCP/IP models",
-          "IPv4 addressing and subnetting",
-          "Routing and switching basics",
-          "Simulator work",
-          "Wireshark packet analysis",
-          "CCNA core topics",
+          "OSI and TCP/IP models, applied to real troubleshooting",
+          "IPv4 addressing, subnetting and VLSM",
+          "TCP, UDP, DNS, DHCP, SSH and Telnet",
+          "LAN and WAN fundamentals",
         ],
       },
       {
-        title: "Practical Implementation",
+        title: "Enterprise Routing and Switching",
         topics: [
-          "Labs on real equipment",
-          "Cisco device configuration",
-          "Linux for network engineers",
-          "AWS fundamentals",
-          "Structured troubleshooting",
-          "Communication skills",
+          "Static and default routing",
+          "OSPF, single and multi-area",
+          "BGP fundamentals for the enterprise use case",
+          "VLANs and inter-VLAN routing with SVIs",
+          "STP, RSTP and PortFast",
+          "EtherChannel with LACP and PAgP",
+          "Loop prevention: BPDU Guard and BPDU Filter",
+          "Trunking and native VLAN",
+          "LLDP and CDP neighbour discovery",
         ],
       },
       {
-        title: "Career Preparation",
+        title: "WAN and Enterprise Connectivity",
         topics: [
-          "Interview practice",
-          "Case studies",
-          "Industry best practices",
-          "Resume preparation",
-          "Certification guidance",
-          "Placement mentoring",
+          "MPLS basics at awareness level",
+          "Site-to-site connectivity",
+          "IPsec VPN, site-to-site and remote access",
+          "NAT: static, dynamic and PAT",
+        ],
+      },
+      {
+        title: "Wireless Networking",
+        topics: [
+          "Aruba wireless deployment, controller and instant AP",
+          "Cisco Meraki cloud wireless",
+          "SSID design and VLAN mapping",
+          "Guest Wi-Fi design",
+          "RF fundamentals",
+        ],
+      },
+      {
+        title: "Network Security",
+        topics: [
+          "Palo Alto NGFW fundamentals",
+          "Security zones and policies",
+          "App-ID and URL filtering",
+          "IPsec VPN",
+          "Enterprise firewall troubleshooting",
+        ],
+      },
+      {
+        title: "Hybrid Cloud Networking",
+        topics: [
+          "AWS VPC architecture",
+          "Public and private subnets",
+          "Route tables, internet gateway and NAT gateway",
+          "Security groups against network ACLs",
+          "On-premises to AWS VPN connectivity",
+        ],
+      },
+      {
+        title: "Monitoring, Operations and ITSM",
+        topics: [
+          "SNMP and syslog monitoring",
+          "Zabbix monitoring setup",
+          "Alerting and dashboards",
+          "Ticketing with GLPI, ServiceNow and JIRA",
+          "Incident severity: P1, P2 and P3 handling",
+          "SLA-based troubleshooting workflow",
+        ],
+      },
+      {
+        title: "Troubleshooting and Enterprise Operations",
+        topics: [
+          "Layer 2 and Layer 3 troubleshooting methodology",
+          "Root cause analysis",
+          "IOS upgrade procedures as run in production",
+          "Writing methods of procedure and standard operating procedures",
+          "Change management workflow",
+          "Production issue handling scenarios",
+        ],
+      },
+      {
+        title: "SD-WAN and Modern Networking",
+        topics: [
+          "SD-WAN architecture basics",
+          "Enterprise WAN modernization",
+          "Cloud-managed networking overview",
         ],
       },
     ],
     projects: [
+      RTP,
       {
-        title: "Multi-vendor lab build",
+        title: "Enterprise campus build",
         summary:
-          "Build and verify a working topology across Cisco, Juniper and Aruba equipment, then document how it is addressed and why.",
+          "Design and configure a multi-VLAN campus with routing, wireless and firewall policy, then document the addressing and the reasoning.",
       },
       {
-        title: "Fault diagnosis log",
+        title: "Incident and RCA log",
         summary:
-          "Work a set of deliberately broken labs and record, for each, the evidence gathered and the cause identified.",
-      },
-      {
-        title: "Cloud networking exercise",
-        summary:
-          "Build a VPC with public and private subnets and explain how it maps to the on-premises design you already configured.",
+          "Work production-style incidents end to end, writing the root cause analysis and the change that closes each one.",
       },
     ],
     outcomes: [
-      "Configure and verify routing and switching on real equipment",
-      "Read a packet capture and explain what the network is doing",
-      "Administer a Linux host well enough to work on one daily",
-      "Explain cloud networking fundamentals in an interview",
-      "Present yourself and your work credibly to an employer",
+      "Configure and troubleshoot enterprise routing, switching and wireless",
+      "Run firewall policy and hybrid cloud connectivity",
+      "Work an incident from alert to root cause under an SLA",
+      "Write the MOP, SOP and RCA documentation an operations team expects",
+      "Move from a NOC seat toward a network engineer role",
     ],
-    careerRoles: ["Network Support Engineer", "Junior Network Engineer", "NOC Technician"],
+    careerRoles: [
+      "NOC Engineer (L1)",
+      "Network Support Engineer (L2)",
+      "Network Engineer (L3)",
+      "Enterprise Network Administrator",
+    ],
     mentorship:
-      "Sessions are taught by engineers who run production networks, with a named trainer responsible for your labs and reviews.",
+      "Taught by engineers running production enterprise networks, with a named trainer responsible for your labs and project reviews.",
     certificate:
       "A programme completion certificate is issued at the end, naming the courses covered.",
     faqs: [
       {
         question: "Do I need a networking background?",
         answer:
-          "No. The programme starts from fundamentals and is built for freshers, including those from non-computing degrees.",
-      },
-      { question: "How long do I keep access?", answer: ACCESS_NOTE },
-      { question: "How do I apply?", answer: APPLY_NOTE },
-    ],
-    related: ["advanced-fresher-internship", "it-core-internship", "devnet-associate-internship"],
-  },
-
-  {
-    slug: "advanced-fresher-internship",
-    title: "Advanced Fresher Internship",
-    category: "Automation",
-    shortDescription:
-      "Everything in the fresher programme plus Python, Git and hands-on Netmiko automation, the bridge between traditional networking and DevOps.",
-    overview: [
-      "The Advanced Fresher Internship takes the same networking foundation as the fresher track and adds the programming side: Python, Git and GitHub, a working IDE, and automation projects built with Netmiko against real devices.",
-      "It exists because the job market has split. A network engineer who can also script is doing a different job from one who cannot, and this programme is aimed at entering the market on the automation side of that line rather than moving across to it later.",
-      "The automation work is project-based. You finish having written scripts that configure and verify real equipment, not having watched someone else write them.",
-    ],
-    duration: DURATION_NOTE,
-    commitment: "Structured sessions alongside lab access throughout the programme.",
-    format: "Hybrid",
-    eligibility: [
-      "Open to freshers, no professional networking background required",
-      "Suited to graduates who want networking and automation together",
-      "No prior programming experience assumed",
-    ],
-    skillsRequired: [
-      "No prior networking or coding knowledge assumed",
-      "Comfortable working through problems methodically",
-      "Willing to debug your own scripts",
-    ],
-    technologies: [
-      "Cisco routers and switches",
-      "Juniper vLabs and Junos CLI",
-      "Aruba CX switches and Aruba Central",
-      "Python 3",
-      "Netmiko and Paramiko",
-      "Git and GitHub",
-      "Visual Studio Code",
-      "Linux, Wireshark and AWS",
-    ],
-    coursesIncluded: [
-      { title: "CCNA Advanced (200-301)" },
-      { title: "JNCIA (JN0-105)" },
-      { title: "Aruba Certified Associate" },
-      { title: "Linux for Networking" },
-      { title: "AWS Certified Cloud Practitioner (CLF-C02)" },
-      { title: "Python & Git, with Visual Studio" },
-      { title: "Network Automation Projects using the Netmiko library" },
-      COMMS,
-    ],
-    phases: [
-      {
-        title: "Advanced Routing Concepts",
-        topics: [
-          "Advanced BGP and OSPF",
-          "EIGRP",
-          "Route redistribution",
-          "Policy-based routing",
-          "Multicast",
-          "VPN fundamentals",
-        ],
+          "No. The programme starts from fundamentals and is built for freshers as well as for people already working a support role who want to move up.",
       },
       {
-        title: "Security & High Availability",
-        topics: [
-          "Firewalls and ACLs",
-          "VRF and segmentation",
-          "HSRP and first-hop redundancy",
-          "DDoS protection",
-          "Network audits",
-        ],
-      },
-      {
-        title: "Professional Development",
-        topics: [
-          "Network design",
-          "Change management",
-          "Monitoring",
-          "Introduction to automation",
-          "Certification paths",
-          "Career growth",
-        ],
-      },
-    ],
-    projects: [
-      {
-        title: "Multi-device configuration push",
-        summary:
-          "Write a Netmiko script that applies a configuration change across a set of devices and verifies the result on each.",
-      },
-      {
-        title: "Inventory and audit script",
-        summary:
-          "Collect version and interface state from a fleet and produce a report that flags what is out of standard.",
-      },
-      {
-        title: "Version-controlled toolkit",
-        summary:
-          "Keep your scripts in Git with branches and meaningful history, the way a team would expect to receive them.",
-      },
-    ],
-    outcomes: [
-      "Configure and verify enterprise routing and switching",
-      "Write Python that configures and validates real devices",
-      "Use Git and GitHub the way a working team does",
-      "Automate a repetitive change instead of repeating it by hand",
-      "Move into a role that expects both networking and scripting",
-    ],
-    careerRoles: ["Network Engineer", "Network Automation Engineer", "Senior Support Engineer"],
-    mentorship:
-      "Taught by engineers who automate production estates, with code review on the scripts you write.",
-    certificate:
-      "A programme completion certificate is issued at the end, naming the courses covered.",
-    faqs: [
-      {
-        question: "Do I need to know Python first?",
+        question: "Which certifications does it prepare me for?",
         answer:
-          "No. Python is taught from first principles inside the programme. Networking knowledge is the prerequisite, not software experience.",
+          "CCNA 200-301 and CCNP Enterprise at ENCOR level, with Juniper JNCIA certification assistance included. The programme is not affiliated with any certification vendor.",
       },
       { question: "How long do I keep access?", answer: ACCESS_NOTE },
       { question: "How do I apply?", answer: APPLY_NOTE },
     ],
-    related: ["network-fresher-internship", "devnet-associate-internship", "network-automation-internship"],
+    related: ["data-center-networking-internship", "data-center-automation-internship", "elite-career-path-bundle"],
   },
 
   {
-    slug: "it-core-internship",
-    title: "IT Core Internship (Non-IT to IT)",
-    category: "Career Transition",
+    slug: "data-center-networking-internship",
+    title: "Data Center Networking Internship",
+    track: "Enterprise infrastructure, L1 to L3 operations",
+    category: "Data Center",
     featured: true,
     shortDescription:
-      "For people moving into IT from another field: starts at IT fundamentals and runs through networking, security, cloud and real project work.",
+      "Data center infrastructure and operations without the automation track: switching, routing, VMware virtualization, monitoring and the ticketing workflow that runs a floor.",
     overview: [
-      "The IT Core Internship is built for people arriving from outside IT, civil, mechanical, commerce, arts, and it starts where that requires, at what a computer and a network actually are, rather than assuming a technical grounding that is not there.",
-      "From that base it runs the full networking sequence: CCNA Advanced, JNCIA, Aruba, Palo Alto NGFW security, Linux, AWS fundamentals and real-time project training. The progression is deliberate, and nothing is skipped on the assumption that you picked it up elsewhere.",
-      "Networking rewards logic, structure and patience rather than mathematics or coding, which is why a transition into it from a non-technical degree is realistic in a way that some other routes into IT are not.",
+      "The Data Center Networking Internship builds the foundational and operational skills a data center role needs, for L1 through L3 positions in enterprise and service provider environments.",
+      "It covers the physical and logical layers together. Rack and stack, power and cooling and server connectivity sit alongside VLAN design, spanning tree, routing for the data center, and VMware ESXi virtualization, because a data center engineer is expected to reason across all of them.",
+      "Operations runs through the whole programme: SNMP and syslog monitoring, Zabbix, incident management, SLA handling and the ticketing systems the work is actually tracked in.",
     ],
     duration: DURATION_NOTE,
     commitment: "Structured sessions alongside lab access throughout the programme.",
     format: "Hybrid",
     eligibility: [
-      "Open to graduates from any discipline, including non-IT",
-      "No prior IT or networking experience required",
-      "Suited to career changers rather than practising engineers",
+      "Open to freshers and to engineers moving into data center work",
+      "No professional data center experience required",
+      "Graduates from any discipline, including non-computing degrees",
     ],
     skillsRequired: [
-      "No prior IT knowledge assumed",
+      "No prior networking knowledge assumed",
       "Basic computer literacy",
-      "Prepared to work through a long sequence in order",
+      "Comfortable working methodically through hardware and software layers",
     ],
     technologies: [
       "Cisco routers and switches",
-      "Juniper and Aruba equipment",
-      "Palo Alto PA-VM, Panorama and GlobalProtect",
-      "Wireshark and MTR",
-      "SolarWinds, Nagios and Zabbix",
-      "ServiceNow and Remedy",
-      "Linux terminal and SSH",
-      "AWS Console, VPC and IAM",
+      "Juniper Junos",
+      "VMware ESXi",
+      "Linux",
+      "Zabbix, SNMP and syslog",
+      "GLPI and ServiceNow",
+      "AWS VPC",
     ],
     coursesIncluded: [
-      { title: "CCNA Advanced (200-301)" },
-      { title: "JNCIA (JN0-105)" },
-      { title: "Aruba Certified Associate" },
-      { title: "Palo Alto NGFW" },
+      { title: "CCNA Advanced (routing and switching)" },
+      { title: "CCNP Enterprise (data center foundation)" },
+      { title: "JNCIA (Juniper, certification assistance)" },
+      { title: "VMware ESXi and Virtualization" },
       { title: "Linux for Networking" },
-      { title: "AWS Certified Cloud Practitioner (CLF-C02)" },
-      { title: "Real-Time Networking Project Training" },
-      COMMS,
+      { title: "Monitoring Tools (Zabbix, SNMP, syslog)" },
+      { title: "Ticketing Tools (GLPI and ServiceNow)" },
+      { title: "AWS Cloud Basics for Networking" },
+      { title: "Real-Time Project Version 2.0" },
     ],
-    phases: [
+    curriculum: [
       {
-        title: "IT Fundamentals",
+        title: "Data Center Fundamentals",
         topics: [
-          "Computer hardware",
-          "Operating systems",
-          "Networking for beginners",
-          "How the internet works",
-          "Introduction to cloud",
-          "IT support fundamentals",
+          "Data center architecture: core, aggregation and access",
+          "Rack and stack",
+          "Power, cooling and infrastructure basics",
+          "Server connectivity fundamentals",
         ],
       },
       {
-        title: "Networking Essentials",
+        title: "Switching and Layer 2 Technologies",
         topics: [
-          "Networking concepts",
-          "CCNA fundamentals",
-          "Routing and switching",
-          "Structured troubleshooting",
-          "Introduction to Linux",
-          "Hands-on labs",
+          "VLAN design and segmentation",
+          "Trunking and inter-VLAN routing",
+          "STP, RSTP and MSTP",
+          "EtherChannel with LACP and PAgP",
+          "MAC address learning and switching behaviour",
         ],
       },
       {
-        title: "Career Development",
+        title: "Routing in the Data Center",
         topics: [
-          "Advanced topics",
-          "Certification preparation",
-          "Professional skills",
-          "Interview practice",
-          "Placement assistance",
+          "Static and default routing",
+          "OSPF fundamentals for the data center",
+          "BGP basics for data center connectivity",
+          "Route filtering",
+        ],
+      },
+      {
+        title: "Virtualization and the Compute Layer",
+        topics: [
+          "VMware ESXi installation and management",
+          "Creating and managing virtual machines",
+          "vSwitch configuration",
+          "Virtual networking concepts",
+        ],
+      },
+      {
+        title: "Monitoring and Operations",
+        topics: [
+          "SNMP monitoring",
+          "Syslog analysis",
+          "Zabbix monitoring setup",
+          "Alert handling and first-line troubleshooting",
+        ],
+      },
+      {
+        title: "IT Operations and Ticketing",
+        topics: [
+          "Incident management workflow",
+          "Ticket handling: P1, P2 and P3",
+          "Understanding SLAs",
+          "GLPI and ServiceNow",
+        ],
+      },
+      {
+        title: "AWS Cloud, Basic Networking",
+        topics: [
+          "VPC fundamentals",
+          "Public and private subnets",
+          "Route tables",
+          "Internet gateway basics",
+          "Introduction to hybrid connectivity",
+        ],
+      },
+      {
+        title: "Troubleshooting",
+        topics: [
+          "Layer 1 to Layer 3 troubleshooting",
+          "Interface issues",
+          "VLAN and routing issues",
+          "Connectivity debugging with ping and traceroute",
         ],
       },
     ],
     projects: [
+      RTP,
       {
-        title: "Foundation build",
+        title: "Enterprise data center build",
         summary:
-          "Build a small network end to end, from addressing plan to working configuration, and document every decision.",
+          "Stand up a simulated data center with VLAN segmentation and routing deployed end to end.",
       },
       {
-        title: "Secured site design",
+        title: "VMware infrastructure lab",
         summary:
-          "Add firewall policy and segmentation to a working topology and justify each rule you introduce.",
+          "Build virtual infrastructure on ESXi, configure vSwitches and connect it to the physical topology.",
       },
       {
-        title: "Real-time project training",
+        title: "Monitoring deployment",
         summary:
-          "Work production-style incidents and changes against the environments the delivery teams use.",
+          "Set up Zabbix against the estate, with alerting thresholds that catch what matters and stay quiet otherwise.",
       },
     ],
     outcomes: [
-      "Explain how a network carries traffic, from cable to application",
-      "Configure and verify routing, switching and firewall policy",
-      "Diagnose a fault with a repeatable, layered method",
-      "Hold a technical conversation without an IT degree behind you",
-      "Enter IT in a role that pays for the skills, not the background",
+      "Reason across the physical, virtual and network layers of a data center",
+      "Design VLAN segmentation and deploy routing for a data center fabric",
+      "Install and manage VMware ESXi and its virtual networking",
+      "Run monitoring and handle incidents against an SLA",
+      "Debug Layer 1 to Layer 3 faults methodically",
     ],
-    careerRoles: ["Network Support Engineer", "Junior Network Engineer", "NOC Technician"],
+    careerRoles: [
+      "Data Center Technician (L1)",
+      "Data Center Support Engineer (L2)",
+      "NOC Engineer",
+      "Network Support Engineer",
+      "Infrastructure Support Engineer",
+      "Junior Network Engineer",
+    ],
     mentorship:
-      "A named trainer follows your progress through the sequence, with extra time built in for the fundamentals phase.",
+      "Taught by engineers who run production data center estates, with a named trainer responsible for your labs and project reviews.",
     certificate:
       "A programme completion certificate is issued at the end, naming the courses covered.",
     faqs: [
       {
-        question: "I have no IT background at all. Is that a problem?",
+        question: "Does this programme include automation?",
         answer:
-          "No. The programme is designed for exactly that and starts from zero. Networking needs logic and structured thinking rather than advanced mathematics or coding.",
+          "No. This is the operations track, deliberately without the automation layer. If you want Python, Ansible and CI/CD on top of the data center material, take the Data Center and Automation Internship instead.",
+      },
+      {
+        question: "Do I need virtualization experience?",
+        answer:
+          "No. VMware ESXi is taught from installation upward, including virtual machine creation and vSwitch configuration.",
       },
       { question: "How long do I keep access?", answer: ACCESS_NOTE },
       { question: "How do I apply?", answer: APPLY_NOTE },
     ],
-    related: ["non-it-to-it-transition", "network-fresher-internship", "advanced-core-internship"],
+    related: ["data-center-automation-internship", "enterprise-networking-internship", "elite-career-path-bundle"],
   },
 
   {
-    slug: "advanced-core-internship",
-    title: "Advanced Core Internship",
-    category: "Advanced Networking",
+    slug: "data-center-automation-internship",
+    title: "Data Center and Automation Internship",
+    track: "Advanced track: cloud, DevOps, network automation and AI-ready infrastructure",
+    category: "Automation",
     featured: true,
     shortDescription:
-      "For working engineers: CCNP enterprise and service provider depth, multi-vendor security, and real-time project training on production-style topologies.",
+      "The advanced track: spine-leaf and VXLAN, AWS hybrid cloud, then Python, Ansible, REST APIs and CI/CD on top, with real automation projects.",
     overview: [
-      "The Advanced Core Internship is the programme for someone already working in networking who wants the depth that separates a support engineer from a design or senior operations role.",
-      "It carries CCNP across enterprise and service provider, MPLS, BGP at scale, IS-IS, L3 and L2 VPN, VXLAN and EVPN, alongside Palo Alto security, Aruba, Juniper and Linux, and finishes on real-time project training against production-style topologies.",
-      "The emphasis throughout is on what happens when a design meets a fault: root cause analysis, change discipline and the documentation that lets someone else pick the work up.",
+      "The Data Center and Automation Internship prepares you for modern data center and cloud infrastructure roles, with the automation, DevOps and cloud networking skills US enterprise environments now expect as standard.",
+      "It carries the networking sequence through CCNP with data center concepts, adds Palo Alto security, Aruba and AWS Cloud Practitioner, then builds the automation layer: Python and Netmiko, Ansible, REST APIs, Git and CI/CD pipelines across Jenkins, GitHub Actions and GitLab CI.",
+      "Observability is treated as a first-class skill rather than an afterthought, with Prometheus, Grafana and Zabbix, and the programme closes on real automation projects rather than demonstrations.",
     ],
     duration: DURATION_NOTE,
     commitment: "Structured sessions alongside lab access throughout the programme.",
     format: "Hybrid",
     eligibility: [
-      "Working engineers with CCNA-level ability or better",
-      "Able to configure and verify routing and switching unaided",
-      "Suited to those targeting senior or architecture roles",
-    ],
-    skillsRequired: [
-      "Routing and switching fundamentals",
-      "Comfortable on a vendor CLI",
-      "Some exposure to production networks",
-    ],
-    technologies: [
-      "Cisco ASR, ISR and Catalyst",
-      "Juniper MX, SRX and QFX",
-      "Arista and Aruba",
-      "Palo Alto PA-VM and Panorama",
-      "GNS3 and EVE-NG",
-      "Wireshark and MTR",
-      "SolarWinds, Zabbix and ServiceNow",
-      "AWS",
-    ],
-    coursesIncluded: [
-      { title: "CCNA Advanced (200-301)" },
-      { title: "CCNP (Multi-Track)" },
-      { title: "JNCIA (JN0-105)" },
-      { title: "Aruba Certified Associate" },
-      { title: "Palo Alto NGFW" },
-      { title: "Linux for Networking" },
-      { title: "AWS Certified Cloud Practitioner (CLF-C02)" },
-      { title: "Real-Time Networking Project Training" },
-      COMMS,
-    ],
-    phases: [
-      {
-        title: "Advanced Infrastructure",
-        topics: [
-          "Enterprise network design",
-          "Data centre networking",
-          "Software-defined networking",
-          "Cloud networking",
-          "Virtualization",
-        ],
-      },
-      {
-        title: "Security & Operations",
-        topics: [
-          "Security frameworks",
-          "Monitoring and analytics",
-          "Incident response",
-          "Compliance",
-          "Disaster recovery and business continuity",
-        ],
-      },
-      {
-        title: "Strategic Implementation",
-        topics: [
-          "Transformation projects",
-          "5G and AI in networking",
-          "Cross-platform integration",
-          "Technical leadership",
-          "Documentation standards",
-        ],
-      },
-    ],
-    projects: [
-      {
-        title: "Service provider core build",
-        summary:
-          "Build an MPLS core with L3VPN and verify end-to-end reachability across customer VRFs.",
-      },
-      {
-        title: "Root cause analysis pack",
-        summary:
-          "Take a production-style incident from symptom to written RCA, with the evidence that supports the conclusion.",
-      },
-      {
-        title: "Multi-vendor security review",
-        summary:
-          "Review a firewall rule base and segmentation design, and propose changes with the reasoning for each.",
-      },
-    ],
-    outcomes: [
-      "Design and troubleshoot enterprise and service provider networks",
-      "Work MPLS, BGP, IS-IS and EVPN at production scale",
-      "Apply multi-vendor security policy with a defensible rationale",
-      "Write root cause analyses and change documentation others can act on",
-      "Move into senior engineering or architecture work",
-    ],
-    careerRoles: ["Enterprise Network Architect", "Senior Network Engineer", "Solutions Architect"],
-    mentorship:
-      "Taught by engineers running production enterprise and service provider estates, with design review on your project work.",
-    certificate:
-      "A programme completion certificate is issued at the end, naming the courses covered.",
-    faqs: [
-      {
-        question: "Is this suitable for a fresher?",
-        answer:
-          "No. It assumes you can already configure and verify routing and switching unaided. Freshers should start with the Network Fresher or IT Core programme.",
-      },
-      { question: "How long do I keep access?", answer: ACCESS_NOTE },
-      { question: "How do I apply?", answer: APPLY_NOTE },
-    ],
-    related: ["network-automation-internship", "it-core-internship", "advanced-fresher-internship"],
-  },
-
-  {
-    slug: "network-automation-internship",
-    title: "Network Automation Internship",
-    category: "Automation",
-    shortDescription:
-      "The most complete programme: CCNP-level networking plus Python, Ansible, REST APIs and CI/CD, with real enterprise automation projects.",
-    overview: [
-      "The Network Automation Internship is the widest programme offered. It carries the full networking sequence through CCNP, adds Palo Alto security and AWS, and then builds the automation layer on top: Python, Netmiko, Ansible, REST APIs, JSON and YAML, Git and CI/CD pipelines.",
-      "It is aimed at NetDevOps work, the roles where the deliverable is a tool or a pipeline rather than a configuration, and where a change is reviewed, tested and deployed the way software is.",
-      "The programme finishes on real enterprise automation projects: zero-touch provisioning, compliance checking, health monitoring and auto-remediation, each built end to end rather than demonstrated.",
-    ],
-    duration: DURATION_NOTE,
-    commitment: "Structured sessions alongside lab access throughout the programme.",
-    format: "Hybrid",
-    eligibility: [
-      "Engineers targeting automation or NetDevOps roles",
-      "CCNA-level networking ability is expected",
+      "Engineers targeting data center, cloud or automation roles",
+      "Suited to those who want the operations and automation layers together",
       "No prior programming experience required",
     ],
     skillsRequired: [
-      "Routing and switching fundamentals",
-      "Comfortable on a Linux shell",
-      "Prepared to debug your own code",
+      "No prior coding knowledge assumed",
+      "Comfortable on a command line",
+      "Prepared to debug your own scripts",
     ],
     technologies: [
-      "Python, Netmiko, Paramiko and NAPALM",
-      "Ansible and Jinja2",
-      "REST APIs, JSON, XML and YAML",
+      "Python, Netmiko and Paramiko",
+      "Ansible",
+      "REST APIs, JSON and YAML",
       "Git, GitHub and GitHub Actions",
       "Jenkins and GitLab CI",
+      "Prometheus, Grafana and Zabbix",
       "Cisco, Juniper, Palo Alto and Aruba equipment",
-      "SolarWinds, Zabbix and ServiceNow",
-      "AWS",
+      "AWS VPC and hybrid cloud",
     ],
     coursesIncluded: [
-      { title: "CCNA Advanced (200-301)" },
-      { title: "CCNP (Multi-Track)" },
-      { title: "JNCIA (JN0-105)" },
-      { title: "Aruba Certified Associate" },
+      { title: "CCNA Advanced (200-301, with BGP)" },
+      { title: "CCNP Enterprise (advanced routing and data center concepts)" },
+      { title: "JNCIA (Juniper, certification assistance)" },
       { title: "Palo Alto NGFW" },
+      { title: "Aruba Networking" },
+      { title: "AWS Cloud Practitioner (CLF-C02)" },
       { title: "Linux for Networking" },
-      { title: "AWS Certified Cloud Practitioner (CLF-C02)" },
       { title: "Python for Network Automation" },
-      { title: "Ansible, REST APIs, Git, CI/CD and data formats" },
-      { title: "Network Automation Real-Time Projects" },
-      { title: "Real-Time Networking Project Training" },
-      { title: "Advanced DevOps for Networking" },
-      COMMS,
+      { title: "Ansible Automation" },
+      { title: "REST APIs for Networking" },
+      { title: "Git and GitHub" },
+      { title: "CI/CD Tools (Jenkins, GitHub Actions, GitLab CI)" },
+      { title: "Data Formats (JSON and YAML)" },
+      { title: "Netmiko and Paramiko" },
+      { title: "Monitoring Tools (Prometheus, Grafana, Zabbix)" },
+      { title: "Real-Time Automation Project Version 2.0" },
     ],
-    phases: [
+    curriculum: [
       {
-        title: "Programming for Networks",
+        title: "Advanced Data Center Networking",
         topics: [
-          "Python for network engineers",
-          "APIs and REST",
-          "JSON, XML and YAML",
-          "Git and version control",
-          "Coding exercises against real devices",
+          "Spine-leaf architecture",
+          "VXLAN at introductory level",
+          "EVPN, conceptual understanding",
+          "High availability design",
+          "Multi-site connectivity",
         ],
       },
       {
-        title: "Automation Tools & Platforms",
+        title: "Cloud Networking",
         topics: [
-          "Ansible",
-          "NETCONF and RESTCONF",
-          "Cisco DNA Center APIs",
-          "Meraki APIs",
-          "Infrastructure as code",
+          "Advanced AWS VPC design",
+          "Hybrid cloud architecture",
+          "Site-to-site VPN connectivity",
+          "AWS networking troubleshooting",
         ],
       },
       {
-        title: "Advanced Automation Projects",
+        title: "Network Automation",
         topics: [
-          "End-to-end automation projects",
-          "CI/CD pipelines",
-          "Monitoring automation",
-          "Configuration management at scale",
-          "Production deployment",
+          "Python for networking use cases",
+          "Netmiko automation scripts",
+          "REST API integration",
+          "Device configuration automation",
+          "Backup and restore automation",
+        ],
+      },
+      {
+        title: "DevOps for Networking",
+        topics: [
+          "Git version control",
+          "CI/CD pipeline basics",
+          "Jenkins, GitHub Actions and GitLab CI",
+          "Handling JSON and YAML configuration",
+        ],
+      },
+      {
+        title: "Observability and Monitoring",
+        topics: [
+          "Prometheus basics",
+          "Grafana dashboards",
+          "Advanced Zabbix monitoring",
+          "Alerting and incident correlation",
+        ],
+      },
+      {
+        title: "Infrastructure Troubleshooting",
+        topics: [
+          "Production issue handling",
+          "Root cause analysis",
+          "Change validation",
+          "Automating pre-change and post-change checks",
         ],
       },
     ],
     projects: [
       {
-        title: "Fleet audit and remediation tool",
+        title: "Real-Time Automation Project Version 2.0",
         summary:
-          "Detect configuration drift across a fleet and push a corrected, validated configuration where it is found.",
+          "Bulk network configuration automation built and run against a production-style estate rather than a fixed lab.",
       },
       {
-        title: "Validation in CI",
+        title: "Automated backup and audit tooling",
         summary:
-          "Put configuration changes through a pipeline that tests them before they reach a device.",
+          "An automated backup system plus network audit tools that report what is out of standard across the fleet.",
       },
       {
-        title: "Monitoring and auto-remediation",
+        title: "Health checks and cloud integration",
         summary:
-          "Detect a BGP neighbour going down, act on it automatically and report what was changed and why.",
+          "Health check scripts and cloud with on-premises integration labs, wired into a pipeline that validates before it deploys.",
       },
     ],
     outcomes: [
-      "Write Python that configures and validates a fleet of devices",
-      "Build Ansible playbooks and infrastructure as code for a network",
-      "Drive changes through a CI/CD pipeline instead of by hand",
-      "Consume REST APIs from controllers and platforms",
-      "Work as the automation engineer on a network team",
+      "Design and troubleshoot spine-leaf data center fabrics",
+      "Build hybrid cloud connectivity on AWS and debug it",
+      "Write Python that configures, backs up and audits a fleet",
+      "Drive network change through a CI/CD pipeline",
+      "Run observability with Prometheus, Grafana and Zabbix",
     ],
-    careerRoles: ["Network Automation Engineer", "DevOps Network Engineer", "Solutions Architect"],
+    careerRoles: [
+      "Data Center Network Engineer",
+      "Network Automation Engineer",
+      "Cloud Network Engineer",
+      "SRE Engineer (entry level)",
+      "DevOps Network Engineer",
+      "Infrastructure Automation Engineer",
+      "AI Infrastructure Support Engineer",
+    ],
     mentorship:
       "Taught by engineers who automate production estates, with code review on every project you submit.",
     certificate:
@@ -661,238 +604,140 @@ export const internships: Internship[] = [
       {
         question: "Do I need to be able to code already?",
         answer:
-          "No. Python is taught from first principles inside the programme. Networking knowledge is the prerequisite, not software experience.",
-      },
-      { question: "How long do I keep access?", answer: ACCESS_NOTE },
-      { question: "How do I apply?", answer: APPLY_NOTE },
-    ],
-    related: ["devnet-associate-internship", "advanced-core-internship", "advanced-fresher-internship"],
-  },
-
-  {
-    slug: "devnet-associate-internship",
-    title: "Cisco DevNet Associate Internship",
-    category: "Automation",
-    shortDescription:
-      "Focused on Cisco DevNet Associate (200-901): Python scripting, Git workflows and Netmiko automation against real devices.",
-    overview: [
-      "The Cisco DevNet Associate Internship is the narrower automation route: CCNA networking, Linux, Python and Git, and Netmiko automation projects, aimed squarely at the DevNet Associate 200-901 exam and the roles it opens.",
-      "It suits two people in particular, a fresher who already knows some Python and wants the networking to go with it, and a working engineer who enjoys the coding side and wants a credential for it.",
-      "The automation work runs against real devices rather than simulated output, and everything you write is kept in Git with the history a team would expect to inherit.",
-    ],
-    duration: DURATION_NOTE,
-    commitment: "Structured sessions alongside lab access throughout the programme.",
-    format: "Hybrid",
-    eligibility: [
-      "Freshers with some Python, or with CCNA-level networking",
-      "Working engineers who want a programmability credential",
-      "Suited to those targeting the 200-901 exam",
-    ],
-    skillsRequired: [
-      "Either basic Python or basic networking, the programme fills the other",
-      "Comfortable on a command line",
-      "Prepared to debug your own code",
-    ],
-    technologies: [
-      "Python 3",
-      "Netmiko, NAPALM, Ansible and Paramiko",
-      "Git and GitHub",
-      "Postman",
-      "Visual Studio Code",
-      "Linux (Ubuntu and CentOS)",
-      "Cisco routers and switches",
-      "Wireshark",
-    ],
-    coursesIncluded: [
-      { title: "CCNA Advanced (200-301)" },
-      { title: "Linux for Networking" },
-      { title: "Python & Git, with Visual Studio" },
-      { title: "Network Automation Projects using the Netmiko library" },
-      { title: "Real-Time Networking Project Training" },
-      COMMS,
-    ],
-    phases: [
-      {
-        title: "Programming & APIs",
-        topics: [
-          "Python fundamentals",
-          "REST and JSON",
-          "Postman",
-          "Git and version control",
-          "Setting up a development environment",
-        ],
+          "No. Python is taught from first principles inside the programme, alongside Netmiko, Ansible and the REST API work that uses it.",
       },
       {
-        title: "Cisco Platforms",
-        topics: [
-          "Meraki Dashboard API",
-          "Cisco DNA Center",
-          "NETCONF and YANG",
-          "Device programmability",
-          "Cisco labs",
-        ],
-      },
-      {
-        title: "Professional Growth",
-        topics: [
-          "Advanced automation projects",
-          "CI/CD",
-          "Security considerations",
-          "Certification path",
-          "Career planning",
-        ],
-      },
-    ],
-    projects: [
-      {
-        title: "Device automation toolkit",
-        summary:
-          "Build a set of Netmiko scripts that configure, verify and report on real Cisco equipment.",
-      },
-      {
-        title: "API integration",
-        summary:
-          "Drive a controller through its REST API and handle the responses properly, including the failures.",
-      },
-      {
-        title: "Collaborative repository",
-        summary:
-          "Run your work through branches, pull requests and CI checks the way a team would.",
-      },
-    ],
-    outcomes: [
-      "Sit the Cisco DevNet Associate 200-901 exam prepared",
-      "Write Python that automates real network devices",
-      "Use Git and GitHub collaboratively, not just as storage",
-      "Consume and troubleshoot REST APIs",
-      "Move into a network developer or DevOps-adjacent role",
-    ],
-    careerRoles: ["Network Automation Engineer", "DevOps Engineer", "Network Developer"],
-    mentorship:
-      "Taught by engineers working in automation, with code review on the scripts and repositories you produce.",
-    certificate:
-      "A programme completion certificate is issued at the end, naming the courses covered.",
-    faqs: [
-      {
-        question: "Does this prepare me for the 200-901 exam?",
+        question: "How is this different from the Data Center Networking Internship?",
         answer:
-          "Yes. The programme is built around the Cisco DevNet Associate 200-901 blueprint, alongside the project work that makes the material stick.",
+          "It carries the same data center foundation and then adds the automation and DevOps layer: Python, Ansible, REST APIs, Git, CI/CD pipelines and Prometheus and Grafana observability. Take the other track if you want operations without automation.",
       },
       { question: "How long do I keep access?", answer: ACCESS_NOTE },
       { question: "How do I apply?", answer: APPLY_NOTE },
     ],
-    related: ["network-automation-internship", "advanced-fresher-internship", "network-fresher-internship"],
+    related: ["data-center-networking-internship", "enterprise-networking-internship", "elite-career-path-bundle"],
   },
 
   {
-    slug: "non-it-to-it-transition",
-    title: "Non-IT to IT Transition Program",
-    category: "Career Transition",
+    slug: "elite-career-path-bundle",
+    title: "Elite Career Path Bundle",
+    track: "All three internships, taken as one sequence",
+    category: "Career Bundle",
     shortDescription:
-      "The bridge route for people from civil, mechanical, commerce or arts backgrounds, networking needs logic and configuration, not coding.",
+      "All three tracks together: enterprise networking, data center operations, and the automation and cloud layer on top, at a single bundled price.",
     overview: [
-      "The Non-IT to IT Transition Program is the bridge for someone whose degree pointed somewhere else entirely. It answers the question that stops most people before they start: whether a career in IT is realistic without a computing background.",
-      "For networking, it is. The work is logic, architecture and configuration rather than mathematics or software development, which is why people arrive here from civil, mechanical, commerce and arts degrees and leave working as engineers.",
-      "The programme runs from technology foundations through the networking core, CCNA, Palo Alto NGFW, router and switch configuration, hands-on labs, and finishes on the professional transition: resume, interviews, soft skills and placement support.",
+      "The Elite Career Path Bundle is all three internships taken as one sequence rather than bought separately: Enterprise Networking, Data Center Networking, and Data Center and Automation.",
+      "Taken in order the tracks build rather than repeat. Enterprise networking establishes routing, switching, wireless and operations; the data center track adds infrastructure, virtualization and the compute layer; the automation track puts Python, Ansible, CI/CD and cloud on top of both.",
+      "It is the widest route offered, and it is aimed at someone who wants to finish able to work in enterprise networking, data center infrastructure or automation, rather than having to pick one at the start.",
     ],
     duration: DURATION_NOTE,
-    commitment: "Structured sessions with dedicated mentorship through the transition.",
+    commitment: "Structured sessions across all three tracks, with lab access throughout.",
     format: "Hybrid",
     eligibility: [
-      "Graduates from any non-IT discipline",
-      "No prior IT experience required",
-      "No coding or advanced mathematics required",
+      "Open to freshers and to working engineers",
+      "No professional networking background required",
+      "Suited to those who want the widest route rather than one specialism",
     ],
     skillsRequired: [
-      "No prior IT knowledge assumed",
+      "No prior networking or coding knowledge assumed",
       "Basic computer literacy",
-      "Methodical, patient approach to problems",
+      "Prepared to commit to a long sequence in order",
     ],
     technologies: [
-      "Cisco routers and switches",
-      "Palo Alto NGFW",
-      "Wireshark",
-      "Packet Tracer and EVE-NG",
-      "Linux terminal",
+      "Cisco, Juniper, Palo Alto, Aruba and Meraki",
+      "VMware ESXi",
+      "AWS VPC and hybrid cloud",
+      "Python, Netmiko, Paramiko and Ansible",
+      "Git, GitHub Actions, Jenkins and GitLab CI",
+      "Prometheus, Grafana and Zabbix",
+      "GLPI, ServiceNow and JIRA",
     ],
     coursesIncluded: [
-      { title: "Technology foundations" },
-      { title: "CCNA Advanced (200-301)" },
-      { title: "Palo Alto NGFW" },
-      COMMS,
+      { title: "Enterprise Networking Internship, in full" },
+      { title: "Data Center Networking Internship, in full" },
+      { title: "Data Center and Automation Internship, in full" },
     ],
-    phases: [
+    curriculum: [
       {
-        title: "Technology Foundation",
+        title: "Track One: Enterprise Networking",
         topics: [
-          "How computers and networks work",
-          "Operating systems",
-          "The internet",
-          "Where IT roles sit in an organisation",
+          "Networking fundamentals and enterprise routing and switching",
+          "WAN connectivity, wireless and network security",
+          "Hybrid cloud networking on AWS",
+          "Monitoring, ITSM and enterprise operations",
+          "SD-WAN and modern networking",
         ],
       },
       {
-        title: "Networking Core",
+        title: "Track Two: Data Center Networking",
         topics: [
-          "CCNA fundamentals",
-          "Router and switch configuration",
-          "Palo Alto NGFW",
-          "Hands-on labs",
+          "Data center architecture and the physical layer",
+          "Layer 2 technologies and routing for the data center",
+          "VMware ESXi virtualization and the compute layer",
+          "Monitoring, operations and ticketing",
+          "Layer 1 to Layer 3 troubleshooting",
         ],
       },
       {
-        title: "Professional Transition",
+        title: "Track Three: Data Center and Automation",
         topics: [
-          "Resume preparation",
-          "Interview practice",
-          "Soft skills",
-          "Placement support",
+          "Spine-leaf, VXLAN and EVPN",
+          "Advanced AWS and hybrid cloud design",
+          "Python, Netmiko and REST API automation",
+          "DevOps for networking: Git and CI/CD",
+          "Observability with Prometheus and Grafana",
         ],
       },
     ],
     projects: [
+      RTP,
       {
-        title: "Foundation build",
+        title: "Real-Time Automation Project Version 2.0",
         summary:
-          "Configure a small working network from scratch and explain each decision in plain language.",
+          "The automation capstone: bulk configuration, automated backup, health checks and network audit tooling.",
       },
       {
-        title: "Lab exam",
+        title: "Cross-track portfolio",
         summary:
-          "Complete a timed practical exercise under the conditions a technical interview would set.",
-      },
-      {
-        title: "Interview preparation",
-        summary:
-          "Rehearse the technical and non-technical conversation until you can hold both.",
+          "Work from all three tracks kept as one documented portfolio, which is what an interviewer actually opens.",
       },
     ],
     outcomes: [
-      "Explain how a network works without a computing background",
-      "Configure and verify Cisco routers and switches",
-      "Apply basic firewall policy",
-      "Answer a technical interview question credibly",
-      "Enter IT on the strength of demonstrable skill",
+      "Work across enterprise networking, data center infrastructure and automation",
+      "Choose a specialism at the end of the programme rather than the start",
+      "Hold a portfolio spanning operations, virtualization and automation",
+      "Meet the requirements of the widest set of roles the tracks target",
     ],
-    careerRoles: ["Junior Network Administrator", "Technical Support Engineer", "NOC Analyst"],
+    careerRoles: [
+      "Network Engineer",
+      "Data Center Network Engineer",
+      "Network Automation Engineer",
+      "Cloud Network Engineer",
+      "DevOps Network Engineer",
+      "Infrastructure Automation Engineer",
+    ],
     mentorship:
-      "Dedicated mentorship runs through the programme, with extra time on the foundation phase for those starting from zero.",
+      "A named trainer follows you across all three tracks, with code review on the automation work.",
     certificate:
-      "A programme completion certificate is issued at the end, naming the work undertaken.",
+      "A completion certificate is issued for each track, naming the courses covered.",
     faqs: [
       {
-        question: "Do I need prior IT experience?",
+        question: "Do I have to take the tracks in order?",
         answer:
-          "No. The programme starts from zero and is built for people with no IT background.",
+          "It is strongly recommended. Each track assumes the one before it, and taken in order they build rather than repeat.",
       },
       {
-        question: "Do I need to learn to code?",
+        question: "Can I buy the tracks separately instead?",
         answer:
-          "No. Networking is logic, architecture and configuration. Coding is optional and only matters if you later move toward automation.",
+          "Yes. Each of the three is sold on its own. The bundle exists because taking all three together costs less than buying them one at a time.",
       },
+      { question: "How long do I keep access?", answer: ACCESS_NOTE },
       { question: "How do I apply?", answer: APPLY_NOTE },
     ],
-    related: ["it-core-internship", "network-fresher-internship", "advanced-fresher-internship"],
+    related: [
+      "enterprise-networking-internship",
+      "data-center-networking-internship",
+      "data-center-automation-internship",
+    ],
   },
 ];
 

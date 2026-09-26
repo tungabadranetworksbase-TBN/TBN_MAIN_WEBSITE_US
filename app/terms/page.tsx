@@ -135,7 +135,7 @@ export default function TermsPage() {
                 enrolment, before any fee is paid. They cover the cancellation window before a batch
                 starts, whether a partial refund applies once it has started, how a deferral to a
                 later batch is handled, and what happens if Tungabadra Networks cancels a batch. Ask
-                for these terms on the demo call and keep the written copy you are given.
+                for these terms on the consultation call and keep the written copy you are given.
               </p>
 
               <h2 id="conduct" style={{ scrollMarginTop: "calc(var(--header-h) + 20px)" }}>

@@ -4,6 +4,7 @@ import JsonLd from "@/components/JsonLd";
 import Nav from "@/components/brand/Nav";
 import Footer from "@/components/brand/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
+import CalEmbed from "@/components/CalEmbed";
 import { site } from "@/lib/site";
 import { graph, organizationSchema, websiteSchema } from "@/lib/schema";
 import "./originkit.css";
@@ -78,6 +79,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Footer />
 
         <JsonLd data={graph(organizationSchema(), websiteSchema())} />
+        <CalEmbed />
       </body>
     </html>
   );

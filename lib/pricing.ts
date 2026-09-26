@@ -41,8 +41,15 @@ const TAX_MULTIPLIER = 1.18;
 /** Round USD to this granularity, so the output reads as a price. */
 const USD_ROUNDING = 5;
 
-/** Base fees exactly as published on the India site, in rupees. */
-type Fee = { inr: number; wasInr?: number };
+/**
+ * A published fee.
+ *
+ * Courses are published in rupees on the India site and converted here.
+ * The internships are published directly in US dollars, so they carry a
+ * `usd` figure and skip the conversion entirely - running a dollar price
+ * through the rupee maths would invent a number nobody published.
+ */
+type Fee = { inr: number; wasInr?: number } | { usd: number; wasUsd?: number };
 
 export const COURSE_FEES: Record<string, Fee> = {
   "cloud-lab-access": { inr: 3000, wasInr: 5000 },
@@ -60,27 +67,23 @@ export const COURSE_FEES: Record<string, Fee> = {
 };
 
 /**
- * Internship fees, from the six priced programmes on /internship.
+ * Internship fees, published directly in US dollars.
  *
- * These are the published rupee figures for the programmes themselves, so the
- * mapping is exact - no programme is matched by level or subject any more.
- * The Non-IT to IT Transition page carries no price on the India site and
- * carries none here.
+ * The bundle is the only one with a struck-through price: the three tracks
+ * bought separately come to more than the bundle costs.
  */
 export const INTERNSHIP_FEES: Record<string, Fee> = {
-  "network-fresher-internship": { inr: 36000, wasInr: 56050 },
-  "devnet-associate-internship": { inr: 51000, wasInr: 83780 },
-  "advanced-fresher-internship": { inr: 56000, wasInr: 86730 },
-  "it-core-internship": { inr: 57000, wasInr: 99710 },
-  "advanced-core-internship": { inr: 70000, wasInr: 126850 },
-  "network-automation-internship": { inr: 105000, wasInr: 157530 },
+  "enterprise-networking-internship": { usd: 1199 },
+  "data-center-networking-internship": { usd: 1499 },
+  "data-center-automation-internship": { usd: 1799 },
+  "elite-career-path-bundle": { usd: 2299, wasUsd: 2999 },
 };
 
 /* ------------------------------ derived -------------------------------- */
 
 export type Price = {
-  /** The base India fee this was converted from, in rupees. */
-  inr: number;
+  /** The base India fee this was converted from, where there was one. */
+  inr?: number;
   /** Converted, rounded USD price. */
   usd: number;
   /** Undiscounted USD price, when the India page shows one. */
@@ -93,7 +96,17 @@ const toUsd = (inr: number) =>
   Math.round((inr * TAX_MULTIPLIER) / INR_PER_USD / USD_ROUNDING) * USD_ROUNDING;
 
 function build(fee: Fee | undefined): Price | null {
-  if (!fee || INR_PER_USD <= 0) return null;
+  if (!fee) return null;
+
+  if ("usd" in fee) {
+    return {
+      usd: fee.usd,
+      wasUsd: fee.wasUsd,
+      discountPct: fee.wasUsd ? Math.round((1 - fee.usd / fee.wasUsd) * 100) : undefined,
+    };
+  }
+
+  if (INR_PER_USD <= 0) return null;
   const usd = toUsd(fee.inr);
   const wasUsd = fee.wasInr ? toUsd(fee.wasInr) : undefined;
   return {
@@ -128,5 +141,5 @@ export const formatUsd = (n: number) => usdFmt.format(n);
 
 /** Lowest course price, for "from $X" copy. */
 export const lowestCourseUsd = Math.min(
-  ...Object.values(COURSE_FEES).map((f) => toUsd(f.inr)),
+  ...Object.values(COURSE_FEES).map((f) => ("usd" in f ? f.usd : toUsd(f.inr))),
 );
