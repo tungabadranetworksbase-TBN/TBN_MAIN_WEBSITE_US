@@ -47,6 +47,16 @@ const heroStats = `${site.figures[0].value} engineers trained · ${site.figures[
 const instrumentSerif = "font-[family-name:var(--font-instrument-serif)]";
 
 
+/**
+ * The WebGL vortex, off.
+ *
+ * Turned off rather than removed: tornado.tsx and every tuned option below
+ * stay exactly as they were, so flipping this back to true restores the hero
+ * as it shipped. It was covering most of the rack elevation behind it, and it
+ * is the hero's only remaining WebGL canvas.
+ */
+const SHOW_TORNADO = false;
+
 export default function Hero() {
   return (
     <div className="relative w-full overflow-hidden bg-[#0a0a0a] lg:h-full h18-background">
@@ -438,6 +448,7 @@ export default function Hero() {
           The left edge of the frame is masked out rather than aligned: the vortex lights its own
           floor to the frame's edge, so any boundary inside the viewport reads as a seam, and the
           fade doubles as the ground the headline is set on. */}
+      {SHOW_TORNADO && (
       <div className="relative z-0 h-[340px] w-full md:h-[440px] lg:absolute lg:inset-0 lg:h-auto lg:overflow-hidden lg:[mask-image:linear-gradient(to_right,transparent_0%,rgba(0,0,0,0.55)_26%,black_44%)]">
         <div className="h-full w-full lg:absolute lg:left-0 lg:top-1/2 lg:aspect-[1440/1024] lg:h-auto lg:w-[max(130%,calc(100vh*1440/1024))] lg:-translate-y-1/2">
           <Tornado
@@ -480,6 +491,7 @@ export default function Hero() {
           }}
         />
       </div>
+      )}
 
       {/* Floating shard accents (desktop) */}
       <div className="hidden lg:absolute lg:flex h-[195.131px] items-center justify-center left-[-162px] top-[508px] w-[166.822px]">
