@@ -331,16 +331,16 @@ button, input, select, textarea { font: inherit; color: inherit; }
   }
 }
 
-/* Hero spine-leaf nodes. Opacity only, so it stays on the compositor and
-   never triggers layout or paint - the hero is already running a WebGL
-   canvas and has no frames to spare. */
-@keyframes ng-pulse {
-  0%, 100% { opacity: 0.55; }
-  50%      { opacity: 1; }
+/* Hero rack LEDs. Opacity only, so it stays on the compositor and never
+   triggers layout or paint - the hero is already running a WebGL canvas and
+   has no frames to spare. Each LED carries its own delay inline, so they
+   blink out of step rather than as one bank. */
+@keyframes ng-led {
+  0%, 100% { opacity: 0.25; }
+  45%      { opacity: 1; }
 }
-.ng-pulse { animation: ng-pulse 4.5s var(--ease) infinite; }
-.ng-pulse:nth-of-type(3) { animation-delay: 2.2s; }
+.ng-led { animation: ng-led 3.2s steps(1, end) infinite; }
 
 @media (prefers-reduced-motion: reduce) {
-  .ng-pulse { animation: none; }
+  .ng-led { animation: none; }
 }
