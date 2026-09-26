@@ -50,8 +50,39 @@
 
 /* The marquee is masked at both edges; without side padding the first and last
    items are cut mid-word rather than fading out. */
+/* The class was named for a fade it never had: items hard-cut at the container
+   edge mid-word as the marquee carried them out. The mask dissolves both ends
+   so they arrive and leave instead of being sliced. */
+.h18-logo-fade {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 clamp(40px, 7%, 96px),
+    #000 calc(100% - clamp(40px, 7%, 96px)),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 clamp(40px, 7%, 96px),
+    #000 calc(100% - clamp(40px, 7%, 96px)),
+    transparent 100%
+  );
+}
+
 .h18-logo-fade .h18-logo-track {
   padding-inline: 8px;
+}
+
+/* The ticker is the last thing in the hero, and its box sat hard against the
+   section below it - the marquee text finished about a line's width from the
+   divider, which reads as the two running into each other. Breathing room
+   below it, and the track centred in its own box so the text is not riding
+   the bottom edge of that box either. */
+.h18-logo-fade {
+  display: flex;
+  align-items: center;
+  padding-bottom: clamp(14px, 2vw, 28px);
 }
 
 /* Fintra's nav is `position: fixed`, and Fintra's own hero carries 68-76px of
