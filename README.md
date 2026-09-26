@@ -123,6 +123,29 @@ detail route, breadcrumbs, JSON-LD, internal links and both sitemaps all derive 
 
 ---
 
+## Environment variables
+
+The contact form delivers into Chatwoot as a real conversation, so it lands in
+the same inbox as the live chat. Copy `.env.example` to `.env.local` for local
+work, and set the same four in Vercel under Project Settings -> Environment
+Variables. `.env.local` is gitignored; `.env.example` deliberately carries no
+comments so it can be pasted into Vercel's bulk importer as-is.
+
+| Variable | Where to find it |
+|---|---|
+| `CHATWOOT_BASE_URL` | Your Chatwoot instance, no trailing slash |
+| `CHATWOOT_API_TOKEN` | Chatwoot -> Profile Settings -> Access Token. An agent credential: never commit it, and it is **not** the public widget token in `components/Chatwoot.tsx` |
+| `CHATWOOT_ACCOUNT_ID` | The number in the dashboard URL, `/app/accounts/<id>/dashboard` |
+| `CHATWOOT_INBOX_ID` | Settings -> Inboxes -> the id in the inbox URL. Use an API-channel inbox, not the website one, so form submissions stay separable from live chats |
+
+Env vars only reach new builds, so redeploy after changing them. With any of
+them missing the form still validates and accepts, logging instead of
+delivering, so local development runs without credentials. If delivery fails
+the endpoint returns 502 and logs the full payload rather than reporting a
+success that did not happen.
+
+---
+
 ## Before launch — required edits
 
 Every placeholder is marked `EDIT ME` in the source.
@@ -137,7 +160,6 @@ Every placeholder is marked `EDIT ME` in the source.
 | Internship compensation + cohort dates — **confirm the US DOL primary-beneficiary classification for unpaid tracks** | `compensation`, `nextCohort` in [lib/internships.ts](lib/internships.ts) |
 | Refund policy, governing state and venue | [app/terms/page.tsx](app/terms/page.tsx) |
 | Privacy policy — **needs counsel review** | [app/privacy-policy/page.tsx](app/privacy-policy/page.tsx) |
-| Inquiry delivery (email/CRM) — currently validates and logs only | [app/api/contact/route.ts](app/api/contact/route.ts) |
 | Official TBN logo, if one exists | [components/Logo.tsx](components/Logo.tsx) |
 | The pre-launch placeholder notice in the footer — delete once the above are done | [components/Footer.tsx](components/Footer.tsx) |
 
