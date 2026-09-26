@@ -4,6 +4,7 @@
 import { site } from "@/lib/site";
 
 import Tornado from "@/components/originkit/ui/hero-18/tornado";
+import NetworkGrid from "@/components/originkit/ui/hero-18/network-grid";
 import BorderOrbit from "@/components/originkit/ui/hero-18/border-orbit";
 import HeroBackgroundTablet from "@/components/originkit/ui/hero-18/hero-background-tablet";
 import HeroBackgroundMobile from "@/components/originkit/ui/hero-18/hero-background-mobile";
@@ -49,6 +50,10 @@ const instrumentSerif = "font-[family-name:var(--font-instrument-serif)]";
 export default function Hero() {
   return (
     <div className="relative w-full overflow-hidden bg-[#0a0a0a] lg:h-full h18-background">
+      {/* Spine-leaf topology, furthest back. First in the DOM and z-0, so the
+          Tornado - also z-0, painted later - covers it where they overlap. */}
+      <NetworkGrid />
+
       {/* Background — mobile (Figma node 654:625) */}
       <div className="md:hidden">
         <HeroBackgroundMobile />
