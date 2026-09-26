@@ -27,6 +27,8 @@ const technologies = [
   "Netmiko",
   "Ansible",
   "Git & CI/CD",
+  "GPU Fabrics",
+  "RDMA / RoCEv2",
   "Prometheus",
   "Grafana",
   "Zabbix",

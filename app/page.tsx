@@ -24,7 +24,7 @@ import s from "@/components/brand/home.module.css";
 export const metadata: Metadata = buildMetadata({
   title: `${site.name}: Networking Training, Internships and Placements`,
   description:
-    "Hands-on networking, cloud and automation training on real enterprise equipment. CCNA, CCNP, Palo Alto, Aruba, Juniper, AWS, Python, Ansible and CI/CD, with internship tracks from NOC to network automation engineer.",
+    "Hands-on networking, cloud, automation and AI infrastructure training on real enterprise equipment. CCNA, CCNP, Palo Alto, Aruba, Juniper, AWS, Python and CI/CD, plus GPU cluster fabrics and the data center stack, with internship tracks from NOC to AI infrastructure engineer.",
   path: "/",
 });
 
@@ -33,7 +33,7 @@ const offer = [
   {
     icon: GraduationCap,
     title: "Networking courses",
-    body: "Twelve courses from CCNA and CCNP through security, cloud, Linux, Python and network automation. Every module is taught on equipment, not slides.",
+    body: "CCNA and CCNP through security, cloud, Linux, Python and automation, and on into the GPU and AI infrastructure stack. Every module is taught on equipment, not slides.",
     meta: "12 courses",
     cls: "offerCell--lead",
   },
@@ -74,6 +74,10 @@ const why = [
     body: "Wireshark analysis runs through the training rather than being bolted on at the end. You learn to read what the wire is doing.",
   },
   {
+    title: "AI infrastructure and the GPU data center stack",
+    body: "What actually carries an AI workload: GPU cluster fabrics, RDMA and lossless Ethernet, non-blocking spine-leaf design, and the power, cooling and storage density a GPU rack demands. Taught as infrastructure, which is what a network engineer is hired to run.",
+  },
+  {
     title: "Automation taught as the job, not an add-on",
     body: "Python, Netmiko, Ansible, REST APIs and CI/CD pipelines run against real devices, and they start from first principles. Networking knowledge is the prerequisite, not software experience.",
   },
@@ -82,6 +86,8 @@ const why = [
 const services = [
   "Network architecture",
   "Implementation",
+  "AI & GPU cluster fabrics",
+  "Data center build-out",
   "Infrastructure automation",
   "Cloud & hybrid connectivity",
   "Managed services",
@@ -89,7 +95,6 @@ const services = [
   "Network security",
   "Firewall deployment",
   "Monitoring & SLA",
-  "IT staffing",
 ];
 
 export default function HomePage() {

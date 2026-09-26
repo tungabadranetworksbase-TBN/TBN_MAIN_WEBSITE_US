@@ -27,6 +27,11 @@ export const faqGroups: FaqGroup[] = [
           "No. The courses are networking-first and hands-on from day one. Python for Network Automation and Cisco DevNet introduce scripting from the beginning, so no prior coding experience is assumed.",
       },
       {
+        question: "Do you train on AI infrastructure and GPUs?",
+        answer:
+          "Yes, from the infrastructure side, which is where network engineers work on it. That means GPU cluster fabrics, RDMA and lossless Ethernet, non-blocking spine-leaf design for east-west traffic, and the power, cooling and storage density a GPU rack demands. It is taught as data center engineering rather than as model training, because running the stack an AI workload sits on is the job these roles actually hire for.",
+      },
+      {
         question: "Do you teach network automation?",
         answer:
           "Yes, and it runs against real devices rather than sample output. Python, Netmiko, Paramiko and Ansible are taught from first principles, alongside REST APIs, JSON and YAML, Git, and CI/CD pipelines in Jenkins, GitHub Actions and GitLab CI. The Data Center and Automation internship is the dedicated track for it, and Python for Network Automation and Cisco DevNet are available as standalone courses.",
@@ -133,6 +138,7 @@ export const allFaqs: Faq[] = faqGroups.flatMap((g) => g.faqs);
 export const homeFaqQuestions = [
   "What is Tungabadra Networks?",
   "Do I need a coding background?",
+  "Do you train on AI infrastructure and GPUs?",
   "Do you teach network automation?",
   "What equipment will I train on?",
   "Do you help with placement?",

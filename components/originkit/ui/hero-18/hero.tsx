@@ -295,7 +295,7 @@ export default function Hero() {
               </div>
             </div>
             <p className={`${lato} text-[15px] text-white tracking-[-0.3px] whitespace-nowrap md:text-[17px]`}>
-              Networking, cloud and automation training
+              Networking, cloud, automation and AI infrastructure
             </p>
             <BorderOrbit />
           </div>
@@ -304,7 +304,7 @@ export default function Hero() {
               The Network You Build Is The Net Worth You Earn
             </h1>
             <p className={`${lato} max-w-[320px] text-[15px] leading-[1.4] opacity-70 md:max-w-[440px] md:text-[18px]`}>
-              Hands-on networking and automation training on real enterprise equipment, with internship tracks that end in production-style project work.
+              Hands-on training on real enterprise equipment, from routing and automation to the GPU and AI infrastructure stack, with internship tracks that end in production-style project work.
             </p>
           </div>
           <div className="flex items-center gap-[12px] md:gap-[16px]">
@@ -375,7 +375,7 @@ export default function Hero() {
                 </div>
               </div>
               <p className={`${lato} font-normal leading-[normal] relative shrink-0 text-[17px] text-white tracking-[-0.34px] whitespace-nowrap`}>
-                Networking, cloud and automation training
+                Networking, cloud, automation and AI infrastructure
               </p>
             </div>
             <BorderOrbit />
@@ -386,7 +386,7 @@ export default function Hero() {
                 The Network You Build Is The Net Worth You Earn
               </p>
               <p className={`${lato} font-normal leading-[normal] opacity-70 relative shrink-0 text-[20px] tracking-[-0.4px] w-[474px]`}>
-                Hands-on networking and automation training on real enterprise equipment, with internship tracks that end in production-style project work.
+                Hands-on training on real enterprise equipment, from routing and automation to the GPU and AI infrastructure stack, with internship tracks that end in production-style project work.
               </p>
             </div>
             <div className="content-stretch flex gap-[16px] items-center relative shrink-0">
