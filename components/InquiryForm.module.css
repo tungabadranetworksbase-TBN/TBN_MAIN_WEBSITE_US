@@ -26,13 +26,25 @@
   padding: 12px 14px;
   border: 1px solid var(--line-strong);
   border-radius: var(--radius);
-  background: var(--surface-2);
+  background: var(--surface);
   font-size: 0.9375rem;
   color: var(--ink);
   transition: border-color 0.2s var(--ease), background-color 0.2s var(--ease);
 }
 .control:hover { border-color: var(--ink-4); }
-.control:focus { background: var(--surface); }
+/* Focus lifts the field rather than sinking it, matching every other
+   hover/active surface on the site. */
+.control:focus { background: var(--surface-2); }
+
+/* The open dropdown is drawn by the browser, not by this stylesheet. The
+   page already declares `color-scheme: dark`, which gets the popup chrome
+   right; these two lines cover the browsers that still paint the option
+   rows from the author styles and would otherwise inherit near-white text
+   onto a light default ground. */
+select.control option {
+  background-color: var(--ink-900);
+  color: var(--fg);
+}
 .control[aria-invalid="true"] { border-color: #b3261e; }
 
 textarea.control { min-height: 132px; resize: vertical; line-height: 1.55; }

@@ -60,6 +60,44 @@
 
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
   --nav-h: 68px;
+
+  /* --- aliases for the CSS modules --------------------------------------
+     The component modules were written against an earlier token set whose
+     names were never defined here. An undefined custom property is not an
+     error: the declaration is simply dropped, so a control ended up with a
+     transparent background and inherited near-white text - invisible the
+     moment a native dropdown painted its own light popup behind it.
+     Mapping the old names onto the real scale fixes every one of them at
+     once, and keeps a single source for the values. */
+  --ink: var(--fg);
+  --ink-2: var(--fg-muted);
+  --ink-3: var(--fg-faint);
+  --ink-4: rgba(255, 255, 255, 0.28);
+
+  --bg: var(--ink-950);
+  --surface: var(--ink-900);
+  --surface-2: var(--ink-850);
+  --surface-3: var(--ink-800);
+  --dark-2: var(--ink-850);
+
+  --accent: var(--gold);
+  --accent-soft: var(--gold-dim);
+  --accent-700: var(--gold-deep);
+  --accent-800: var(--gold-deep);
+
+  --radius: var(--r-input);
+  --radius-lg: var(--r-card);
+  --radius-pill: var(--r-pill);
+
+  --font-ui: var(--font-body);
+  --header-h: var(--nav-h);
+
+  /* Text and rules that sit on a dark band rather than the page ground. */
+  --on-dark-2: rgba(255, 255, 255, 0.72);
+  --on-dark-3: rgba(255, 255, 255, 0.54);
+  --on-dark-line: rgba(255, 255, 255, 0.16);
+
+  --shadow-lg: 0 18px 48px rgba(0, 0, 0, 0.5);
 }
 
 *,
