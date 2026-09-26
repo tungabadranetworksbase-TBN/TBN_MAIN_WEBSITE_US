@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { site } from "@/lib/site";
 import { useId, useRef, useState } from "react";
 import styles from "./InquiryForm.module.css";
 
@@ -46,6 +47,7 @@ export default function InquiryForm({
   const id = (name: string) => `${uid}-${name}`;
 
   const [errors, setErrors] = useState<Errors>({});
+  const [failMessage, setFailMessage] = useState<string | null>(null);
   const [state, setState] = useState<"idle" | "sending" | "sent" | "failed">("idle");
   const statusRef = useRef<HTMLParagraphElement>(null);
 
@@ -84,7 +86,15 @@ export default function InquiryForm({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
-      if (!res.ok) throw new Error(String(res.status));
+      if (!res.ok) {
+        // Show what the server said rather than a generic apology: it
+        // distinguishes "we could not record this" from a validation
+        // problem, and it is the only signal the visitor gets.
+        const body = await res.json().catch(() => null);
+        setFailMessage(typeof body?.error === "string" ? body.error : null);
+        throw new Error(String(res.status));
+      }
+      setFailMessage(null);
       setState("sent");
       form.reset();
     } catch {
@@ -264,7 +274,14 @@ export default function InquiryForm({
         {state === "sent" &&
           "Thank you, your inquiry has been received. We reply to inquiries within one business day."}
         {state === "failed" &&
-          "Something went wrong sending your inquiry. Please email us directly and we will pick it up from there."}
+          (failMessage ??
+            "Something went wrong sending your inquiry. Please email us directly and we will pick it up from there.")}
+        {state === "failed" && (
+          <>
+            {" "}
+            <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>
+          </>
+        )}
       </p>
     </form>
   );

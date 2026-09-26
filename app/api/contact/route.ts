@@ -128,6 +128,23 @@ async function deliverToChatwoot(data: Inquiry): Promise<"sent" | "failed" | "un
 
   const api = `${base}/api/v1/accounts/${account}`;
   const headers = { "Content-Type": "application/json", api_access_token: token };
+
+  /**
+   * Records why Chatwoot refused a step.
+   *
+   * Without this a failure is indistinguishable from any other - the endpoint
+   * returns 502 and the operator has nothing to act on. The body is truncated
+   * because Chatwoot errors are short and a full HTML error page is noise.
+   */
+  const refused = async (step: string, res: Response) => {
+    const body = await res.text().catch(() => "");
+    console.error("[inquiry] chatwoot refused", {
+      step,
+      status: res.status,
+      body: body.slice(0, 300),
+    });
+    return "failed" as const;
+  };
   const post = (path: string, payload: unknown) =>
     fetch(`${api}${path}`, {
       method: "POST",
@@ -158,17 +175,20 @@ async function deliverToChatwoot(data: Inquiry): Promise<"sent" | "failed" | "un
         headers,
         signal: AbortSignal.timeout(10_000),
       });
-      if (!found.ok) return "failed";
+      if (!found.ok) return refused("contacts.search", found);
       const hit = (await found.json())?.payload?.[0];
       contactId = hit?.id;
       sourceId = hit?.contact_inboxes?.find(
         (ci: { inbox?: { id?: number } }) => ci?.inbox?.id === Number(inbox),
       )?.source_id;
     } else {
-      return "failed";
+      return refused("contacts.create", created);
     }
 
-    if (!contactId) return "failed";
+    if (!contactId) {
+      console.error("[inquiry] chatwoot returned no contact id");
+      return "failed";
+    }
 
     const convo = await post("/conversations", {
       inbox_id: Number(inbox),
@@ -177,9 +197,12 @@ async function deliverToChatwoot(data: Inquiry): Promise<"sent" | "failed" | "un
       status: "open",
       additional_attributes: { interest: data.interest },
     });
-    if (!convo.ok) return "failed";
+    if (!convo.ok) return refused("conversations", convo);
     const conversationId = (await convo.json())?.id;
-    if (!conversationId) return "failed";
+    if (!conversationId) {
+      console.error("[inquiry] chatwoot returned no conversation id");
+      return "failed";
+    }
 
     // Subject and interest go in the body: Chatwoot messages have no subject.
     const lines = [
@@ -194,10 +217,15 @@ async function deliverToChatwoot(data: Inquiry): Promise<"sent" | "failed" | "un
       content: lines.join("\n"),
       message_type: "incoming",
     });
-    return message.ok ? "sent" : "failed";
-  } catch {
-    // Network error, timeout, or a malformed response. The caller logs the
-    // payload, so nothing is lost by not distinguishing them here.
+    return message.ok ? "sent" : refused("messages", message);
+  } catch (err) {
+    // Never reached Chatwoot at all: DNS, TLS, a timeout, or a firewall in
+    // front of the instance that does not admit Vercel. Worth naming, because
+    // it looks identical to a rejected request from the outside.
+    console.error("[inquiry] chatwoot unreachable", {
+      host: base,
+      error: err instanceof Error ? `${err.name}: ${err.message}` : String(err),
+    });
     return "failed";
   }
 }
