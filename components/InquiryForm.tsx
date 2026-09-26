@@ -64,6 +64,11 @@ export default function InquiryForm({
       subject: String(fd.get("subject") ?? ""),
       message: String(fd.get("message") ?? ""),
       consent: fd.get("consent") === "on",
+      // Which of the six placements this came from. Read at submit time
+      // rather than render time so it survives client-side navigation, and
+      // sent because six forms landing in one inbox are otherwise
+      // indistinguishable beyond the subject line.
+      source: typeof window === "undefined" ? "" : window.location.pathname + window.location.search,
       // Honeypot: real users never fill a hidden field.
       company_website: String(fd.get("company_website") ?? ""),
     };

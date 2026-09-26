@@ -24,7 +24,7 @@ import { NextResponse } from "next/server";
 export const runtime = "nodejs";
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-const MAX = { name: 120, email: 254, phone: 40, subject: 200, message: 5000 } as const;
+const MAX = { name: 120, email: 254, phone: 40, subject: 200, message: 5000, source: 300 } as const;
 
 type Payload = {
   name?: unknown;
@@ -34,6 +34,7 @@ type Payload = {
   subject?: unknown;
   message?: unknown;
   consent?: unknown;
+  source?: unknown;
   company_website?: unknown;
 };
 
@@ -60,6 +61,7 @@ export async function POST(request: Request) {
     subject: str(body.subject, MAX.subject),
     message: str(body.message, MAX.message),
     consent: body.consent === true,
+    source: str(body.source, MAX.source),
   };
 
   const errors: Record<string, string> = {};
@@ -109,6 +111,8 @@ type Inquiry = {
   interest: string;
   subject: string;
   message: string;
+  /** The page the form was submitted from. */
+  source: string;
 };
 
 /**
@@ -162,7 +166,11 @@ async function deliverToChatwoot(data: Inquiry): Promise<"sent" | "failed" | "un
       name: data.name,
       email: data.email,
       phone_number: data.phone || undefined,
-      custom_attributes: { interest: data.interest, subject: data.subject },
+      custom_attributes: {
+        interest: data.interest,
+        subject: data.subject,
+        source_page: data.source,
+      },
     });
 
     if (created.ok) {
@@ -195,7 +203,7 @@ async function deliverToChatwoot(data: Inquiry): Promise<"sent" | "failed" | "un
       contact_id: contactId,
       source_id: sourceId,
       status: "open",
-      additional_attributes: { interest: data.interest },
+      additional_attributes: { interest: data.interest, source_page: data.source },
     });
     if (!convo.ok) return refused("conversations", convo);
     const conversationId = (await convo.json())?.id;
@@ -209,6 +217,7 @@ async function deliverToChatwoot(data: Inquiry): Promise<"sent" | "failed" | "un
       data.subject ? `Topic: ${data.subject}` : null,
       `Interested in: ${data.interest}`,
       data.phone ? `Phone: ${data.phone}` : null,
+      data.source ? `Submitted from: ${data.source}` : null,
       "",
       data.message,
     ].filter((line): line is string => line !== null);
