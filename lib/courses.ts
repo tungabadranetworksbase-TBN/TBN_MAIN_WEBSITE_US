@@ -69,7 +69,7 @@ export const courseCategories: { name: CourseCategory; blurb: string }[] = [
   { name: "Projects", blurb: "Extended build work on real topologies." },
 ];
 
-const CONSULT_NOTE = "Duration and fees are shared on the free consultation call, with the current syllabus and batch dates.";
+const CONSULT_NOTE = "Length is confirmed on the free consultation call, with the current syllabus and batch dates.";
 const VENDOR_NOTE =
   "Tungabadra Networks is not an authorized training partner of this vendor and does not administer or issue the exam. Exams are booked and paid for directly with the vendor.";
 
@@ -790,7 +790,7 @@ export const courses: Course[] = [
       { title: "What you can practice", topics: ["Enterprise OSPF, BGP and MPLS topologies", "Cisco ASR and Juniper MX labs", "Palo Alto NGFW policy and VPN", "Data centre spine-leaf", "Service provider Layer 3 and Layer 2 VPN", "Python and Ansible automation"] },
       { title: "Access", topics: ["Six months from activation, with no daily limits", "Around-the-clock browser access from any device, nothing to install", "A dedicated, isolated lab environment", "Topologies arrive pre-wired and can be modified or reset at any time"] },
     ],
-    duration: "Six months of access. Pricing is shared on the consultation call.",
+    duration: "Six months of access from activation.",
     deliveryFormats: ["Online (live)"],
     level: "Intermediate",
     prerequisites: ["Suited to engineers who already know what they want to practise", "Not a substitute for a taught course if you are starting out"],

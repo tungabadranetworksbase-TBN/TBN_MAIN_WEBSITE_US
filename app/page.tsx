@@ -14,6 +14,7 @@ import Hero18 from "@/components/originkit/hero-18";
 import NextjsFlare from "@/components/ui/nextjs-flare";
 import JsonLd from "@/components/JsonLd";
 import Reveal from "@/components/brand/Reveal";
+import InternshipPricing from "@/components/brand/InternshipPricing";
 import { buildMetadata } from "@/lib/seo";
 import { faqSchema, graph, webPageSchema } from "@/lib/schema";
 import { site } from "@/lib/site";
@@ -182,7 +183,7 @@ export default function HomePage() {
               The catalog
             </h2>
             <p className="lede" style={{ marginTop: 12 }}>
-              Fees are shared on the consultation call, with the current syllabus and batch dates.
+              Every course page carries its fee, its full syllabus and what it prepares you for.
             </p>
           </div>
           <Link href="/courses" className="link-gold">
@@ -199,6 +200,30 @@ export default function HomePage() {
             </Link>
           ))}
         </div>
+      </section>
+
+      {/* 3b. the internship tracks, priced. Sits after the catalog because it
+             is the same question one step further on: having seen the
+             courses, which programme do I buy? */}
+      <section className="section section--tight shell" aria-labelledby="tracks-h">
+        <div className={s.courseHead}>
+          <div>
+            <h2 className="d2" id="tracks-h">
+              Internship tracks
+            </h2>
+            <p className="lede" style={{ marginTop: 12 }}>
+              Each track bundles its courses, real-time project work and placement support into one
+              programme. Take one, or all three together.
+            </p>
+          </div>
+          <Link href="/internships" className="link-gold">
+            Compare tracks <ArrowRight size={15} weight="bold" />
+          </Link>
+        </div>
+
+        <Reveal>
+          <InternshipPricing />
+        </Reveal>
       </section>
 
       {/* 4. why - sticky heading beside a scrolling list */}

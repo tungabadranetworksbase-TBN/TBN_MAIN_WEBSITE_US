@@ -1,0 +1,133 @@
+/* Internship pricing cards.
+   Structure follows the reference component - price, feature list, one
+   highlighted tier, a call to action per card - rebuilt on the brand tokens,
+   because a white card with an indigo accent has nowhere to sit on this
+   ground. */
+
+.grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: 1fr;
+  align-items: start;
+}
+@media (min-width: 640px) {
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 1180px) {
+  .grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 26px 22px 22px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  background: var(--ink-900);
+}
+
+/* The bundle. A solid gold block is too much at this size with four cards,
+   so it is a tint and a border rather than a fill. */
+.card--feature {
+  border-color: var(--gold-line);
+  background: linear-gradient(180deg, rgba(252, 192, 0, 0.07), rgba(252, 192, 0, 0.02) 42%, var(--ink-900) 100%);
+}
+
+.badge {
+  position: absolute;
+  top: -11px;
+  left: 20px;
+  padding: 3px 11px;
+  border-radius: var(--r-pill);
+  background: var(--gold);
+  color: var(--ink-1000);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.name {
+  font-family: var(--font-display);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--fg);
+}
+
+.track {
+  margin-top: 5px;
+  font-size: 0.6875rem;
+  line-height: 1.45;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--fg-faint);
+}
+
+.priceRow {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+.price {
+  font-family: var(--font-display);
+  font-size: 2.125rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--gold);
+}
+.was {
+  font-size: 0.9375rem;
+  color: var(--fg-faint);
+  text-decoration: line-through;
+}
+.off {
+  padding: 2px 8px;
+  border-radius: var(--r-chip);
+  background: var(--gold-dim);
+  border: 1px solid var(--gold-line);
+  color: var(--gold);
+  font-size: 0.6875rem;
+  font-weight: 600;
+}
+.note {
+  margin-top: 6px;
+  font-size: 0.75rem;
+  color: var(--fg-faint);
+}
+
+.features {
+  margin: 20px 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  /* Pushes every card's button to the same baseline however many bullets a
+     tier carries. */
+  flex: 1;
+}
+.feature {
+  display: grid;
+  grid-template-columns: 17px 1fr;
+  gap: 9px;
+  align-items: start;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--fg-muted);
+}
+.tick {
+  margin-top: 2px;
+  color: var(--gold);
+}
+
+.cta {
+  margin-top: 22px;
+  width: 100%;
+  justify-content: center;
+}
