@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { esc, notifySlack } from "@/lib/slack";
 
 /**
  * Inquiry endpoint.
@@ -75,6 +76,20 @@ export async function POST(request: Request) {
   }
 
   const outcome = await deliverToChatwoot(data);
+
+  // Every valid submission, whatever Chatwoot did. When Chatwoot refused,
+  // this is the only surviving signal that a lead arrived, so it is exactly
+  // when the notification matters most. Awaited rather than left to run
+  // after the response: a serverless function can be frozen the moment it
+  // returns, and an un-awaited call is not reliably delivered.
+  await notifySlack(`📩 New enquiry · ${data.interest}`, [
+    `*${esc(data.name)}* · ${esc(data.email)}${data.phone ? ` · ${esc(data.phone)}` : ""}`,
+    data.subject ? `Topic: ${esc(data.subject)}` : null,
+    data.source ? `From: \`${esc(data.source)}\`` : null,
+    outcome === "failed" ? "⚠️ *Not recorded in Chatwoot* — recover from the logs." : null,
+    "",
+    `>${esc(data.message).replace(/\n/g, "\n>")}`,
+  ]);
 
   if (outcome === "unconfigured") {
     // No credentials: log that an inquiry arrived, never the message body, and

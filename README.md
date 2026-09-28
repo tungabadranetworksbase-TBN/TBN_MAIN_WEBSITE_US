@@ -137,12 +137,33 @@ comments so it can be pasted into Vercel's bulk importer as-is.
 | `CHATWOOT_API_TOKEN` | Chatwoot -> Profile Settings -> Access Token. An agent credential: never commit it, and it is **not** the public widget token in `components/Chatwoot.tsx` |
 | `CHATWOOT_ACCOUNT_ID` | The number in the dashboard URL, `/app/accounts/<id>/dashboard` |
 | `CHATWOOT_INBOX_ID` | Settings -> Inboxes -> the id in the inbox URL. Use an API-channel inbox, not the website one, so form submissions stay separable from live chats |
+| `SLACK_WEBHOOK_URL` | Slack -> your app -> Incoming Webhooks -> add to a channel. Posts to that one channel; moving channels later means a new URL, not a code change |
+| `CAL_WEBHOOK_SECRET` | Cal.com -> Settings -> Developer -> Webhooks. The same string you set on the webhook, used to verify each delivery |
 
 Env vars only reach new builds, so redeploy after changing them. With any of
 them missing the form still validates and accepts, logging instead of
 delivering, so local development runs without credentials. If delivery fails
 the endpoint returns 502 and logs the full payload rather than reporting a
 success that did not happen.
+
+## Notifications
+
+A form submission and a booked consultation both post to Slack, so a lead is
+seen the same day rather than whenever someone next opens Chatwoot.
+
+- **Forms** — `app/api/contact/route.ts` notifies after it has tried
+  Chatwoot, on every valid submission. When Chatwoot refused, the Slack
+  message says so, because that is the only surviving signal that a lead
+  arrived. Slack never changes the response the visitor gets.
+- **Calls** — `app/api/cal/route.ts` receives Cal.com webhooks. Point Cal at
+  `https://<your-domain>/api/cal` and subscribe `BOOKING_CREATED` and
+  `BOOKING_CANCELLED`. The endpoint is public, so every delivery is checked
+  against `CAL_WEBHOOK_SECRET` and rejected with a 401 if the HMAC does not
+  match; with the secret unset it refuses everything with a 503 rather than
+  accepting unverified posts.
+
+Cal's payload shape is not guaranteed across versions. Use the **Ping** button
+on its webhook settings page to see a real delivery before relying on it.
 
 ---
 
