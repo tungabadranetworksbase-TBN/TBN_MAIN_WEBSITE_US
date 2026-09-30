@@ -138,11 +138,12 @@ export default function AboutPage() {
         <Prose>
           <h2>What we deliberately do not claim</h2>
           <p>
-            The figures on this site (engineers trained, placements, salary hike and partner
-            count) are Tungabadra Networks&rsquo; own published figures, reproduced as claims we make
-            about ourselves rather than independently audited results. We publish no awards,
-            accreditations, rankings or reviews, and no course fees or fixed durations, because
-            those are set per batch and confirmed on the consultation call.
+            The three figures on this site &mdash; engineers trained, placements and hiring
+            relationships &mdash; are Tungabadra Networks&rsquo; own published figures, reproduced as
+            claims we make about ourselves rather than independently audited results. We publish
+            no awards, accreditations, rankings or reviews, and no success rate, salary increase
+            or package figure. Course and internship fees are published in full; enterprise
+            services and corporate training are quoted per engagement.
           </p>
           <p>
             Tungabadra Networks is not an authorized training partner of any certification vendor,
@@ -152,7 +153,7 @@ export default function AboutPage() {
             We do not provide proxy interview support of any kind. We do not attend interviews on a
             candidate&rsquo;s behalf, assist during a live interview, or misrepresent anyone&rsquo;s
             identity, experience or work. Placement support is preparation: mock interviews,
-            portfolio and resume review, and introductions to hiring partners. Candidates attend
+            portfolio and resume review, and introductions to hiring relationships. Candidates attend
             their own interviews and answer for their own work, because a role obtained any other
             way does not survive the first month of it.
           </p>

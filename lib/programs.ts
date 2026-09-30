@@ -122,7 +122,7 @@ export const programs: Program[] = [
       "From CLI to code: Linux, then programmability, then the libraries that drive real fleets, ending in a reviewed automation repository.",
     overview: [
       "The Network Automation Career Path is for engineers whose roles are starting to expect code. It assumes no software background and builds in the order the skills actually depend on each other.",
-      "Linux comes first because that is where the automation runs and where most engineers have the largest gap. DevNet then covers Python, APIs and programmability concepts. Python for Network Automation goes deeper on the libraries used against production devices, and the projects course puts the result under version control with CI.",
+      "Linux comes first because that is where the automation runs and where most engineers have the largest gap. CCNA Automation then covers Python, APIs and programmability concepts. Python for Network Automation goes deeper on the libraries used against production devices, and the projects course puts the result under version control with CI.",
       "The output is a repository you can show, not a certificate you can claim.",
     ],
     courseSlugs: [
@@ -294,7 +294,7 @@ export const certificationTracks: CertificationTrack[] = [
   },
   {
     slug: "palo-alto-pcnsa",
-    exam: "Palo Alto Networks PCNSA",
+    exam: "Palo Alto Networks NGFW",
     vendor: "Palo Alto Networks",
     summary:
       "Next-generation firewall administration: zones, security policy, App-ID, Content-ID, NAT and VPN.",
@@ -305,7 +305,7 @@ export const certificationTracks: CertificationTrack[] = [
   },
   {
     slug: "juniper-jncia-junos",
-    exam: "Juniper JNCIA-Junos",
+    exam: "Juniper JNCIA-Junos (JN0-106)",
     vendor: "Juniper Networks",
     summary:
       "Junos fundamentals: the configuration model, commit workflow, routing policy and firewall filters.",
@@ -327,7 +327,7 @@ export const certificationTracks: CertificationTrack[] = [
   },
   {
     slug: "cisco-devnet-associate",
-    exam: "Cisco DevNet Associate (200-901)",
+    exam: "Cisco CCNA Automation (200-901 CCNAAUTO)",
     vendor: "Cisco",
     summary:
       "Software development and design for network engineers: Python, APIs, data formats, version control and programmability.",

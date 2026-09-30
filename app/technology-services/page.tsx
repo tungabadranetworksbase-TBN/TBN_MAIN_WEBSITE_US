@@ -3,7 +3,7 @@ import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
 import { AnswerBox, CtaBand, FaqList, Hero, SectionHead } from "@/components/ui";
 import InquiryForm from "@/components/InquiryForm";
-import { ArrowRight, Chart, Cloud, Network, Refresh, Shield, Terminal } from "@/components/Icons";
+import { ArrowRight, Chart, Clock, Cloud, Network, Refresh, Shield, Terminal } from "@/components/Icons";
 import { buildMetadata } from "@/lib/seo";
 import { breadcrumbSchema, faqSchema, graph, webPageSchema } from "@/lib/schema";
 
@@ -73,6 +73,17 @@ const services = [
       "Operational runbooks and escalation paths",
       "Environment and dependency inventories",
       "Technical onboarding material",
+    ],
+  },
+  {
+    icon: Clock,
+    title: "Managed services and 24/7 NOC",
+    body: "Ongoing operation of your network rather than a one-off engagement: monitoring, incident response and change execution against an agreed service level, staffed around the clock.",
+    points: [
+      "24/7 monitoring, alerting and first response",
+      "Incident management to an agreed SLA",
+      "Change execution inside your change window",
+      "Monthly reporting on availability and incident trends",
     ],
   },
   {
@@ -249,7 +260,6 @@ export default function TechnologyServicesPage() {
             </h2>
             <ul className="checklist">
               <li>Penetration testing and offensive security engagements</li>
-              <li>Managed service or 24/7 operations contracts</li>
               <li>Hardware or software resale</li>
               <li>Staff augmentation on an open-ended hourly basis</li>
             </ul>

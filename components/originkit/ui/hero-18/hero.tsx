@@ -42,7 +42,13 @@ const imgEllipse1 = asset("ellipse-1.svg");
 const inter = "font-[family-name:var(--font-inter)]";
 const interTight = "font-[family-name:var(--font-inter-tight)]";
 const lato = "font-[family-name:var(--font-lato)]";
-const heroStats = `${site.figures[0].value} engineers trained · ${site.figures[1].value} placed · ${site.figures[3].value} hiring partners`;
+/**
+ * Looked up by label, not by index. This line previously read figures[3],
+ * which silently became "Courses" the moment an entry was removed from the
+ * array - the hero then advertised "12 hiring partners".
+ */
+const figure = (label: string) => site.figures.find((f) => f.label === label)?.value ?? "";
+const heroStats = `${figure("Engineers trained")} engineers trained · ${figure("Placements")} placements · ${figure("Hiring relationships")} hiring relationships`;
 
 const instrumentSerif = "font-[family-name:var(--font-instrument-serif)]";
 

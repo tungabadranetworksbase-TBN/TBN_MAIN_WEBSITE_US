@@ -13,9 +13,20 @@ const crumbs = [
   { name: "Certifications", href: "/certifications" },
 ];
 
+/**
+ * The vendors, as prose. Written from the data rather than by hand: the page
+ * used to name CompTIA, Microsoft, the Cloud Native Computing Foundation,
+ * HashiCorp, Azure, Kubernetes and Terraform, none of which any track here
+ * covers.
+ */
+const VENDOR_PROSE =
+  certificationVendors.length > 1
+    ? `${certificationVendors.slice(0, -1).join(", ")} and ${certificationVendors[certificationVendors.length - 1]}`
+    : certificationVendors[0];
+
 export const metadata: Metadata = buildMetadata({
   title: "Certification Preparation Tracks",
-  description: `${certificationTracks.length} certification prep tracks from Tungabadra Networks covering CompTIA, Cisco, AWS, Azure, Kubernetes and Terraform exam domains.`,
+  description: `${certificationTracks.length} certification prep tracks from Tungabadra Networks covering ${VENDOR_PROSE} exam domains.`,
   path: "/certifications",
 });
 
@@ -23,7 +34,7 @@ const faqs = [
   {
     question: "Does Tungabadra Networks issue these certifications?",
     answer:
-      "No. These are third-party credentials issued by CompTIA, Cisco, Amazon Web Services, Microsoft, the Cloud Native Computing Foundation and HashiCorp. Tungabadra Networks courses cover the topic areas those exams assess; the exams themselves are registered, administered and issued by the vendors.",
+      `No. These are third-party credentials issued by ${VENDOR_PROSE}. Tungabadra Networks courses cover the topic areas those exams assess; the exams themselves are registered, administered and issued by the vendors.`,
   },
   {
     question: "Is Tungabadra Networks an authorized training partner?",
@@ -33,7 +44,7 @@ const faqs = [
   {
     question: "Which certification should I take first?",
     answer:
-      "Take the one named most often in the job postings you are actually targeting. For people new to IT, CompTIA Network+ or Security+ are the usual starting points; for people already in an infrastructure role, Cisco CCNA or an associate-level cloud certification is generally more useful.",
+      "Take the one named most often in the job postings you are actually targeting. For people new to networking, Cisco CCNA is the usual starting point; for people already in an infrastructure role, CCNP, a vendor security credential such as Palo Alto NGFW, or an associate-level cloud certification is generally more useful.",
   },
   {
     question: "Do I need to buy the exam separately?",
@@ -175,8 +186,7 @@ export default function CertificationsPage() {
               Vendor relationship disclosure
             </h2>
             <p className="card__body">
-              CompTIA, Cisco, Amazon Web Services, Microsoft, the Cloud Native Computing Foundation
-              and HashiCorp are the owners of the credentials referenced on this page. All
+              {VENDOR_PROSE} are the owners of the credentials referenced on this page. All
               trademarks belong to their respective owners.
             </p>
             <p className="card__body">

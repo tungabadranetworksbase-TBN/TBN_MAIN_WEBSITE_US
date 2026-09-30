@@ -12,7 +12,7 @@ const crumbs = [
   { name: "Terms & Conditions", href: "/terms" },
 ];
 
-/** EDIT ME: update whenever the terms change. */
+/** Update whenever the terms change. */
 const LAST_UPDATED = "2026-08-26";
 
 export const metadata: Metadata = buildMetadata({
@@ -64,8 +64,6 @@ export default function TermsPage() {
       <div className="container">
         <div className={styles.layout} style={{ paddingTop: 0 }}>
           <div className={styles.main} style={{ gap: 0 }}>
-            {/* These terms still need a lawyer's eyes before launch - flagged to the
-                reader rather than hidden, since that is the honest state of them. */}
             <div className="card card--muted" style={{ marginBottom: 32 }}>
               <h2 className="h5">Please note</h2>
               <p className="card__body">
@@ -95,7 +93,7 @@ export default function TermsPage() {
               <ul>
                 <li>Participants must be 18 years of age or older.</li>
                 <li>
-                  Internship participants must be located in the United States and authorized to
+                  Internship participants must be students in the United States and authorized to
                   work or intern in the US.
                 </li>
                 <li>
@@ -215,8 +213,8 @@ export default function TermsPage() {
               </h2>
               <p>
                 TBN is not affiliated with, endorsed by, or an authorized training partner of
-                CompTIA, Cisco, Amazon Web Services, Microsoft, the Cloud Native Computing
-                Foundation, HashiCorp, or any other certification vendor referenced on this site.
+                Cisco, Palo Alto Networks, Juniper Networks, HPE Aruba Networking, Amazon Web
+                Services, CompTIA, or any other certification vendor referenced on this site.
                 Trademarks belong to their respective owners. Exam registration and fees are handled
                 directly with the vendor. Cloud accounts and third-party tools used during a course
                 are subject to those providers&rsquo; own terms, and you are responsible for charges

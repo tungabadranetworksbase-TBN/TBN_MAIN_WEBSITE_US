@@ -24,7 +24,7 @@ export const faqGroups: FaqGroup[] = [
       {
         question: "Do I need a coding background?",
         answer:
-          "No. The courses are networking-first and hands-on from day one. Python for Network Automation and Cisco DevNet introduce scripting from the beginning, so no prior coding experience is assumed.",
+          "No. The courses are networking-first and hands-on from day one. Python for Network Automation and Cisco CCNA Automation introduce scripting from the beginning, so no prior coding experience is assumed.",
       },
       {
         question: "Do you train on AI infrastructure and GPUs?",
@@ -34,17 +34,17 @@ export const faqGroups: FaqGroup[] = [
       {
         question: "Do you teach network automation?",
         answer:
-          "Yes, and it runs against real devices rather than sample output. Python, Netmiko, Paramiko and Ansible are taught from first principles, alongside REST APIs, JSON and YAML, Git, and CI/CD pipelines in Jenkins, GitHub Actions and GitLab CI. The Data Center and Automation internship is the dedicated track for it, and Python for Network Automation and Cisco DevNet are available as standalone courses.",
+          "Yes, and it runs against real devices rather than sample output. Python, Netmiko, Paramiko and Ansible are taught from first principles, alongside REST APIs, JSON and YAML, Git, and CI/CD pipelines in Jenkins, GitHub Actions and GitLab CI. The Data Center and Automation internship is the dedicated track for it, and Python for Network Automation and Cisco CCNA Automation are available as standalone courses.",
       },
       {
         question: "What equipment will I train on?",
         answer:
-          "Physical Cisco, Palo Alto and Aruba equipment in real enterprise labs, with 24/7 rack access. Wireshark packet-level analysis runs throughout the training rather than being treated as an add-on.",
+          "Physical Cisco, Palo Alto and HPE Aruba Networking equipment in real enterprise labs, with 24/7 rack access. Wireshark packet-level analysis runs throughout the training rather than being treated as an add-on.",
       },
       {
         question: "Do you help with placement?",
         answer:
-          "Yes. Placement support continues until you secure a role, and the organization reports 950+ students placed with 40+ hiring partners including Infosys, Accenture, TCS, Capgemini and HPE.",
+          "Yes. Placement support runs through the job-search process: portfolio and resume review, mock interviews, and introductions to hiring relationships. Employment is not guaranteed, and no outcome is promised. The organization reports 1,000+ placements across 50+ hiring relationships.",
       },
       {
         question: "How is the training delivered?",
@@ -66,7 +66,7 @@ export const faqGroups: FaqGroup[] = [
       {
         question: "What courses does Tungabadra Networks offer?",
         answer:
-          "Twelve courses: CCNA Advanced, CCNP Enterprise & Service Provider, Palo Alto NGFW, AWS Certified Cloud Practitioner, Aruba Certified Associate, Juniper JNCIA, Cisco DevNet / Network Automation, Linux for Networking Engineers, Python for Network Automation, Real-Time Networking Projects, Real-Time Network Automation Projects, and Cloud Lab Access.",
+          "Twelve courses: CCNA Advanced, CCNP Enterprise & Service Provider, Palo Alto NGFW, AWS Certified Cloud Practitioner, HPE Aruba Networking Certified Associate, Juniper JNCIA, Cisco CCNA Automation, Linux for Networking Engineers, Python for Network Automation, Real-Time Networking Projects, Real-Time Network Automation Projects, and Cloud Lab Access.",
       },
       {
         question: "Which course should I start with?",
@@ -76,7 +76,7 @@ export const faqGroups: FaqGroup[] = [
       {
         question: "How much do the courses cost?",
         answer:
-          "Fees are not published online. They are shared on the free consultation call, along with the current syllabus and batch dates. A 50% discount on CCNA is offered to fee reimbursement candidates.",
+          "Every course page shows its fee in US dollars, alongside the full syllabus and what it prepares you for. Internship tracks are priced on the internships page. Enterprise services and corporate training are quoted per engagement, so those are agreed on a consultation call.",
       },
       {
         question: "Is there online delivery?",
@@ -98,17 +98,17 @@ export const faqGroups: FaqGroup[] = [
       {
         question: "Which companies hire your students?",
         answer:
-          "The organization lists 40+ hiring partners including Infosys, Accenture, TCS, Capgemini, HPE, Vedang Cellular Services, OLA Tech Solutions and Concentrix.",
+          "The organization reports 50+ hiring relationships, including Infosys, Accenture, TCS, Capgemini, HPE, Vedang Cellular Services, OLA Tech Solutions and Concentrix. An introduction is not an offer, and employment is not guaranteed.",
       },
       {
         question: "Do you provide proxy interview support?",
         answer:
-          "No. Tungabadra Networks does not attend interviews on a candidate's behalf, provide live assistance during an interview, or misrepresent anyone's identity, experience or work. Placement support is preparation only: mock interviews, portfolio and resume review, and introductions to hiring partners. Candidates attend their own interviews and answer for their own work. Anyone found arranging or accepting proxy attendance is removed from the program and from placement support.",
+          "No. Tungabadra Networks does not attend interviews on a candidate's behalf, provide live assistance during an interview, or misrepresent anyone's identity, experience or work. Placement support is preparation only: mock interviews, portfolio and resume review, and introductions to hiring relationships. Candidates attend their own interviews and answer for their own work. Anyone found arranging or accepting proxy attendance is removed from the program and from placement support.",
       },
       {
         question: "What results does Tungabadra Networks report?",
         answer:
-          "The organization publishes these figures: 3,000+ engineers trained, 950+ students placed, a 96% career success rate, a 150% average salary hike and a highest package of Rs 26.5L.",
+          "Three figures, and only these three: 3,000+ engineers trained, 1,000+ placements and 50+ hiring relationships. These are the organization's own figures, reported as claims it makes about itself rather than independently audited results. No success rate, salary increase or package figure is published.",
       },
     ],
   },
@@ -120,7 +120,7 @@ export const faqGroups: FaqGroup[] = [
       {
         question: "What services does the engineering division provide?",
         answer:
-          "Network architecture, network implementation, managed network services, 24/7 NOC, network security, firewall deployment, network monitoring and SLA support, plus IT staffing and payroll for Cisco, Juniper and Aruba engineers.",
+          "Network architecture, network implementation, managed network services, 24/7 NOC, network security, firewall deployment, network monitoring and SLA support, plus IT staffing and payroll for Cisco, Juniper and HPE Aruba Networking engineers.",
       },
       {
         question: "Why does a training company run production networks?",

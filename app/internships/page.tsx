@@ -14,16 +14,25 @@ const crumbs = [
   { name: "Internships", href: "/internships" },
 ];
 
+/**
+ * Tracks and the bundle are counted apart. `internships.length` is 4, but one
+ * of those is the Elite Career Path Bundle, which is the other three sold
+ * together rather than a fourth track - so calling them all tracks overstates
+ * the catalogue.
+ */
+const BUNDLES = internships.filter((i) => i.category === "Career Bundle");
+const TRACKS = internships.filter((i) => i.category !== "Career Bundle");
+
 export const metadata: Metadata = buildMetadata({
   title: "Technology Internships in the US",
-  description: `${internships.length} mentored internship tracks in network operations, implementation, security, automation and career transition, alongside the Tungabadra Networks engineering team.`,
+  description: `${TRACKS.length} mentored internship tracks in enterprise networking, data center operations and automation, plus the Elite Career Path Bundle, alongside the Tungabadra Networks engineering team.`,
   path: "/internships",
 });
 
 const faqs = [
   {
     question: "Are Tungabadra Networks internships available in the US?",
-    answer: `Yes. All ${internships.length} tracks are mentored placements alongside the engineering team, run on-site, hybrid or remote depending on the track.`,
+    answer: `Yes. All ${TRACKS.length} tracks, and the Elite Career Path Bundle that carries all three, are mentored programmes run for students in the United States, delivered online with lab access.`,
   },
   {
     question: "How do I apply for an internship?",
@@ -46,7 +55,7 @@ export default function InternshipsPage() {
           webPageSchema({
             path: "/internships",
             name: "Technology Internships in the US",
-            description: `All ${internships.length} internship tracks offered by Tungabadra Networks.`,
+            description: `All ${TRACKS.length} internship tracks offered by Tungabadra Networks, plus the Elite Career Path Bundle.`,
             type: "CollectionPage",
           }),
           breadcrumbSchema(crumbs),
@@ -67,10 +76,10 @@ export default function InternshipsPage() {
 
       <PageHero
         titleTop="Mentored internships"
-        titleBottom="located in the US"
+        titleBottom="for students in the United States"
         subtitle="A named mentor, reviewed work every week, and a completion certificate listing what you actually delivered."
-        statOneValue={String(internships.length)}
-        statOneLabel="Tracks"
+        statOneValue={`${TRACKS.length}+1`}
+        statOneLabel="Tracks + bundle"
         statTwoValue="1:1"
         statTwoLabel="Mentored"
         ctaLabel="Apply Now"
@@ -83,7 +92,8 @@ export default function InternshipsPage() {
         </Prose>
         <AnswerBox>
           <strong>
-            Tungabadra Networks runs {internships.length} mentored technology internship tracks for
+            Tungabadra Networks runs {TRACKS.length} mentored technology internship tracks, plus
+            the Elite Career Path Bundle that carries all {TRACKS.length} together, for
             participants working alongside our engineering team.
           </strong>{" "}
           You work on scoped, reviewed tasks with an assigned mentor and finish with a completion

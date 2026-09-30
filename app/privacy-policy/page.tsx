@@ -10,7 +10,7 @@ import styles from "../detail.module.css";
 const crumbs = [
   { name: "Home", href: "/" },
   { name: "Privacy Policy", href: "/privacy-policy" },
-]; /** EDIT ME: update whenever the policy text changes. */
+]; /** Update whenever the policy text changes. */
 const LAST_UPDATED = "2026-08-26";
 
 export const metadata: Metadata = buildMetadata({
@@ -58,15 +58,6 @@ export default function PrivacyPolicyPage() {
       <div className="container">
         <div className={styles.layout} style={{ paddingTop: 0 }}>
           <div className={styles.main} style={{ gap: 0 }}>
-            {/* EDIT ME: template text. Have counsel review before launch. */}{" "}
-            <div className="card card--muted" style={{ marginBottom: 32 }}>
-              <h2 className="h5">Before launch</h2>
-              <p className="card__body">
-                This policy is a working template written for a US-facing training organization. It
-                must be reviewed by qualified counsel and updated to match the systems, vendors and
-                data flows Tungabadra Networks actually uses before the site goes live.
-              </p>
-            </div>
             <div className="prose">
               <h2
                 id="scope"

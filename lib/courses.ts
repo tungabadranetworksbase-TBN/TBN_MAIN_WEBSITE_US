@@ -271,7 +271,7 @@ export const courses: Course[] = [
       { title: "VPN bring-up under fault", summary: "Establish a site-to-site tunnel against a misconfigured peer and diagnose each phase failure in turn." },
       { title: "TAC case simulation", summary: "Work a realistic support case end to end, from symptom to root cause to written resolution." },
     ],
-    certification: { preparesFor: ["Palo Alto Networks PCNSA"], note: VENDOR_NOTE },
+    certification: { preparesFor: ["Palo Alto Networks NGFW"], note: VENDOR_NOTE },
     careers: [
       { role: "Network Security Engineer", note: "Owns firewall policy and secure connectivity." },
       { role: "Firewall Administrator", note: "Day-to-day policy changes, reviews and audits." },
@@ -288,33 +288,33 @@ export const courses: Course[] = [
 
   {
     slug: "aruba-certified-associate",
-    title: "Aruba Certified Associate (ACA)",
+    title: "HPE Aruba Networking Certified Associate (ACA)",
     category: "Wireless & Campus",
     shortDescription:
-      "Campus switching and wireless on Aruba: WLAN design, controllers, access points and the security that runs across a campus fabric.",
+      "Campus switching and wireless on HPE Aruba Networking: WLAN design, controllers, access points and the security that runs across a campus fabric.",
     overview: [
-      "The Aruba Certified Associate course covers campus networking on Aruba hardware: switching, wireless LAN design, controller and access point configuration, and campus security.",
+      "The HPE Aruba Networking Certified Associate course covers campus networking on HPE Aruba Networking hardware: switching, wireless LAN design, controller and access point configuration, and campus security.",
       "Wireless is where most campus faults actually live, so a significant part of the course is spent on RF behaviour, coverage, roaming and the diagnostics that separate an RF problem from a wired one.",
-      "It follows the topic areas Aruba publishes for the ACA credential.",
+      "It follows the topic areas HPE Aruba Networking publishes for the ACA credential.",
     ],
     audience: [
       "Network engineers supporting campus or wireless estates",
-      "Engineers working in organisations running Aruba hardware",
+      "Engineers working in organisations running HPE Aruba Networking hardware",
       "CCNA holders adding a wireless and campus specialisation",
-      "Anyone preparing for the Aruba ACA exam",
+      "Anyone preparing for the HPE Aruba Networking ACA exam",
     ],
     outcomes: [
-      "Configure Aruba switching for a campus access and aggregation layer",
+      "Configure HPE Aruba Networking switching for a campus access and aggregation layer",
       "Design WLAN coverage and plan channel and power settings",
       "Configure controllers, access points and SSID policy",
       "Apply role-based access and campus security controls",
       "Diagnose roaming, coverage and interference problems",
       "Separate an RF fault from a wired or authentication fault",
     ],
-    skills: ["Aruba switching", "WLAN design", "Controllers and APs", "SSID and role policy", "RF fundamentals", "Roaming", "Campus security", "802.1X concepts", "Wireless troubleshooting", "Site survey basics"],
+    skills: ["HPE Aruba switching", "WLAN design", "Controllers and APs", "SSID and role policy", "RF fundamentals", "Roaming", "Campus security", "802.1X concepts", "Wireless troubleshooting", "Site survey basics"],
     curriculum: [
       { title: "Networking Fundamentals", topics: ["OSI and TCP/IP models", "IPv4 subnetting", "ARP, ICMP, DHCP and DNS", "Unicast, broadcast and multicast"] },
-      { title: "Aruba Networking Fundamentals", topics: ["Aruba product portfolio", "CX 6200, 6300 and 6400", "Access points and Aruba Central", "Introduction to ClearPass"] },
+      { title: "HPE Aruba Networking Fundamentals", topics: ["HPE Aruba Networking portfolio", "CX 6200, 6300 and 6400", "Access points and Aruba Central", "Introduction to ClearPass"] },
       { title: "Layer 2 Switching", topics: ["MAC address table", "Access and trunk ports, 802.1Q", "LACP"] },
       { title: "Spanning Tree", topics: ["STP and RSTP", "Root election, port roles and states", "Loop prevention"] },
       { title: "Layer 3 Basics", topics: ["SVI inter-VLAN routing", "Static and default routes", "Introduction to OSPF"] },
@@ -333,16 +333,16 @@ export const courses: Course[] = [
       { title: "Roaming investigation", summary: "Diagnose a sticky-client and roaming problem across a multi-AP deployment." },
       { title: "Guest access build", summary: "Deploy segmented guest access with role-based policy and verify isolation." },
     ],
-    certification: { preparesFor: ["Aruba Certified Associate (ACA)"], note: VENDOR_NOTE },
+    certification: { preparesFor: ["HPE Aruba Networking Certified Associate (ACA)"], note: VENDOR_NOTE },
     careers: [
       { role: "Wireless Network Engineer", note: "Designs and supports campus WLAN estates." },
       { role: "Campus Network Engineer", note: "Owns access and aggregation across sites." },
-      { role: "Network Engineer (Aruba)", note: "Supports organisations standardised on Aruba." },
+      { role: "Network Engineer (HPE Aruba Networking)", note: "Supports organisations standardised on HPE Aruba Networking." },
       { role: "Field Engineer", note: "AP installation, survey and commissioning." },
     ],
     faqs: [
       { question: "Do I need wireless experience?", answer: "No. RF fundamentals are taught from first principles. Switching and VLAN knowledge is the real prerequisite." },
-      { question: "Is there physical Aruba equipment?", answer: "Yes. The labs include Aruba hardware alongside the Cisco and Palo Alto racks." },
+      { question: "Is there physical HPE Aruba Networking equipment?", answer: "Yes. The labs include HPE Aruba Networking hardware alongside the Cisco and Palo Alto racks." },
     ],
     related: ["ccna-advanced-training", "palo-alto-ngfw", "juniper-jncia"],
   },
@@ -356,13 +356,13 @@ export const courses: Course[] = [
     overview: [
       "Juniper JNCIA covers the Junos operating system: its configuration model, the candidate-and-commit workflow, routing fundamentals, routing policy and firewall filters.",
       "For engineers coming from Cisco, the course spends real time on where the two platforms diverge. The commit model, the policy framework and the way Junos treats interfaces catch people out, and those are the areas most worth drilling.",
-      "It follows the topic areas Juniper publishes for the JNCIA-Junos credential.",
+      "It follows the topic areas Juniper publishes for the JNCIA-Junos (JN0-106) credential.",
     ],
     audience: [
       "Engineers working in multi-vendor environments",
       "Cisco-trained engineers adding Juniper",
       "Engineers targeting service provider roles where Junos is common",
-      "Anyone preparing for JNCIA-Junos",
+      "Anyone preparing for JNCIA-Junos (JN0-106)",
     ],
     outcomes: [
       "Navigate the Junos CLI and the candidate configuration model confidently",
@@ -391,7 +391,7 @@ export const courses: Course[] = [
       { title: "Routing policy exercise", summary: "Implement a route filtering requirement using the Junos policy framework and verify each term." },
       { title: "Safe change drill", summary: "Apply a change with commit confirmed, observe a failure, and roll back cleanly." },
     ],
-    certification: { preparesFor: ["Juniper JNCIA-Junos"], note: VENDOR_NOTE },
+    certification: { preparesFor: ["Juniper JNCIA-Junos (JN0-106)"], note: VENDOR_NOTE },
     careers: [
       { role: "Network Engineer (multi-vendor)", note: "Supports mixed Cisco and Juniper estates." },
       { role: "Service Provider Engineer", note: "Works on Junos-based provider infrastructure." },
@@ -407,21 +407,21 @@ export const courses: Course[] = [
 
   {
     slug: "cisco-devnet-network-automation",
-    title: "Cisco DevNet / Network Automation",
+    title: "Cisco CCNA Automation",
     category: "Automation",
     featured: true,
     shortDescription:
       "The bridge from CLI to code: Python, Linux, REST APIs and the automation tooling that modern network roles increasingly assume.",
     overview: [
-      "Cisco DevNet / Network Automation covers the software side of network engineering: Python fundamentals, Linux, REST APIs, data formats and the tooling used to configure and verify devices programmatically.",
+      "Cisco CCNA Automation covers the software side of network engineering: Python fundamentals, Linux, REST APIs, data formats and the tooling used to configure and verify devices programmatically.",
       "It assumes no software background. Networking knowledge is the prerequisite; the programming is taught from first principles because that is the direction most engineers arrive from.",
-      "It follows the topic areas Cisco publishes for the DevNet Associate (200-901) exam.",
+      "It follows the topic areas Cisco publishes for the CCNA Automation (200-901 CCNAAUTO) exam.",
     ],
     audience: [
       "Network engineers who have never written code",
       "Engineers whose roles are starting to expect automation",
       "CCNA or CCNP holders adding programmability",
-      "Anyone preparing for Cisco DevNet Associate",
+      "Anyone preparing for Cisco CCNA Automation",
     ],
     outcomes: [
       "Write Python that reads, transforms and validates device data",
@@ -447,7 +447,7 @@ export const courses: Course[] = [
       { title: "Configuration checker", summary: "Write a script that checks devices against a written standard and reports exceptions." },
       { title: "Version-controlled config", summary: "Put a device configuration under Git with a review workflow and a rollback path." },
     ],
-    certification: { preparesFor: ["Cisco DevNet Associate (200-901)"], note: VENDOR_NOTE },
+    certification: { preparesFor: ["Cisco CCNA Automation (200-901 CCNAAUTO)"], note: VENDOR_NOTE },
     careers: [
       { role: "Network Automation Engineer", note: "Builds the tooling that configures and verifies fleets." },
       { role: "NetDevOps Engineer", note: "Applies software delivery practice to network infrastructure." },
@@ -456,7 +456,7 @@ export const courses: Course[] = [
     ],
     faqs: [
       { question: "Do I need a coding background?", answer: "No. Python is taught from first principles. Networking knowledge is the prerequisite, not software experience." },
-      { question: "Is this the same as Python for Network Automation?", answer: "They overlap but differ in emphasis. DevNet is broader and exam-aligned, covering APIs, Linux and programmability concepts. Python for Network Automation goes deeper on the libraries used to drive devices day to day." },
+      { question: "Is this the same as Python for Network Automation?", answer: "They overlap but differ in emphasis. CCNA Automation is broader and exam-aligned, covering APIs, Linux and programmability concepts. Python for Network Automation goes deeper on the libraries used to drive devices day to day." },
     ],
     related: ["python-for-network-automation", "linux-for-network-engineers", "real-time-automation-projects"],
   },
@@ -474,7 +474,7 @@ export const courses: Course[] = [
     ],
     audience: [
       "Network engineers automating repetitive work",
-      "Engineers who have completed DevNet or equivalent Python basics",
+      "Engineers who have completed CCNA Automation or equivalent Python basics",
       "NOC staff automating recurring checks",
       "Engineers modernising a manual change process",
     ],
@@ -501,7 +501,7 @@ export const courses: Course[] = [
     duration: CONSULT_NOTE,
     deliveryFormats: ["Classroom", "Online (live)", "Corporate (on-site)"],
     level: "Advanced",
-    prerequisites: ["Working knowledge of routing and switching", "Basic Python, or Cisco DevNet / Network Automation first", "Comfortable on the Linux command line"],
+    prerequisites: ["Working knowledge of routing and switching", "Basic Python, or Cisco CCNA Automation first", "Comfortable on the Linux command line"],
     projects: [
       { title: "Fleet compliance audit", summary: "Collect configuration from every device in the lab fleet, check it against a written standard, and produce an exception report." },
       { title: "Templated site rollout", summary: "Generate and deploy a full branch configuration from a data file, with validation before and after." },
@@ -515,7 +515,7 @@ export const courses: Course[] = [
       { role: "Tools Engineer", note: "Builds internal tooling for infrastructure teams." },
     ],
     faqs: [
-      { question: "How much Python do I need first?", answer: "Enough to write a function, loop over a list and handle an exception. Cisco DevNet / Network Automation covers more than enough, and week one includes a refresher." },
+      { question: "How much Python do I need first?", answer: "Enough to write a function, loop over a list and handle an exception. Cisco CCNA Automation covers more than enough, and week one includes a refresher." },
       { question: "Will this work on my employer's equipment?", answer: "The techniques apply to anything reachable over SSH or an API, which covers most Cisco, Juniper and Arista platforms. Labs run on the training fleet so you never test on production." },
       { question: "Ansible or Python: which should I use?", answer: "Both, for different jobs. The course covers when declarative Ansible is right and when you need the control of a script." },
     ],
@@ -664,7 +664,7 @@ export const courses: Course[] = [
     skills: ["Enterprise topology design", "Data centre fundamentals", "Migration planning", "Change windows", "Root cause analysis", "Incident documentation", "Rollback planning", "Wireshark", "Multi-protocol troubleshooting", "Handover"],
     curriculum: [
       { title: "Network Architectures", topics: ["Enterprise small, medium and large", "Service provider core, distribution and access", "Data centre three-tier vs leaf-spine", "High availability", "North-south vs east-west traffic"] },
-      { title: "Devices & Vendors", topics: ["Cisco ASR, ISR and Catalyst", "Juniper MX, SRX and QFX", "Arista", "Aruba", "Line cards, RSP, IOM and fabric", "SFP types"] },
+      { title: "Devices & Vendors", topics: ["Cisco ASR, ISR and Catalyst", "Juniper MX, SRX and QFX", "Arista", "HPE Aruba Networking", "Line cards, RSP, IOM and fabric", "SFP types"] },
       { title: "Hardware Troubleshooting", topics: ["SFP Tx/Rx and DOM", "Fiber bending, splicing and cleaning", "CRC errors", "Link flapping", "Health checks", "The RMA process"] },
       { title: "Routing & Protocol Troubleshooting", topics: ["Static and default routes", "IP SLA", "OSPF LSA types 1 to 5, neighbors and virtual links", "BGP path selection, route reflectors and advertisement issues"] },
       { title: "Reachability Troubleshooting", topics: ["End-to-end reachability", "Isolating Layer 2 from Layer 3", "ARP, MAC and routing tables", "VLAN and trunk issues", "Server reachability"] },

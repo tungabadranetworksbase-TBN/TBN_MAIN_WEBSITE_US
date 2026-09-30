@@ -96,7 +96,7 @@ export const internships: Internship[] = [
       "The enterprise route: routing and switching through CCNP level, wireless, firewall, hybrid cloud and the monitoring and ticketing work an operations role actually runs on.",
     overview: [
       "The Enterprise Networking Internship is built to make you employable in enterprise networking roles, from NOC engineer through to network engineer, with the foundation to move into cloud, security and automation later.",
-      "It runs the full enterprise stack: CCNA Advanced with BGP fundamentals, CCNP Enterprise at ENCOR level, Cisco Meraki and Aruba wireless, Palo Alto NGFW, Linux, and AWS networking for hybrid connectivity.",
+      "It runs the full enterprise stack: CCNA Advanced with BGP fundamentals, CCNP Enterprise at ENCOR level, Cisco Meraki and HPE Aruba Networking wireless, Palo Alto NGFW, Linux, and AWS networking for hybrid connectivity.",
       "What separates it from a certification course is the operations half. Monitoring, ticketing, incident severity, SLA workflow, root cause analysis and change management are taught as the job, because that is what an L1 or L2 role is made of.",
     ],
     duration: DURATION_NOTE,
@@ -115,7 +115,7 @@ export const internships: Internship[] = [
     technologies: [
       "Cisco routers and switches",
       "Cisco Meraki cloud wireless",
-      "Aruba controllers and instant APs",
+      "HPE Aruba Networking controllers and instant APs",
       "Juniper Junos",
       "Palo Alto NGFW",
       "AWS VPC and hybrid connectivity",
@@ -126,7 +126,7 @@ export const internships: Internship[] = [
       { title: "CCNA Advanced (200-301, with BGP fundamentals)" },
       { title: "CCNP Enterprise (ENCOR level)" },
       { title: "Cisco Meraki Wireless (cloud managed networking)" },
-      { title: "Aruba Wireless Networking (enterprise Wi-Fi)" },
+      { title: "HPE Aruba Networking Wireless (enterprise Wi-Fi)" },
       { title: "JNCIA (Juniper, certification assistance)" },
       { title: "Palo Alto NGFW (next-generation firewall)" },
       { title: "Linux for Networking Engineers" },
@@ -461,7 +461,7 @@ export const internships: Internship[] = [
       "The advanced track: spine-leaf and VXLAN, AWS hybrid cloud, then Python, Ansible, REST APIs and CI/CD on top, with real automation projects.",
     overview: [
       "The Data Center and Automation Internship prepares you for modern data center and cloud infrastructure roles, with the automation, DevOps and cloud networking skills US enterprise environments now expect as standard.",
-      "It carries the networking sequence through CCNP with data center concepts, adds Palo Alto security, Aruba and AWS Cloud Practitioner, then builds the automation layer: Python and Netmiko, Ansible, REST APIs, Git and CI/CD pipelines across Jenkins, GitHub Actions and GitLab CI.",
+      "It carries the networking sequence through CCNP with data center concepts, adds Palo Alto security, HPE Aruba Networking and AWS Cloud Practitioner, then builds the automation layer: Python and Netmiko, Ansible, REST APIs, Git and CI/CD pipelines across Jenkins, GitHub Actions and GitLab CI.",
       "Observability is treated as a first-class skill rather than an afterthought, with Prometheus, Grafana and Zabbix, and the programme closes on real automation projects rather than demonstrations.",
     ],
     duration: DURATION_NOTE,
@@ -484,7 +484,7 @@ export const internships: Internship[] = [
       "Git, GitHub and GitHub Actions",
       "Jenkins and GitLab CI",
       "Prometheus, Grafana and Zabbix",
-      "Cisco, Juniper, Palo Alto and Aruba equipment",
+      "Cisco, Juniper, Palo Alto and HPE Aruba Networking equipment",
       "AWS VPC and hybrid cloud",
     ],
     coursesIncluded: [
@@ -492,7 +492,7 @@ export const internships: Internship[] = [
       { title: "CCNP Enterprise (advanced routing and data center concepts)" },
       { title: "JNCIA (Juniper, certification assistance)" },
       { title: "Palo Alto NGFW" },
-      { title: "Aruba Networking" },
+      { title: "HPE Aruba Networking" },
       { title: "AWS Cloud Practitioner (CLF-C02)" },
       { title: "Linux for Networking" },
       { title: "Python for Network Automation" },

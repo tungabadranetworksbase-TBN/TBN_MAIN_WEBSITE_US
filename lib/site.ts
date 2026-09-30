@@ -98,29 +98,24 @@ export const site = {
     linkedin: "https://www.linkedin.com/company/tungabadra-networks",
   },
 
-  /** Figures as published by the organisation. */
   /**
-   * The live site publishes two conflicting sets of placement figures: the home
-   * page says 950+ placed / 150% hike / Rs 26.5L / 40+ partners, the placements
-   * page says 890+ / 100% / Rs 25.2L / 50+. We use the placements-page set,
-   * because its breakdown reconciles exactly (433 freshers + 248 experienced +
-   * 209 non-IT = 890) and a figure with a breakdown behind it is the more
-   * defensible claim. CONFIRM WHICH SET IS CURRENT and correct this in one place.
+   * The organisation's figures, stated once.
+   *
+   * These are the agreed set and the only ones published: 3,000+ trained,
+   * 1,000+ placements, 50+ hiring relationships. The site used to carry two
+   * conflicting versions - the home page said 950+ placed with 40+ partners,
+   * the placements page said 890+ with 50+ - alongside a salary hike, a
+   * success rate and a rupee package figure. Those are outcome statistics
+   * that app/terms says this site does not publish, so they are gone rather
+   * than reconciled. Anything quoting a placement or partner number should
+   * read it from here.
    */
   figures: [
     { label: "Engineers trained", value: "3,000+" },
-    { label: "Graduates placed", value: "890+" },
-    { label: "Average salary increase", value: "100%" },
-    { label: "Hiring partners", value: "50+" },
+    { label: "Placements", value: "1,000+" },
+    { label: "Hiring relationships", value: "50+" },
     { label: "Courses", value: "12" },
     { label: "Teaching since", value: "2024" },
-  ],
-
-  /** The 890 placements, broken down. Sums exactly; safe to render together. */
-  placementBreakdown: [
-    { label: "Freshers", value: "433" },
-    { label: "Experienced", value: "248" },
-    { label: "From non-IT backgrounds", value: "209" },
   ],
 
   /** Verifiable, non-promotional facts. Safe for AI answer extraction. */
