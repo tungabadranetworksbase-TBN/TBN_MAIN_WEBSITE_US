@@ -9,7 +9,7 @@ import BorderOrbit from "@/components/originkit/ui/hero-18/border-orbit";
 import HeroBackgroundTablet from "@/components/originkit/ui/hero-18/hero-background-tablet";
 import HeroBackgroundMobile from "@/components/originkit/ui/hero-18/hero-background-mobile";
 import LogoTicker from "@/components/originkit/ui/hero-18/logo-ticker";
-import HeroDemoSlot from "@/components/HeroDemoSlot";
+import { HeroDemoSlot } from "@/components/DemoCampaigns";
 
 
 /** Public asset under /sections/hero-18/assets */

@@ -11,6 +11,7 @@ import {
   ShieldCheck,
 } from "@phosphor-icons/react/dist/ssr";
 import Hero18 from "@/components/originkit/hero-18";
+import { DemoSessionsSection } from "@/components/DemoCampaigns";
 import NextjsFlare from "@/components/ui/nextjs-flare";
 import JsonLd from "@/components/JsonLd";
 import Reveal from "@/components/brand/Reveal";
@@ -201,6 +202,9 @@ export default function HomePage() {
           ))}
         </div>
       </section>
+
+      {/* 3a. free demo sessions from the .in campaign backend; renders nothing when there are none */}
+      <DemoSessionsSection />
 
       {/* 3b. the internship tracks, priced. Sits after the catalog because it
              is the same question one step further on: having seen the

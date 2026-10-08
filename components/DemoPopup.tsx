@@ -4,7 +4,17 @@ import { useEffect, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { ArrowRight, Calendar, Clock, Close } from "@/components/Icons";
-import { type Campaign, REGISTERED_KEY, SEEN_KEY, fmtClassesStart, fmtDate, fmtTime, isRegistrationClosed } from "@/lib/demo";
+import {
+  type Campaign,
+  REGISTERED_KEY,
+  SEEN_KEY,
+  fmtClassesStart,
+  fmtDate,
+  fmtTime,
+  initials,
+  isRegistrationClosed,
+  loadCampaigns,
+} from "@/lib/demo";
 import { site } from "@/lib/site";
 import styles from "./DemoPopup.module.css";
 
@@ -37,10 +47,8 @@ export default function DemoPopup() {
 
     let cancelled = false;
     let timer: ReturnType<typeof setTimeout> | undefined;
-    fetch("/api/demo/campaigns")
-      .then((r) => r.json())
-      .then((res: { data?: Campaign[] }) => {
-        const camps = Array.isArray(res?.data) ? res.data : [];
+    loadCampaigns()
+      .then((camps) => {
         if (cancelled || camps.length === 0) return;
         setCampaigns(camps);
         timer = setTimeout(() => {
@@ -148,8 +156,13 @@ export default function DemoPopup() {
                 const starts = fmtClassesStart(c.classes_start_date);
                 return (
                   <li key={c.slug} className={styles.item}>
+                    {c.banner_url && (
+                      // eslint-disable-next-line @next/next/no-img-element -- remote CDN banner uploaded in the .in admin
+                      <img src={c.banner_url} alt="" className={styles.thumb} />
+                    )}
                     <div className={styles.badges}>
                       <span className={styles.chip}>{c.course_name}</span>
+                      {c.meet_link && <span className={styles.open}>Online</span>}
                       {!closed && <span className={styles.open}>Open</span>}
                     </div>
                     <p className={styles.itemTitle}>{c.title}</p>
@@ -162,7 +175,12 @@ export default function DemoPopup() {
                       </span>
                     </div>
                     <div className={styles.foot}>
-                      <span className={styles.trainer}>with {c.trainer_name}</span>
+                      <span className={styles.trainer}>
+                        <span className={styles.avatar} aria-hidden="true">
+                          {initials(c.trainer_name)}
+                        </span>
+                        {c.trainer_name}
+                      </span>
                       {closed ? (
                         <a className="btn btn--ghost btn--sm" href={site.contact.enroll}>
                           {starts ? `Classes start ${starts} · Enroll` : "Enroll"}

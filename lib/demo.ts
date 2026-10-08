@@ -72,3 +72,32 @@ export async function fetchIn<T>(path: string, init?: RequestInit & { next?: { r
     return null;
   }
 }
+
+/** Accent per course family, the same mapping as the .in site. Brand gold for anything else. */
+export function courseColor(name: string) {
+  const n = name.toUpperCase();
+  if (/PALO ?ALTO|PALALTO|NGFW|PA-220/.test(n)) return "#dc2626";
+  if (n.includes("CCNA")) return "#2563eb";
+  if (n.includes("CCNP")) return "#4f46e5";
+  if (n.includes("JNCIA")) return "#059669";
+  return "#fcc000";
+}
+
+export const initials = (name: string) =>
+  name
+    .replace(/^(Mr|Ms|Mrs|Dr)\.?\s*/i, "")
+    .split(/\s+/)
+    .map((w) => w[0])
+    .join("")
+    .toUpperCase()
+    .slice(0, 2);
+
+let pending: Promise<Campaign[]> | undefined;
+/** The US campaign list, fetched once per page load and shared by the popup, hero and homepage section. Browser only. */
+export function loadCampaigns() {
+  pending ??= fetch("/api/demo/campaigns")
+    .then((r) => r.json())
+    .then((res: { data?: Campaign[] }) => (Array.isArray(res?.data) ? res.data : []))
+    .catch(() => []);
+  return pending;
+}
