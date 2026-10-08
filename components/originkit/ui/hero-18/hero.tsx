@@ -9,6 +9,7 @@ import BorderOrbit from "@/components/originkit/ui/hero-18/border-orbit";
 import HeroBackgroundTablet from "@/components/originkit/ui/hero-18/hero-background-tablet";
 import HeroBackgroundMobile from "@/components/originkit/ui/hero-18/hero-background-mobile";
 import LogoTicker from "@/components/originkit/ui/hero-18/logo-ticker";
+import HeroDemoSlot from "@/components/HeroDemoSlot";
 
 
 /** Public asset under /sections/hero-18/assets */
@@ -352,6 +353,7 @@ export default function Hero() {
               </div>
             </a>
           </div>
+          <HeroDemoSlot />
         </div>
         <div className="flex flex-col items-center gap-[12px] self-stretch">
           <p className={`${interTight} font-light text-[14px] text-white opacity-50 md:text-[16px]`}>
@@ -434,6 +436,7 @@ export default function Hero() {
                 </div>
               </a>
             </div>
+            <HeroDemoSlot />
           </div>
         </div>
         <div className="content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full">
