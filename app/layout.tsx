@@ -4,7 +4,7 @@ import JsonLd from "@/components/JsonLd";
 import Nav from "@/components/brand/Nav";
 import Footer from "@/components/brand/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
-import CalEmbed from "@/components/CalEmbed";
+import ConsultationModal from "@/components/ConsultationModal";
 import Chatwoot from "@/components/Chatwoot";
 import DemoPopup from "@/components/DemoPopup";
 import { site } from "@/lib/site";
@@ -81,7 +81,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Footer />
 
         <JsonLd data={graph(organizationSchema(), websiteSchema())} />
-        <CalEmbed />
+        <ConsultationModal />
         <Chatwoot />
         <DemoPopup />
       </body>

@@ -138,7 +138,7 @@ comments so it can be pasted into Vercel's bulk importer as-is.
 | `CHATWOOT_ACCOUNT_ID` | The number in the dashboard URL, `/app/accounts/<id>/dashboard` |
 | `CHATWOOT_INBOX_ID` | Settings -> Inboxes -> the id in the inbox URL. Use an API-channel inbox, not the website one, so form submissions stay separable from live chats |
 | `SLACK_WEBHOOK_URL` | Slack -> your app -> Incoming Webhooks -> add to a channel. Posts to that one channel; moving channels later means a new URL, not a code change |
-| `CAL_WEBHOOK_SECRET` | Cal.com -> Settings -> Developer -> Webhooks. The same string you set on the webhook, used to verify each delivery |
+| `TBN_IN_API_URL` | Optional. Base URL of the .in site, whose API serves demo campaigns and stores consultation requests. Defaults to `https://www.tungabadranetworks.in` |
 
 Env vars only reach new builds, so redeploy after changing them. With any of
 them missing the form still validates and accepts, logging instead of
@@ -148,22 +148,20 @@ success that did not happen.
 
 ## Notifications
 
-A form submission and a booked consultation both post to Slack, so a lead is
-seen the same day rather than whenever someone next opens Chatwoot.
+Every form posts to Slack, so a lead is seen the same day rather than
+whenever someone next opens Chatwoot or the admin panel.
 
-- **Forms** — `app/api/contact/route.ts` notifies after it has tried
+- **Contact form** — `app/api/contact/route.ts` notifies after it has tried
   Chatwoot, on every valid submission. When Chatwoot refused, the Slack
   message says so, because that is the only surviving signal that a lead
   arrived. Slack never changes the response the visitor gets.
-- **Calls** — `app/api/cal/route.ts` receives Cal.com webhooks. Point Cal at
-  `https://<your-domain>/api/cal` and subscribe `BOOKING_CREATED` and
-  `BOOKING_CANCELLED`. The endpoint is public, so every delivery is checked
-  against `CAL_WEBHOOK_SECRET` and rejected with a 401 if the HMAC does not
-  match; with the secret unset it refuses everything with a 503 rather than
-  accepting unverified posts.
-
-Cal's payload shape is not guaranteed across versions. Use the **Ping** button
-on its webhook settings page to see a real delivery before relying on it.
+- **Consultation form** — every Book a Consultation button opens
+  `components/ConsultationModal.tsx`. `app/api/consultation/route.ts` stores
+  the request through the .in backend (`POST /api/consultations`), where it
+  appears under Consultations in the .in admin, and posts the details to
+  Slack. If the .in backend refuses, the Slack message says so.
+- **Demo registrations** — `app/api/demo/register/route.ts`, forwarded to the
+  .in backend the same way.
 
 ---
 

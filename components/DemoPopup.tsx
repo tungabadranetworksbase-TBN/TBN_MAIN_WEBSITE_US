@@ -109,6 +109,7 @@ export default function DemoPopup() {
             aria-modal="true"
             aria-labelledby="demo-popup-title"
             className={styles.card}
+            data-lenis-prevent
             initial={reduce ? false : { opacity: 0, scale: 0.94, y: 24 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.96, y: 12 }}

@@ -318,8 +318,6 @@ export default function HomePage() {
             <div className={s.ctaActions}>
               <Link
                 href={site.contact.consultation}
-                data-cal-link={site.contact.consultationPath}
-                data-cal-config='{"layout":"month_view"}'
                 className="btn btn--gold"
               >
                 Book a Consultation

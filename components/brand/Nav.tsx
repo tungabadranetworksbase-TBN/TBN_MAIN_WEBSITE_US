@@ -94,8 +94,6 @@ export default function Nav() {
           </a>
           <Link
             href={site.contact.consultation}
-            data-cal-link={site.contact.consultationPath}
-            data-cal-config='{"layout":"month_view"}'
             className="btn btn--gold"
           >
             Book a Consultation
@@ -143,8 +141,6 @@ export default function Nav() {
               <div className={styles.drawerActions}>
                 <Link
             href={site.contact.consultation}
-            data-cal-link={site.contact.consultationPath}
-            data-cal-config='{"layout":"month_view"}'
             className="btn btn--gold"
           >
                   Book a Consultation

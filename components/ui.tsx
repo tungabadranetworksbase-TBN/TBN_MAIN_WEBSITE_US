@@ -17,21 +17,10 @@ import styles from "./ui.module.css";
 const isExternal = (href: string) => /^https?:\/\//i.test(href);
 
 /**
- * Attributes for a link, decided from its href.
- *
- * The booking link is special-cased: Cal.com's embed watches for
- * `data-cal-link` and opens the booking flow in a modal over the page,
- * calling preventDefault itself, so the href stays as the fallback for when
- * the embed has not loaded. Every other absolute link leaves the site and
- * opens in a new tab with the opener severed.
+ * Attributes for a link, decided from its href. An absolute link leaves the
+ * site and opens in a new tab with the opener severed.
  */
 export const extProps = (href: string) => {
-  if (href === site.contact.consultation) {
-    return {
-      "data-cal-link": site.contact.consultationPath,
-      "data-cal-config": '{"layout":"month_view"}',
-    } as const;
-  }
   return isExternal(href) ? ({ target: "_blank", rel: "noopener noreferrer" } as const) : {};
 };
 

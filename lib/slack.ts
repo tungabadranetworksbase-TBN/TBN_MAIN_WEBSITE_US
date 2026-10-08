@@ -1,8 +1,8 @@
 /**
  * Slack notifications, via an incoming webhook.
  *
- * Used by the contact form and the Cal.com webhook receiver so a lead or a
- * booked call is seen the same day, rather than whenever somebody next opens
+ * Used by the contact, consultation and demo forms so a lead or a
+ * consultation request is seen the same day, rather than whenever somebody next opens
  * Chatwoot.
  *
  * Configure `SLACK_WEBHOOK_URL` in .env.local, and in Vercel under Project

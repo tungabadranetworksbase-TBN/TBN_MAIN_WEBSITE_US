@@ -9,9 +9,6 @@
  * The site publishes no course fees, so none are stated anywhere.
  */
 
-/** Cal.com booking, as a path. Used both as a URL and as an embed target. */
-const CAL_PATH = "tungabadranetworks/welcome-to-tungabadranetworks-usa-consultation-call";
-
 export const site = {
   name: "Tungabadra Networks",
   shortName: "Tungabadra",
@@ -48,17 +45,12 @@ export const site = {
     corporate: "ussupport@tungabadranetworks.com",
     phone: "+1 (940) 377-0034",
     /**
-     * Where every Book a Consultation button goes. Scheduling happens on
-     * Cal.com rather than on this site, so the button hands off directly
-     * instead of routing through the contact form first.
+     * Where every Book a Consultation button points. components/ConsultationModal
+     * catches clicks on links with exactly this href and opens the
+     * consultation form over the page; without JavaScript the link still
+     * lands on the contact form with the subject filled in.
      */
-    consultation: `https://cal.com/${CAL_PATH}`,
-    /**
-     * The same booking as a Cal.com embed path. Elements carrying this in
-     * `data-cal-link` open the booking flow in a modal over the page instead
-     * of navigating away.
-     */
-    consultationPath: CAL_PATH,
+    consultation: "/contact?subject=Free%20consultation",
     phoneHref: "tel:+19403770034",
     hours: "Monday to Friday, 9:00 AM to 6:00 PM ET",
     /**

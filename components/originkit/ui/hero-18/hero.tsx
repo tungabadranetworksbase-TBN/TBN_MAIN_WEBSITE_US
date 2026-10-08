@@ -17,10 +17,8 @@ function asset(file: string) {
   return `/originkit/hero-18/${file}`;
 }
 
-/** Booking happens on Cal.com; see site.contact.consultation. */
-const CONSULTATION_PATH =
-  "tungabadranetworks/welcome-to-tungabadranetworks-usa-consultation-call";
-const CONSULTATION_URL = `https://cal.com/${CONSULTATION_PATH}`;
+/** Opens the consultation form; see site.contact.consultation. */
+const CONSULTATION_URL = site.contact.consultation;
 
 const imgDiagonalLines = asset("diagonal-lines.png");
 const imgDiagonalLines1 = asset("diagonal-lines-1.svg");
@@ -339,8 +337,6 @@ export default function Hero() {
             </a>
             <a
               href={CONSULTATION_URL}
-              data-cal-link={CONSULTATION_PATH}
-              data-cal-config='{"layout":"month_view"}'
               className="bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.1)] border-solid flex items-center justify-center gap-[10px] rounded-[10px] py-[12px] pl-[18px] pr-[12px] transition-colors duration-150 hover:bg-[rgba(255,255,255,0.08)] hover:border-[rgba(255,255,255,0.2)] md:py-[14px] md:pl-[24px] md:pr-[14px]"
             >
               <p className={`${lato} text-[13px] text-white tracking-[-0.35px] whitespace-nowrap md:text-[14px]`}>
@@ -422,8 +418,6 @@ export default function Hero() {
               </a>
               <a
                 href={CONSULTATION_URL}
-              data-cal-link={CONSULTATION_PATH}
-              data-cal-config='{"layout":"month_view"}'
                 className="bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.1)] border-solid content-stretch flex gap-[10px] h-full items-center justify-center pl-[24px] pr-[14px] py-[14px] relative rounded-[10px] shrink-0 transition-colors duration-150 hover:bg-[rgba(255,255,255,0.08)] hover:border-[rgba(255,255,255,0.2)]"
               >
                 <p className={`${lato} font-normal leading-[1.5] relative shrink-0 text-[14px] text-white tracking-[-0.42px] whitespace-nowrap`}>
