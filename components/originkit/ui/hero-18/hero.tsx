@@ -1,6 +1,7 @@
 // Delivered by Originkit · stack: nextjs · styling: tailwind
 "use client";
 
+import { useEffect, useRef } from "react";
 import { site } from "@/lib/site";
 
 import Tornado from "@/components/originkit/ui/hero-18/tornado";
@@ -63,8 +64,42 @@ const instrumentSerif = "font-[family-name:var(--font-instrument-serif)]";
 const SHOW_TORNADO = false;
 
 export default function Hero() {
+  const rootRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  /**
+   * The desktop copy is absolutely positioned, so it adds no height of its
+   * own: on a short window, or with the demo rows showing, its bottom ran
+   * under the next section and was cut off. Measure where it actually ends
+   * and let the hero grow to fit. It still fills the viewport whenever the
+   * copy fits, which is the designed case. ResizeObserver catches the demo
+   * rows arriving after the first paint.
+   */
+  useEffect(() => {
+    const root = rootRef.current;
+    const content = contentRef.current;
+    if (!root || !content) return;
+    const desktop = window.matchMedia("(min-width: 1024px)");
+    const fit = () => {
+      if (!desktop.matches) {
+        root.style.minHeight = "";
+        return;
+      }
+      const end = content.getBoundingClientRect().bottom - root.getBoundingClientRect().top;
+      root.style.minHeight = `${Math.ceil(end + 24)}px`;
+    };
+    const ro = new ResizeObserver(fit);
+    ro.observe(content);
+    window.addEventListener("resize", fit);
+    fit();
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", fit);
+    };
+  }, []);
+
   return (
-    <div className="relative w-full overflow-hidden bg-[#0a0a0a] lg:h-full h18-background">
+    <div ref={rootRef} className="relative w-full overflow-hidden bg-[#0a0a0a] lg:flex-1 h18-background">
       {/* Spine-leaf topology, furthest back. First in the DOM and z-0, so the
           Tornado - also z-0, painted later - covers it where they overlap. */}
       <NetworkGrid />
@@ -369,7 +404,7 @@ export default function Hero() {
           transformOrigin: "top left",
         }}
       >
-      <div className="pointer-events-auto lg:absolute lg:content-stretch lg:flex flex-col gap-[72px] items-start left-[82px] top-[207px] w-[688px]">
+      <div ref={contentRef} className="pointer-events-auto lg:absolute lg:content-stretch lg:flex flex-col gap-[48px] items-start left-[82px] top-[150px] w-[688px]">
         <div className="content-stretch flex flex-col gap-[24px] items-start relative shrink-0">
           <div className="bg-[rgba(255,255,255,0.02)] content-stretch flex flex-col gap-[10px] items-start px-[12px] py-[8px] relative rounded-[12px] shrink-0">
             <div className="content-stretch flex gap-[10px] items-center justify-center relative rounded-[12px] shrink-0">

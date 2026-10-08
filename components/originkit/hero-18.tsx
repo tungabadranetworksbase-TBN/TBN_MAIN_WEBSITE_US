@@ -10,7 +10,7 @@ const Hero18 = () => (
   // ticker under the fold on the most common desktop screen there is. The hero
   // takes the viewport it is given; the floor only catches genuinely short
   // windows, where scrolling is the right answer anyway.
-  <main className="relative w-full lg:h-[calc(100vh-var(--nav-h))] lg:min-h-[600px] lg:shrink-0">
+  <main className="relative w-full lg:flex lg:min-h-[max(600px,calc(100vh-var(--nav-h)))] lg:shrink-0 lg:flex-col">
     <Hero />
   </main>
 );
