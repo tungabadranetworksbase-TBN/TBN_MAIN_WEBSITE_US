@@ -16,8 +16,28 @@ import styles from "./InquiryForm.module.css";
  * on the contact form instead.
  */
 
-type Field = "name" | "email" | "phone" | "requirement";
+type Field = "consultation_type" | "name" | "email" | "phone" | "country" | "date" | "window" | "requirement";
 type Errors = Partial<Record<Field, string>>;
+
+export const TYPES = [
+  { value: "course", label: "About a course" },
+  { value: "one_on_one", label: "1:1 discussion" },
+  { value: "other", label: "Something else" },
+] as const;
+
+const COUNTRIES = [
+  "United States", "Canada", "India", "United Kingdom", "Australia", "United Arab Emirates",
+  "Saudi Arabia", "Qatar", "Kuwait", "Oman", "Bahrain", "Singapore", "Germany", "Ireland",
+  "Netherlands", "New Zealand", "South Africa", "Nigeria", "Other",
+];
+
+const WINDOWS = ["Morning (9 AM–12 PM)", "Afternoon (12–5 PM)", "Evening (5–8 PM)", "Any time"];
+
+/** Today as YYYY-MM-DD in the visitor's own zone, for the date picker's minimum. */
+const today = () => {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+};
 
 /** Client-side mirror of app/api/consultation/route.ts. */
 function validate(d: Record<Field, string>): Errors {
@@ -26,6 +46,11 @@ function validate(d: Record<Field, string>): Errors {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(d.email.trim())) e.email = "Enter a valid email address.";
   const digits = d.phone.replace(/\D/g, "").length;
   if (!/^[+\d\s().-]+$/.test(d.phone.trim()) || digits < 7 || digits > 15) e.phone = "Enter a valid phone number.";
+  if (!d.consultation_type) e.consultation_type = "Choose what you would like to discuss.";
+  if (!d.country) e.country = "Choose your country.";
+  if (!d.date) e.date = "Pick a day that suits you.";
+  else if (d.date < today()) e.date = "Pick today or a later day.";
+  if (!d.window) e.window = "Pick a time window.";
   if (d.requirement.trim().length < 5) e.requirement = "Tell us a little about what you need.";
   return e;
 }
@@ -74,7 +99,16 @@ export default function ConsultationModal() {
     const form = event.currentTarget;
     const fd = new FormData(form);
     const get = (k: string) => String(fd.get(k) ?? "");
-    const fields = { name: get("name"), email: get("email"), phone: get("phone"), requirement: get("requirement") };
+    const fields: Record<Field, string> = {
+      consultation_type: get("consultation_type"),
+      name: get("name"),
+      email: get("email"),
+      phone: get("phone"),
+      country: get("country"),
+      date: get("date"),
+      window: get("window"),
+      requirement: get("requirement"),
+    };
 
     const found = validate(fields);
     setErrors(found);
@@ -90,7 +124,21 @@ export default function ConsultationModal() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          ...fields,
+          consultation_type: fields.consultation_type,
+          name: fields.name,
+          email: fields.email,
+          phone: fields.phone,
+          country: fields.country,
+          // One readable line for the admin panel: the day, the window and the
+          // zone those times are in, e.g. "Tue, Oct 14 · Evening (5–8 PM) · America/Chicago".
+          available_time: [
+            new Intl.DateTimeFormat("en-US", { weekday: "short", month: "short", day: "numeric" }).format(
+              new Date(`${fields.date}T12:00:00`),
+            ),
+            fields.window,
+            Intl.DateTimeFormat().resolvedOptions().timeZone,
+          ].join(" · "),
+          requirement: fields.requirement,
           source_page: window.location.pathname + window.location.search,
           company_website: get("company_website"),
         }),
@@ -126,7 +174,7 @@ export default function ConsultationModal() {
   return (
     <div className={popup.overlay}>
       <div className={popup.backdrop} onClick={() => setOpen(false)} aria-hidden="true" />
-      <div role="dialog" aria-modal="true" aria-labelledby={id("title")} className={popup.card} data-lenis-prevent>
+      <div role="dialog" aria-modal="true" aria-labelledby={id("title")} className={`${popup.card} ${popup.cardWide}`} data-lenis-prevent>
         <button className={popup.close} onClick={() => setOpen(false)} aria-label="Close">
           <Close size={18} />
         </button>
@@ -149,39 +197,96 @@ export default function ConsultationModal() {
             </button>
           </div>
         ) : (
-          <form onSubmit={onSubmit} noValidate style={{ display: "flex", flexDirection: "column", gap: 16, padding: "16px 20px 24px" }}>
-            <div className={styles.field}>
-              <label className={styles.label} htmlFor={id("name")}>
-                Full name
-              </label>
-              <input ref={firstRef} className={styles.control} id={id("name")} name="name" autoComplete="name" {...aria("name")} />
-              {err("name")}
+          <form onSubmit={onSubmit} noValidate className={styles.modalForm}>
+            <fieldset className={styles.fieldset} {...aria("consultation_type")}>
+              <legend className={styles.label}>What would you like to discuss?</legend>
+              <div className={styles.choices}>
+                {TYPES.map((t, i) => (
+                  <label key={t.value} className={styles.choice}>
+                    <input ref={i === 0 ? firstRef : undefined} type="radio" name="consultation_type" value={t.value} />
+                    <span>{t.label}</span>
+                  </label>
+                ))}
+              </div>
+              {err("consultation_type")}
+            </fieldset>
+
+            <div className={`${styles.row} ${styles["row--2"]}`}>
+              <div className={styles.field}>
+                <label className={styles.label} htmlFor={id("name")}>
+                  Full name
+                </label>
+                <input className={styles.control} id={id("name")} name="name" autoComplete="name" {...aria("name")} />
+                {err("name")}
+              </div>
+
+              <div className={styles.field}>
+                <label className={styles.label} htmlFor={id("email")}>
+                  Email address
+                </label>
+                <input className={styles.control} id={id("email")} name="email" type="email" autoComplete="email" {...aria("email")} />
+                {err("email")}
+              </div>
             </div>
 
-            <div className={styles.field}>
-              <label className={styles.label} htmlFor={id("email")}>
-                Email address
-              </label>
-              <input className={styles.control} id={id("email")} name="email" type="email" autoComplete="email" {...aria("email")} />
-              {err("email")}
+            <div className={`${styles.row} ${styles["row--2"]}`}>
+              <div className={styles.field}>
+                <label className={styles.label} htmlFor={id("phone")}>
+                  Phone number
+                </label>
+                <input
+                  className={styles.control}
+                  id={id("phone")}
+                  name="phone"
+                  type="tel"
+                  inputMode="tel"
+                  autoComplete="tel"
+                  placeholder="(555) 000-0000"
+                  {...aria("phone")}
+                />
+                {err("phone")}
+              </div>
+
+              <div className={styles.field}>
+                <label className={styles.label} htmlFor={id("country")}>
+                  Country
+                </label>
+                <select className={styles.control} id={id("country")} name="country" defaultValue="United States" autoComplete="country-name" {...aria("country")}>
+                  {COUNTRIES.map((c) => (
+                    <option key={c}>{c}</option>
+                  ))}
+                </select>
+                {err("country")}
+              </div>
             </div>
 
-            <div className={styles.field}>
-              <label className={styles.label} htmlFor={id("phone")}>
-                Phone number
-              </label>
-              <input
-                className={styles.control}
-                id={id("phone")}
-                name="phone"
-                type="tel"
-                inputMode="tel"
-                autoComplete="tel"
-                placeholder="(555) 000-0000"
-                {...aria("phone")}
-              />
-              {err("phone")}
+            <div className={`${styles.row} ${styles["row--2"]}`}>
+              <div className={styles.field}>
+                <label className={styles.label} htmlFor={id("date")}>
+                  Preferred day
+                </label>
+                <input className={styles.control} id={id("date")} name="date" type="date" min={today()} {...aria("date")} />
+                {err("date")}
+              </div>
+
+              <div className={styles.field}>
+                <label className={styles.label} htmlFor={id("window")}>
+                  Available time
+                </label>
+                <select className={styles.control} id={id("window")} name="window" defaultValue="" {...aria("window")}>
+                  <option value="" disabled>
+                    Choose a time window
+                  </option>
+                  {WINDOWS.map((w) => (
+                    <option key={w}>{w}</option>
+                  ))}
+                </select>
+                {err("window")}
+              </div>
             </div>
+            <p className={styles.hint} style={{ marginTop: -8 }}>
+              Times are in your own time zone.
+            </p>
 
             <div className={styles.field}>
               <label className={styles.label} htmlFor={id("requirement")}>

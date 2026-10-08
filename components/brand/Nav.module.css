@@ -80,7 +80,10 @@
 .panelLink:hover { background: var(--ink-850); color: var(--gold); }
 
 .actions { display: none; align-items: center; gap: 14px; margin-left: auto; }
-.phone { font-size: 0.8125rem; color: var(--fg-faint); }
+.phone { font-size: 0.8125rem; color: var(--fg-faint); white-space: nowrap; }
+/* Between tablet and wide desktop the links, phone and button do not all fit;
+   the phone is the one to drop (it is in the footer and on /contact). */
+@media (max-width: 1179px) { .phone { display: none; } }
 .phone:hover { color: var(--gold); }
 
 .toggle {

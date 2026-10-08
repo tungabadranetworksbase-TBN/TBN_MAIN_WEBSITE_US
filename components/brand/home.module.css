@@ -2,14 +2,18 @@
    sections on the page share one, per the section-repetition rule. */
 
 /* --- 1. figures: a hairline row, not cards ------------------------------- */
+/* Wrapping flex rather than a grid: five figures never fill 2, 3 or 6
+   columns evenly, and a grid left the spare cell showing the rule colour as
+   an empty grey box. Here the last row stretches to fill instead. */
 .figures {
-  display: grid;
+  display: flex;
+  flex-wrap: wrap;
   gap: 1px;
   background: var(--line);
   border-block: 1px solid var(--line);
-  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 .figure {
+  flex: 1 1 40%;
   display: flex;
   /* dt must precede dd in the DOM; reverse puts the figure above its label */
   flex-direction: column-reverse;
@@ -185,11 +189,11 @@
 .ctaActions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
 
 @media (min-width: 640px) {
-  .figures { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .figure { flex-basis: 30%; }
   .courseGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (min-width: 1024px) {
-  .figures { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .figure { flex-basis: 15%; }
   .offer { grid-template-columns: repeat(6, minmax(0, 1fr)); }
   /* 4 items, 4 cells, deliberately uneven: lead is wider than the rest. */
   .offerCell--lead { grid-column: span 3; }

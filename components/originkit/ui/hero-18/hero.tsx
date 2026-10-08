@@ -292,14 +292,14 @@ export default function Hero() {
 
       {/* Hero content — mobile/tablet */}
       <div className="relative z-10 flex flex-col items-center gap-[40px] px-6 pb-[20px] pt-[16px] text-center md:gap-[56px] md:px-10 md:pb-[24px] md:pt-[24px] lg:hidden">
-        <div className="flex flex-col items-center gap-[20px] md:gap-[24px]">
-          <div className="relative flex items-center gap-[10px] rounded-[12px] bg-[rgba(255,255,255,0.02)] px-[12px] py-[8px]">
+        <div className="flex w-full flex-col items-center gap-[20px] md:gap-[24px]">
+          <div className="relative flex max-w-full items-center gap-[10px] rounded-[12px] bg-[rgba(255,255,255,0.02)] px-[12px] py-[8px]">
             <div className="bg-[#fcc000] content-stretch flex items-center p-[6.4px] relative rounded-[80px] shrink-0">
               <div className="relative shrink-0 size-[19.2px]">
                 <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBoldAstronomyPlanet} />
               </div>
             </div>
-            <p className={`${lato} text-[15px] text-white tracking-[-0.3px] whitespace-nowrap md:text-[17px]`}>
+            <p className={`${lato} text-left text-[13px] leading-snug text-white tracking-[-0.3px] sm:text-[15px] md:whitespace-nowrap md:text-[17px]`}>
               Networking, cloud, automation and AI infrastructure
             </p>
             <BorderOrbit />

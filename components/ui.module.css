@@ -191,12 +191,25 @@
   display: flex;
   gap: 10px;
   padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
-  background: rgba(233, 236, 234, 0.92);
+  background: rgba(11, 11, 13, 0.92);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-top: 1px solid var(--line);
 }
-.stickyCta > * { flex: 1; }
+/* Equal halves that may shrink below their label, so the pair always fits a
+   320px screen; a long label wraps inside its button instead. */
+.stickyCta > * {
+  flex: 1 1 0;
+  min-width: 0;
+  padding-inline: 12px;
+  white-space: normal;
+  text-align: center;
+  line-height: 1.2;
+}
+/* Lift the chat bubble above the bar it would otherwise sit on. */
+@media (max-width: 767px) {
+  :global(body:has([data-sticky-cta]) .woot-widget-bubble) { bottom: 84px !important; }
+}
 
 @media (min-width: 768px) {
   .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }

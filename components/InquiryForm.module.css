@@ -84,3 +84,35 @@ textarea.control { min-height: 132px; resize: vertical; line-height: 1.55; }
 @media (min-width: 640px) {
   .row--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
+
+/* --- consultation modal ------------------------------------------------ */
+.modalForm { display: flex; flex-direction: column; gap: 16px; padding: 16px 20px 24px; }
+.fieldset { border: 0; padding: 0; margin: 0; min-width: 0; display: flex; flex-direction: column; gap: 7px; }
+
+/* Radio choices drawn as pills. The input stays in the accessibility tree
+   and keyboard order; only its box is hidden. */
+.choices { display: flex; flex-wrap: wrap; gap: 8px; }
+.choice { position: relative; flex: 1 1 auto; }
+.choice input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
+.choice span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-pill);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--fg-muted);
+  white-space: nowrap;
+  transition: border-color 0.2s var(--ease), color 0.2s var(--ease), background-color 0.2s var(--ease);
+}
+.choice:hover span { border-color: var(--ink-4); color: var(--fg); }
+.choice input:checked + span { border-color: var(--gold); background: var(--gold-dim); color: var(--gold); }
+.choice input:focus-visible + span { outline: 2px solid var(--gold); outline-offset: 2px; }
+.fieldset[aria-invalid="true"] .choice span { border-color: #b3261e; }
+
+/* The native date picker icon is drawn dark; flip it for the dark field. */
+.control::-webkit-calendar-picker-indicator { filter: invert(0.85); cursor: pointer; }
+.fieldset > legend { padding: 0; }

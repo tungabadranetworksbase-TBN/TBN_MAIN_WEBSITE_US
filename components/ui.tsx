@@ -294,7 +294,7 @@ export function StickyCta({
   secondary: { label: string; href: string };
 }) {
   return (
-    <div className={styles.stickyCta}>
+    <div className={styles.stickyCta} data-sticky-cta>
       <Link href={primary.href} {...extProps(primary.href)} className="btn btn--primary btn--sm">
         {primary.label}
       </Link>

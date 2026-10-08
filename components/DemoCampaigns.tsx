@@ -67,7 +67,8 @@ function Row({ c, now, full }: { c: Campaign; now: number; full?: boolean }) {
 
       <div className={`flex min-w-0 flex-1 items-center gap-3 ${full ? "py-3 pl-3 pr-3" : "py-2.5 pl-2.5 pr-2.5"}`}>
         <span
-          className={`${mono} hidden shrink-0 rounded-[8px] px-2 py-0.5 font-semibold uppercase tracking-[0.06em] text-white sm:inline ${full ? "text-[11px]" : "text-[10px]"}`}
+          className={`${mono} hidden max-w-[35%] shrink-0 truncate rounded-[8px] px-2 py-0.5 font-semibold uppercase tracking-[0.06em] text-white sm:inline-block ${full ? "text-[11px]" : "text-[10px]"}`}
+          title={c.course_name}
           style={{ background: color, color: color === "#fcc000" ? "#08080a" : "#fff" }}
         >
           {c.course_name}
@@ -139,7 +140,7 @@ export function HeroDemoSlot() {
   if (campaigns.length === 0) return null;
   return (
     <div className="flex w-full max-w-[540px] flex-col gap-2 text-left">
-      <p className="flex items-center gap-2 text-[11px]">
+      <p className="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[11px]">
         <span className={`${mono} uppercase tracking-[0.08em] text-[#fcc000]`}>Free demo classes</span>
         <span className="text-[rgba(255,255,255,0.5)]">No cost · times in your time zone</span>
       </p>

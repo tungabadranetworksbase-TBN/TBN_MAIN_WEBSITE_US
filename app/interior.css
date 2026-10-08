@@ -70,6 +70,9 @@
 }
 
 .grid { display: grid; gap: clamp(14px, 1.8vw, 20px); }
+/* Grid items default to min-width: auto, so one wide child (a form, a long
+   word) would stretch the column past a phone's width. */
+.grid > * { min-width: 0; }
 /* auto-fit alone lets a "--3" grid render four columns on a wide viewport, so
    each modifier is capped at the column count its name promises. */
 .grid--2 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); }
@@ -130,7 +133,9 @@
   border: 1px solid var(--line);
   background: var(--ink-850);
   color: var(--fg-muted);
-  white-space: nowrap;
+  /* Some tags are whole phrases ("Comfortable working methodically through
+     hardware ..."); on a phone they wrap rather than push the page sideways. */
+  max-width: 100%;
 }
 .tag--accent { border-color: var(--gold-line); background: var(--gold-dim); color: var(--gold); }
 

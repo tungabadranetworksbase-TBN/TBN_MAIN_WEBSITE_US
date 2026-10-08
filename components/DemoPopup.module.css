@@ -119,6 +119,9 @@
   border-radius: var(--r-chip);
   background: var(--gold);
   color: var(--ink-1000);
+  /* Course names from the admin can be a whole sentence. */
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 .open {
   font-size: 0.6875rem;
@@ -193,3 +196,10 @@
   cursor: pointer;
 }
 .later:hover { color: var(--fg); }
+
+/* The consultation form pairs its fields, so it needs more room than the list. */
+.cardWide { max-width: 560px; }
+
+/* While any modal dialog is open, the chat bubble would sit on top of its
+   last field and submit button on a phone. */
+:global(body:has([role="dialog"][aria-modal="true"]) .woot-widget-bubble) { display: none !important; }
