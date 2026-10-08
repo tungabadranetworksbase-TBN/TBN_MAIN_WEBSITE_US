@@ -6,6 +6,7 @@ import Footer from "@/components/brand/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
 import CalEmbed from "@/components/CalEmbed";
 import Chatwoot from "@/components/Chatwoot";
+import DemoPopup from "@/components/DemoPopup";
 import { site } from "@/lib/site";
 import { graph, organizationSchema, websiteSchema } from "@/lib/schema";
 import "./originkit.css";
@@ -82,6 +83,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <JsonLd data={graph(organizationSchema(), websiteSchema())} />
         <CalEmbed />
         <Chatwoot />
+        <DemoPopup />
       </body>
     </html>
   );
