@@ -35,6 +35,7 @@
 
 /* Shown when the form cannot be embedded: one clear way on. */
 .handoff {
+  margin-bottom: 16px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;

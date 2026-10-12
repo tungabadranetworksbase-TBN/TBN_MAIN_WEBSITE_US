@@ -34,8 +34,12 @@ const isStripeCheckout = (raw: string) => {
   }
 };
 
-/** How long a loaded frame has to announce its embed mode before we stop framing it. */
-const HANDSHAKE_MS = 5000;
+/**
+ * How long a loaded frame has to announce its embed mode before we offer the
+ * direct link. Generous: the LMS sends its first message only once it has
+ * fetched the form, which has been measured at up to ~5s on a cold load.
+ */
+const HANDSHAKE_MS = 15000;
 
 export default function EnrollFrame({ src }: { src: string }) {
   const frameRef = useRef<HTMLIFrameElement>(null);
@@ -50,9 +54,9 @@ export default function EnrollFrame({ src }: { src: string }) {
 
   /**
    * The first height message is the LMS saying it is in embed mode. A frame
-   * that loads but never says so is a version of the form whose Pay step would
-   * try to open Stripe inside the frame, which Stripe refuses. Rather than
-   * leave a visitor to find that out at payment, hand them the form directly.
+   * that loads but never says so may be a version of the form whose Pay step
+   * would try to open Stripe inside the frame, which Stripe refuses, so offer
+   * the direct form. The frame stays: a slow form is still a working one.
    */
   const [unembeddable, setUnembeddable] = useState(false);
   useEffect(() => {
@@ -93,22 +97,19 @@ export default function EnrollFrame({ src }: { src: string }) {
     return () => window.removeEventListener("message", onMessage);
   }, []);
 
-  if (unembeddable) {
-    return (
-      <div className={styles.handoff}>
-        <p className={styles.handoffTitle}>Continue to the registration form</p>
-        <p className={styles.handoffText}>
-          The form opens on our enrollment portal. You can register and pay there; it takes a few minutes.
-        </p>
-        <a className="btn btn--gold" href={direct}>
-          Continue to registration
-        </a>
-      </div>
-    );
-  }
-
   return (
     <div className={styles.wrap}>
+      {unembeddable && (
+        <div className={styles.handoff} role="status">
+          <p className={styles.handoffTitle}>Form taking a while?</p>
+          <p className={styles.handoffText}>
+            You can open the same registration form directly on our enrollment portal and register and pay there.
+          </p>
+          <a className="btn btn--gold btn--sm" href={direct}>
+            Open the form directly
+          </a>
+        </div>
+      )}
       {!loaded && (
         <div className={styles.loading} aria-hidden="true">
           <span className={styles.bar} />
