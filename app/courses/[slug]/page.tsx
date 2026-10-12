@@ -7,7 +7,7 @@ import { AnswerBox, CtaBand, FaqList, Hero, StickyCta, stickyPadClass } from "@/
 import { ArrowRight, Certificate, ChevronDown } from "@/components/Icons";
 import { extProps } from "@/components/ui";
 import { buildMetadata } from "@/lib/seo";
-import { site } from "@/lib/site";
+import { enrollHref, site } from "@/lib/site";
 import { breadcrumbSchema, courseSchema, faqSchema, graph, webPageSchema } from "@/lib/schema";
 import { courses, getCourse, getRelatedCourses } from "@/lib/courses";
 import { coursePrice, formatUsd } from "@/lib/pricing";
@@ -70,7 +70,7 @@ export default async function CoursePage({ params }: Params) {
         align="left"
         image="/images/section-bg-dark.png"
         actions={[
-          { label: "Enroll Now", href: site.contact.enroll },
+          { label: "Enroll Now", href: enrollHref(course) },
           { label: "See curriculum", href: "#curriculum", variant: "ghost-dark" },
         ]}
       />
@@ -328,8 +328,8 @@ export default async function CoursePage({ params }: Params) {
 
               <div className={styles.asideActions}>
                 <Link
-                  href={site.contact.enroll}
-                  {...extProps(site.contact.enroll)}
+                  href={enrollHref(course)}
+                  {...extProps(enrollHref(course))}
                   className="btn btn--primary btn--block"
                 >
                   Enroll Now
@@ -367,7 +367,7 @@ export default async function CoursePage({ params }: Params) {
       />
 
       <StickyCta
-        primary={{ label: "Enroll Now", href: site.contact.enroll }}
+        primary={{ label: "Enroll Now", href: enrollHref(course) }}
         secondary={{ label: "Curriculum", href: "#curriculum" }}
       />
     </div>

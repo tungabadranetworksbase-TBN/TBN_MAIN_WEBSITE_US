@@ -24,6 +24,8 @@ export type Faq = { question: string; answer: string };
 
 export type Course = {
   slug: string;
+  /** The LMS slug, only where it differs from `slug`; see enrollHref in lib/site. */
+  lmsSlug?: string;
   title: string;
   category: CourseCategory;
   shortDescription: string;

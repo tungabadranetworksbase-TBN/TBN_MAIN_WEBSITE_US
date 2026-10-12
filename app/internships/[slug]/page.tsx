@@ -8,7 +8,7 @@ import InquiryForm from "@/components/InquiryForm";
 import { ArrowRight, Certificate, Users } from "@/components/Icons";
 import { extProps } from "@/components/ui";
 import { buildMetadata } from "@/lib/seo";
-import { site } from "@/lib/site";
+import { enrollHref, site } from "@/lib/site";
 import { breadcrumbSchema, faqSchema, graph, webPageSchema } from "@/lib/schema";
 import { getInternship, getRelatedInternships, internships } from "@/lib/internships";
 import { formatUsd, internshipPrice } from "@/lib/pricing";
@@ -75,7 +75,7 @@ export default async function InternshipPage({ params }: Params) {
         align="left"
         image="/images/texture-wide-1.png"
         actions={[
-          { label: "Enroll Now", href: site.contact.enroll },
+          { label: "Enroll Now", href: enrollHref(internship) },
           { label: "Check eligibility", href: "#eligibility", variant: "ghost-dark" },
         ]}
       />
@@ -304,8 +304,8 @@ export default async function InternshipPage({ params }: Params) {
 
               <div className={styles.asideActions}>
                 <Link
-                  href={site.contact.enroll}
-                  {...extProps(site.contact.enroll)}
+                  href={enrollHref(internship)}
+                  {...extProps(enrollHref(internship))}
                   className="btn btn--primary btn--block"
                 >
                   Enroll Now
@@ -344,7 +344,7 @@ export default async function InternshipPage({ params }: Params) {
       />
 
       <StickyCta
-        primary={{ label: "Enroll Now", href: site.contact.enroll }}
+        primary={{ label: "Enroll Now", href: enrollHref(internship) }}
         secondary={{ label: "Eligibility", href: "#eligibility" }}
       />
     </div>

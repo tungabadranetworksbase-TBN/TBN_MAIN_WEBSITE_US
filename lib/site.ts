@@ -62,11 +62,11 @@ export const site = {
       "https://chat.whatsapp.com/CYrZanCp3jj1xV1W2UMYCz?s=sh&p=i&mlu=4&ilr=4",
     portal: "https://sms.tungabadranetworks.in/student/login",
     /**
-     * Where enrollment and payment happen. The site itself takes no payment -
-     * every Enroll button hands off here, and the portal is the system of
-     * record for what a student has bought.
+     * Where every Enroll button goes. app/enroll embeds the LMS registration
+     * form, which takes the payment through Stripe; this site takes none
+     * itself. Use enrollHref() to preselect a course.
      */
-    enroll: "https://sms.tungabadranetworks.in/#courses",
+    enroll: "/enroll",
     address: {
       // EDIT ME: US office address.
       street: "",
@@ -120,6 +120,25 @@ export const site = {
     { label: "Audience", value: "Graduates, career changers and working IT professionals" },
   ],
 } as const;
+
+/**
+ * The LMS that owns registration and payment, and the form /enroll embeds.
+ * The LMS only lets this site frame /f/, /verify and /course-list, and only
+ * talks to it by postMessage from this exact origin.
+ */
+export const lms = {
+  origin: "https://lms.tungabadranetworks.in",
+  form: "us-registration",
+} as const;
+
+/**
+ * The Enroll link for a course or internship, preselecting it on the form.
+ * `lmsSlug` covers an item whose LMS slug differs from ours; the LMS ignores
+ * a slug that is not one of the form's offerings, so a miss just shows the
+ * full list.
+ */
+export const enrollHref = (item?: { slug: string; lmsSlug?: string }) =>
+  item ? `/enroll?course=${encodeURIComponent(item.lmsSlug ?? item.slug)}` : site.contact.enroll;
 
 export type NavItem = {
   label: string;

@@ -26,6 +26,8 @@ export type InternshipCategory =
 
 export type Internship = {
   slug: string;
+  /** The LMS slug, only where it differs from `slug`; see enrollHref in lib/site. */
+  lmsSlug?: string;
   title: string;
   /** The positioning line shown under the title. */
   track: string;

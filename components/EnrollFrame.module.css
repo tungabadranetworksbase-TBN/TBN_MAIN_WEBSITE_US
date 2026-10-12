@@ -1,0 +1,34 @@
+.wrap { position: relative; }
+
+.frame {
+  display: block;
+  width: 100%;
+  border: 0;
+  border-radius: var(--r-card);
+  background: transparent;
+  color-scheme: normal;
+  transition: opacity 0.3s var(--ease);
+}
+
+/* Shown until the frame has loaded, in the space the form will take. */
+.loading {
+  position: absolute;
+  inset: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 8px 0;
+}
+.bar {
+  height: 52px;
+  border-radius: var(--r-input);
+  background: linear-gradient(90deg, var(--ink-850), var(--ink-800), var(--ink-850));
+  background-size: 200% 100%;
+  animation: shimmer 1.4s linear infinite;
+}
+.bar:first-child { height: 28px; width: 40%; }
+@keyframes shimmer { to { background-position: -200% 0; } }
+@media (prefers-reduced-motion: reduce) { .bar { animation: none; } }
+
+.fallback { margin-top: 16px; font-size: 0.875rem; color: var(--fg-faint); }
+.fallback a { color: var(--gold); text-decoration: underline; text-underline-offset: 3px; }
