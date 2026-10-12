@@ -455,6 +455,7 @@ export const internships: Internship[] = [
 
   {
     slug: "data-center-automation-internship",
+    lmsSlug: "data-center-and-automation-internship",
     title: "Data Center and Automation Internship",
     track: "Advanced track: cloud, DevOps, network automation and AI-ready infrastructure",
     category: "Automation",

@@ -78,6 +78,7 @@ const VENDOR_NOTE =
 export const courses: Course[] = [
   {
     slug: "ccna-advanced-training",
+    lmsSlug: "ccna-advance-training",
     title: "CCNA Advanced Training",
     category: "Routing & Switching",
     featured: true,
@@ -161,6 +162,7 @@ export const courses: Course[] = [
 
   {
     slug: "ccnp-enterprise-service-provider",
+    lmsSlug: "ccnp",
     title: "CCNP Enterprise & Service Provider",
     category: "Routing & Switching",
     featured: true,
@@ -226,6 +228,7 @@ export const courses: Course[] = [
 
   {
     slug: "palo-alto-ngfw",
+    lmsSlug: "pcnse-palo-alto",
     title: "Palo Alto NGFW",
     category: "Network Security",
     featured: true,
@@ -290,6 +293,7 @@ export const courses: Course[] = [
 
   {
     slug: "aruba-certified-associate",
+    lmsSlug: "aruba-certified-associate-aca",
     title: "HPE Aruba Networking Certified Associate (ACA)",
     category: "Wireless & Campus",
     shortDescription:
@@ -351,6 +355,7 @@ export const courses: Course[] = [
 
   {
     slug: "juniper-jncia",
+    lmsSlug: "jncia",
     title: "Juniper JNCIA",
     category: "Routing & Switching",
     shortDescription:
@@ -526,6 +531,7 @@ export const courses: Course[] = [
 
   {
     slug: "linux-for-network-engineers",
+    lmsSlug: "linux-for-networking",
     title: "Linux for Network Engineers",
     category: "Systems",
     shortDescription:
@@ -581,6 +587,7 @@ export const courses: Course[] = [
 
   {
     slug: "aws-cloud-practitioner",
+    lmsSlug: "aws",
     title: "AWS Certified Cloud Practitioner",
     category: "Cloud",
     shortDescription:
@@ -709,6 +716,7 @@ export const courses: Course[] = [
 
   {
     slug: "real-time-automation-projects",
+    lmsSlug: "real-time-network-automation-projects",
     title: "Real-Time Network Automation Projects",
     category: "Projects",
     shortDescription:
