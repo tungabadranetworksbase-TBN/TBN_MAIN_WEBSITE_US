@@ -34,16 +34,32 @@ const isStripeCheckout = (raw: string) => {
   }
 };
 
-export default function EnrollFrame({
-  src,
-  fallback,
-}: {
-  src: string;
-  fallback: string;
-}) {
+/** How long a loaded frame has to announce its embed mode before we stop framing it. */
+const HANDSHAKE_MS = 5000;
+
+export default function EnrollFrame({ src }: { src: string }) {
   const frameRef = useRef<HTMLIFrameElement>(null);
   const [height, setHeight] = useState<number | null>(null);
   const [loaded, setLoaded] = useState(false);
+  // The same form, opened directly rather than framed.
+  const direct = (() => {
+    const u = new URL(src);
+    u.searchParams.delete("embed");
+    return u.toString();
+  })();
+
+  /**
+   * The first height message is the LMS saying it is in embed mode. A frame
+   * that loads but never says so is a version of the form whose Pay step would
+   * try to open Stripe inside the frame, which Stripe refuses. Rather than
+   * leave a visitor to find that out at payment, hand them the form directly.
+   */
+  const [unembeddable, setUnembeddable] = useState(false);
+  useEffect(() => {
+    if (!loaded || height !== null) return;
+    const t = setTimeout(() => setUnembeddable(true), HANDSHAKE_MS);
+    return () => clearTimeout(t);
+  }, [loaded, height]);
   // The frame is created only after hydration, so onLoad is always attached
   // before it can fire; a server-rendered frame could finish first and stay hidden.
   const [mounted, setMounted] = useState(false);
@@ -77,6 +93,20 @@ export default function EnrollFrame({
     return () => window.removeEventListener("message", onMessage);
   }, []);
 
+  if (unembeddable) {
+    return (
+      <div className={styles.handoff}>
+        <p className={styles.handoffTitle}>Continue to the registration form</p>
+        <p className={styles.handoffText}>
+          The form opens on our enrollment portal. You can register and pay there; it takes a few minutes.
+        </p>
+        <a className="btn btn--gold" href={direct}>
+          Continue to registration
+        </a>
+      </div>
+    );
+  }
+
   return (
     <div className={styles.wrap}>
       {!loaded && (
@@ -101,7 +131,7 @@ export default function EnrollFrame({
       )}
       <p className={styles.fallback}>
         Trouble loading the form?{" "}
-        <a href={fallback} target="_blank" rel="noopener noreferrer">
+        <a href={direct} target="_blank" rel="noopener noreferrer">
           Open it in a new tab
         </a>
         .

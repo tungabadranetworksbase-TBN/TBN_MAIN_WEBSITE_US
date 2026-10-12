@@ -32,7 +32,6 @@ export default async function EnrollPage({ searchParams }: Props) {
     if (v) query.set(k, v);
   }
   const src = `${lms.origin}${path}?${query}`;
-  const fallback = `${lms.origin}/f/${lms.form}${one("course") ? `?course=${encodeURIComponent(one("course")!)}` : ""}`;
 
   return (
     <div className="container" style={{ paddingBlock: "clamp(32px, 5vw, 64px) clamp(48px, 6vw, 88px)" }}>
@@ -44,7 +43,7 @@ export default async function EnrollPage({ searchParams }: Props) {
         <p className="lede" style={{ marginTop: 12, marginBottom: "clamp(24px, 4vw, 40px)" }}>
           Complete your registration below. Payment is handled securely by Stripe; you return here once it is done.
         </p>
-        <EnrollFrame src={src} fallback={fallback} />
+        <EnrollFrame src={src} />
       </div>
     </div>
   );
