@@ -38,7 +38,8 @@ export default function DemoPopup() {
   const closeRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    if (!pathname || pathname.startsWith("/demo")) return;
+    // Never over a form the visitor came to fill in.
+    if (!pathname || pathname.startsWith("/demo") || pathname.startsWith("/enroll")) return;
     try {
       if (localStorage.getItem(SEEN_KEY) || localStorage.getItem(REGISTERED_KEY)) return;
     } catch {
@@ -48,7 +49,10 @@ export default function DemoPopup() {
     let cancelled = false;
     let timer: ReturnType<typeof setTimeout> | undefined;
     loadCampaigns()
-      .then((camps) => {
+      .then((all) => {
+        // Interrupting someone is only worth it for a session they can still
+        // join. Closed demos stay in the hero and homepage rows with Enroll.
+        const camps = all.filter((c) => !isRegistrationClosed(c));
         if (cancelled || camps.length === 0) return;
         setCampaigns(camps);
         timer = setTimeout(() => {
