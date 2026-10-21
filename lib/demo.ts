@@ -35,20 +35,34 @@ export type Campaign = {
 
 export const isForUs = (c: Campaign) => c.audience === "us" || c.audience === "both";
 
+/**
+ * A demo's start as an instant. The .in API stores UTC and normally sends an
+ * offset ("...+00:00" or "...Z"); a value without one is read as UTC too,
+ * because `new Date()` would otherwise take it as the viewer's local time and
+ * move the session by their whole UTC offset.
+ */
+export const demoTime = (dt: string) =>
+  new Date(/(?:[zZ]|[+-]\d{2}:?\d{2})$/.test(dt.trim()) ? dt : `${dt.trim().replace(" ", "T")}Z`);
+
 /** Same rule as the .in site: closed once the demo time has passed or it is no longer active. */
 export function isRegistrationClosed(c: Campaign) {
   if (c.status && c.status !== "active") return true;
-  const t = new Date(c.demo_datetime).getTime();
+  const t = demoTime(c.demo_datetime).getTime();
   return Number.isFinite(t) && t < Date.now();
 }
 
-/** Formats in the viewer's own time zone. Call from the browser, not on the server. */
+/**
+ * In the viewer's own time zone (the browser's), always in US English so a
+ * visitor gets "Thu, Oct 30" and "6:00 AM PDT" whatever language their browser
+ * is set to; other locales print "18:00" and "GMT-7". Call from the browser,
+ * not on the server, whose zone is UTC.
+ */
 export const fmtDate = (dt: string) =>
-  new Intl.DateTimeFormat(undefined, { weekday: "short", month: "short", day: "numeric" }).format(new Date(dt));
+  new Intl.DateTimeFormat("en-US", { weekday: "short", month: "short", day: "numeric" }).format(demoTime(dt));
 
 export const fmtTime = (dt: string) =>
-  new Intl.DateTimeFormat(undefined, { hour: "numeric", minute: "2-digit", timeZoneName: "short" }).format(
-    new Date(dt),
+  new Intl.DateTimeFormat("en-US", { hour: "numeric", minute: "2-digit", hour12: true, timeZoneName: "short" }).format(
+    demoTime(dt),
   );
 
 /** A date-only "YYYY-MM-DD" is read as local midnight so the day does not shift. */

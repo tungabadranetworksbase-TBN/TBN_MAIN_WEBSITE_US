@@ -5,6 +5,7 @@ import Link from "next/link";
 import {
   type Campaign,
   courseColor,
+  demoTime,
   fmtClassesStart,
   fmtDate,
   fmtTime,
@@ -49,7 +50,7 @@ const mono = "font-[family-name:var(--font-geist-mono)]";
 
 function Row({ c, now, full }: { c: Campaign; now: number; full?: boolean }) {
   const closed = isRegistrationClosed(c);
-  const left = new Date(c.demo_datetime).getTime() - now;
+  const left = demoTime(c.demo_datetime).getTime() - now;
   const urgent = !closed && left > 0 && left < 86_400_000;
   const starts = fmtClassesStart(c.classes_start_date);
   const color = courseColor(c.course_name);
