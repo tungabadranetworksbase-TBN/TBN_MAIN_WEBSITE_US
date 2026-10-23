@@ -10,7 +10,7 @@
  * The India pages quote a base fee plus a statutory tax component, and print
  * the combined total. `TAX_MULTIPLIER` reproduces that total exactly - checked
  * against the totals those pages publish, e.g. 18,000 -> 21,240 for CCNP and
- * 49,000 -> 57,820 for DevNet. The USD price is that final total converted, so
+ * 49,000 -> 57,820 for CCNA Automation. The USD price is that final total converted, so
  * what a buyer sees here is the all-in figure with nothing added at checkout.
  *
  * Where the India page shows a struck-through "was" price, `wasInr` carries it
