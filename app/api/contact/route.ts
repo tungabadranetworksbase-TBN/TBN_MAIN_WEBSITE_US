@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { esc, notifySlack } from "@/lib/slack";
+import { CONSENT_TEXT, SMS_PHONE, idempotencyKey, smsCall, usingSms } from "@/lib/crm";
 
 /**
  * Inquiry endpoint.
@@ -7,8 +8,15 @@ import { esc, notifySlack } from "@/lib/slack";
  * Validation runs here as well as in the browser, because the client check is a
  * convenience and this is the trust boundary.
  *
- * Submissions are delivered into Chatwoot as a real conversation, so they land
- * in the same inbox as the live chat rather than in a separate mailbox.
+ * Where a submission goes depends on CRM_BACKEND.
+ *
+ *   sms  SMS 2.0 is the record. Chatwoot is attempted afterwards as a
+ *        best-effort copy and can never fail the request - once SMS 2.0 is
+ *        the single CRM, a Chatwoot outage must not turn a captured lead into
+ *        an error for the person who filled the form in.
+ *   in   (default) Chatwoot is the record, exactly as before.
+ *
+ * Chatwoot can be dropped entirely after go-live by removing its block below.
  *
  * Configure these in .env.local (never commit them - the API token is an agent
  * credential with full access to the account):
@@ -69,10 +77,41 @@ export async function POST(request: Request) {
   if (data.name.length < 2) errors.name = "Enter your full name.";
   if (!EMAIL.test(data.email)) errors.email = "Enter a valid email address.";
   if (data.message.length < 10) errors.message = "Message is too short.";
+  // Optional here, unlike the other forms, so only checked when given.
+  if (data.phone && !SMS_PHONE.test(data.phone)) errors.phone = "Enter a valid phone number.";
   if (!data.consent) errors.consent = "Consent is required.";
 
   if (Object.keys(errors).length > 0) {
     return NextResponse.json({ errors }, { status: 422 });
+  }
+
+  // SMS 2.0 first when it is the record, so a Chatwoot failure afterwards
+  // cannot cost us the lead.
+  let smsStored: boolean | null = null;
+  if (usingSms()) {
+    const res = await smsCall<{ id?: string }>("/contact", {
+      method: "POST",
+      body: JSON.stringify({
+        name: data.name,
+        email: data.email,
+        phone: data.phone || undefined,
+        message: data.message,
+        pageUrl: data.source || undefined,
+        // The form's "Program or topic" field. SMS 2.0 has no subject, and
+        // courseInterest is the nearest thing it does have.
+        courseInterest: data.subject || undefined,
+        metadata: {
+          form: data.interest,
+          // SMS 2.0 has no consent column, so the flag and the exact wording
+          // shown travel as form answers. Consent only means something
+          // alongside what the person was actually asked.
+          consent: data.consent,
+          consent_text: CONSENT_TEXT,
+        },
+      }),
+      idempotencyKey: await idempotencyKey("contact", [data.email, data.subject, data.source]),
+    });
+    smsStored = res.ok;
   }
 
   const outcome = await deliverToChatwoot(data);
@@ -86,10 +125,37 @@ export async function POST(request: Request) {
     `*${esc(data.name)}* · ${esc(data.email)}${data.phone ? ` · ${esc(data.phone)}` : ""}`,
     data.subject ? `Topic: ${esc(data.subject)}` : null,
     data.source ? `From: \`${esc(data.source)}\`` : null,
-    outcome === "failed" ? "⚠️ *Not recorded in Chatwoot* — recover from the logs." : null,
+    smsStored === false
+      ? "⚠️ *Not recorded in SMS 2.0* — recover from the logs."
+      : smsStored === null && outcome === "failed"
+        ? "⚠️ *Not recorded in Chatwoot* — recover from the logs."
+        : null,
+    smsStored === true && outcome === "failed" ? "Chatwoot copy failed; the lead is in SMS 2.0." : null,
     "",
     `>${esc(data.message).replace(/\n/g, "\n>")}`,
   ]);
+
+  if (smsStored !== null) {
+    if (!smsStored) {
+      console.error("[inquiry] NOT RECORDED IN SMS 2.0, recover from this line", {
+        at: new Date().toISOString(),
+        chatwootCopy: outcome,
+        ...data,
+      });
+      return NextResponse.json(
+        { error: "We could not record your inquiry. Please email us instead." },
+        { status: 502 },
+      );
+    }
+    // Stored. A failed Chatwoot copy is logged, never surfaced: it is a copy.
+    if (outcome === "failed") {
+      console.warn("[inquiry] chatwoot copy failed; the lead is in SMS 2.0", {
+        at: new Date().toISOString(),
+        email: data.email,
+      });
+    }
+    return NextResponse.json({ ok: true });
+  }
 
   if (outcome === "unconfigured") {
     // No credentials: log that an inquiry arrived, never the message body, and

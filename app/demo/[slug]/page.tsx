@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { Hero } from "@/components/ui";
 import DemoRegistrationForm, { SessionTime } from "@/components/DemoRegistrationForm";
 import { buildMetadata } from "@/lib/seo";
-import { type Campaign, fetchIn, isForUs } from "@/lib/demo";
+import { readCampaign } from "@/lib/demo";
 import styles from "../../detail.module.css";
 
 type Params = { params: Promise<{ slug: string }> };
@@ -11,14 +11,7 @@ type Params = { params: Promise<{ slug: string }> };
 export const revalidate = 60;
 
 /** The campaign, or null when it is missing, closed, or not offered in the US. */
-async function getCampaign(slug: string) {
-  const res = await fetchIn<{ success?: boolean; data?: Campaign }>(
-    `/api/campaigns/${encodeURIComponent(slug)}`,
-    { next: { revalidate: 60 } },
-  );
-  const c = res?.body?.success ? res.body.data : undefined;
-  return c && isForUs(c) ? c : null;
-}
+const getCampaign = readCampaign;
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { slug } = await params;

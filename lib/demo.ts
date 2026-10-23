@@ -31,6 +31,10 @@ export type Campaign = {
   status?: string | null;
   classes_start_date?: string | null;
   audience?: string | null;
+  /** Seat counts, sent by SMS 2.0. The .in backend does not send these. */
+  seats?: number | null;
+  registrations_count?: number | null;
+  seats_left?: number | null;
 };
 
 export const isForUs = (c: Campaign) => c.audience === "us" || c.audience === "both";
@@ -114,4 +118,45 @@ export function loadCampaigns() {
     .then((res: { data?: Campaign[] }) => (Array.isArray(res?.data) ? res.data : []))
     .catch(() => []);
   return pending;
+}
+
+
+/* ------------------------------------------------------------------ CRM --
+   While CRM_BACKEND=sms, campaigns come from SMS 2.0 instead of .in. The two
+   differ in both envelope and nesting: .in replies { success, data } with the
+   campaign or array directly under `data`, SMS 2.0 replies { success, data:
+   { campaigns } } or { success, data: { campaign } }. Both are normalised to
+   a plain Campaign here so no caller has to care which is live. */
+
+import { smsCall, usingSms } from "./crm";
+
+/** Open US campaigns. Empty list on any failure, so the popup just never opens. */
+export async function readCampaigns(): Promise<Campaign[]> {
+  if (usingSms()) {
+    const res = await smsCall<{ campaigns?: Campaign[] }>("/demo-campaigns", {
+      next: { revalidate: 60 },
+    });
+    return Array.isArray(res.data?.campaigns) ? res.data.campaigns.filter(isForUs) : [];
+  }
+  const res = await fetchIn<{ success?: boolean; data?: Campaign[] }>("/api/campaigns?site=us", {
+    next: { revalidate: 60 },
+  });
+  return Array.isArray(res?.body?.data) ? res.body.data.filter(isForUs) : [];
+}
+
+/** One campaign, or null when missing, or not offered in the US. */
+export async function readCampaign(slug: string): Promise<Campaign | null> {
+  const safe = encodeURIComponent(slug);
+  if (usingSms()) {
+    const res = await smsCall<{ campaign?: Campaign }>(`/demo-campaigns/${safe}`, {
+      next: { revalidate: 60 },
+    });
+    const c = res.ok ? res.data?.campaign : undefined;
+    return c && isForUs(c) ? c : null;
+  }
+  const res = await fetchIn<{ success?: boolean; data?: Campaign }>(`/api/campaigns/${safe}`, {
+    next: { revalidate: 60 },
+  });
+  const c = res?.body?.success ? res.body.data : undefined;
+  return c && isForUs(c) ? c : null;
 }

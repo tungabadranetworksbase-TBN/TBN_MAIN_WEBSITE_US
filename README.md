@@ -137,6 +137,9 @@ comments so it can be pasted into Vercel's bulk importer as-is.
 | `CHATWOOT_API_TOKEN` | Chatwoot -> Profile Settings -> Access Token. An agent credential: never commit it, and it is **not** the public widget token in `components/Chatwoot.tsx` |
 | `CHATWOOT_ACCOUNT_ID` | The number in the dashboard URL, `/app/accounts/<id>/dashboard` |
 | `CHATWOOT_INBOX_ID` | Settings -> Inboxes -> the id in the inbox URL. Use an API-channel inbox, not the website one, so form submissions stay separable from live chats |
+| `CRM_BACKEND` | `in` (default) or `sms`. Selects where leads are written. `in` is today's behaviour; `sms` sends them to SMS 2.0 instead. Setting it back to `in` is the whole rollback |
+| `SMS_INTAKE_URL` | SMS 2.0 intake base, `https://api.tungabadranetworks.in/api/intake` in production. Only read when `CRM_BACKEND=sms` |
+| `SMS_SITE_KEY` | SMS 2.0 -> Developer -> Integrations -> Website intake keys, code `us`. A secret: it authorises writes into the CRM, and the key also scopes campaigns to the US audience |
 | `SLACK_WEBHOOK_URL` | Slack -> your app -> Incoming Webhooks -> add to a channel. Posts to that one channel; moving channels later means a new URL, not a code change |
 | `TBN_IN_API_URL` | Optional. Base URL of the .in site, whose API serves demo campaigns and stores consultation requests. Defaults to `https://www.tungabadranetworks.in` |
 
@@ -145,6 +148,34 @@ them missing the form still validates and accepts, logging instead of
 delivering, so local development runs without credentials. If delivery fails
 the endpoint returns 502 and logs the full payload rather than reporting a
 success that did not happen.
+
+## Lead routing
+
+Every form on this site writes to a backend it does not own. `CRM_BACKEND`
+chooses which:
+
+| | `in` (default) | `sms` |
+|---|---|---|
+| Contact / enquiry forms | Chatwoot | SMS 2.0, with Chatwoot as a best-effort copy |
+| Book a Consultation | .in `/api/consultations` | SMS 2.0 `/consultations` |
+| Demo registration | .in `/api/demo/register` | SMS 2.0 `/demo-campaigns/:slug/register` |
+| Demo campaign reads | .in `/api/campaigns` | SMS 2.0 `/demo-campaigns` |
+
+The default means deploying this changes nothing until the variable is set,
+and setting it back to `in` is the entire rollback. There is no half state: in
+`sms` mode nothing touches the .in backend, because the intake key itself
+scopes the records.
+
+Writes carry an `Idempotency-Key` derived from the payload and hashed, so a
+visitor double-submitting does not create two leads and no email address
+travels in a header. Slack is notified either way and never changes the
+response the visitor sees.
+
+A `409` from SMS 2.0 on demo registration means the session closed or filled
+while the form was open. That is returned as a `409` with its message, not
+retried, because a retry cannot fix it.
+
+---
 
 ## Notifications
 
