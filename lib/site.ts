@@ -60,7 +60,7 @@ export const site = {
      */
     whatsapp:
       "https://chat.whatsapp.com/CYrZanCp3jj1xV1W2UMYCz?s=sh&p=i&mlu=4&ilr=4",
-    portal: "https://sms.tungabadranetworks.in/student/login",
+    portal: "https://tblearn.com/login",
     /**
      * Where every Enroll button goes. app/enroll embeds the LMS registration
      * form, which takes the payment through Stripe; this site takes none
@@ -127,7 +127,7 @@ export const site = {
  * talks to it by postMessage from this exact origin.
  */
 export const lms = {
-  origin: "https://lms.tungabadranetworks.in",
+  origin: "https://tblearn.com",
   form: "us-registration",
 } as const;
 
