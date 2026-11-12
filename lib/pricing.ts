@@ -70,6 +70,7 @@ export const COURSE_FEES: Record<string, Fee> = {
   "linux-for-network-engineers": { usd: 120 },
   "aruba-certified-associate": { usd: 150 },
   "juniper-jncia": { usd: 150 },
+  "fortigate-firewall-training": { usd: 220 },
   "python-for-network-automation": { inr: 11000 },
   "palo-alto-ngfw": { usd: 220 },
   "real-time-automation-projects": { inr: 15000 },

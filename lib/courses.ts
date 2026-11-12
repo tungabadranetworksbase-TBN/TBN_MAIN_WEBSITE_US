@@ -1,5 +1,5 @@
 /**
- * Course catalog - the twelve courses published on tungabadranetworks.in.
+ * Course catalog - the thirteen courses published on tungabadranetworks.in.
  *
  * Two rules held to throughout:
  *
@@ -288,7 +288,82 @@ export const courses: Course[] = [
       { question: "Is this hands-on or lecture based?", answer: "Hands-on. Labs run on physical Palo Alto equipment with 24/7 rack access, and the troubleshooting modules use live faults." },
       { question: "Do I need security experience?", answer: "No, but you do need solid TCP/IP, routing and NAT knowledge. CCNA Advanced Training covers that ground." },
     ],
-    related: ["ccnp-enterprise-service-provider", "juniper-jncia", "aruba-certified-associate"],
+    related: ["fortigate-firewall-training", "ccnp-enterprise-service-provider", "juniper-jncia"],
+  },
+
+  {
+    slug: "fortigate-firewall-training",
+    title: "FortiGate Firewall Training",
+    category: "Network Security",
+    shortDescription:
+      "Fourteen modules on FortiGate, from packet flow and policy to SSL inspection, IPsec VPN, High Availability and central management with FortiManager and FortiAnalyzer.",
+    overview: [
+      "FortiGate Firewall Training covers the platform as it is actually run: how FortiGate processes a packet, how interfaces, zones, policy and NAT fit together, and how to prove a configuration works before it reaches production.",
+      "The course moves from firewall fundamentals through the features an enterprise estate depends on - Active Directory SSO, SSL inspection, web filtering, remote-access SSL VPN and site-to-site IPsec - and then to running more than one firewall: Active-Passive and Active-Active High Availability, FortiClient and ZTNA, and centralised policy and log management with FortiManager and FortiAnalyzer.",
+      "Troubleshooting is treated as a skill in its own right rather than a closing module. Packet flow, session table inspection, packet capture and the FortiOS diagnose commands are used throughout.",
+    ],
+    audience: [
+      "Network engineers adding a security specialisation",
+      "Engineers supporting or inheriting a Fortinet estate",
+      "CCNA holders moving toward security roles",
+      "Firewall administrators moving from another vendor to FortiGate",
+    ],
+    outcomes: [
+      "Configure and administer FortiGate firewalls",
+      "Implement firewall policies, NAT and network segmentation",
+      "Deploy and troubleshoot site-to-site IPsec and remote-access VPNs",
+      "Configure web filtering and SSL inspection",
+      "Troubleshoot packet flow, routing and connectivity issues",
+      "Implement FortiGate High Availability",
+      "Manage firewalls centrally and analyse logs with FortiManager and FortiAnalyzer",
+    ],
+    skills: ["Firewall policy", "Source and destination NAT", "Packet flow analysis", "SSL inspection", "Web filtering", "SSL VPN", "IPsec VPN", "High Availability", "FortiOS CLI", "FortiManager", "FortiAnalyzer", "FortiClient and ZTNA"],
+    curriculum: [
+      { title: "Firewall Fundamentals", topics: ["Firewalls and their place in network security", "Traditional firewall vs next-generation firewall", "FortiGate models: 40F, 100F, 200F and 600F series", "Virtual Domains (VDOMs)", "Deployment modes: NAT/Route, Transparent and VDOM"] },
+      { title: "Packet Flow and Processing", topics: ["Packet processing inside FortiGate", "Packet ingress and interface processing", "Session lookup and the session table", "Routing lookup and firewall policy matching", "NAT processing and security profile inspection", "Session creation and management", "Forwarding and drop decisions"] },
+      { title: "Basic FortiGate Lab Configuration", topics: ["Interfaces and zones", "Interface configuration and IP addressing", "Creating and managing firewall policies", "Source NAT and destination NAT", "Inter-zone, LAN and DMZ configuration", "Connectivity testing and verification"] },
+      { title: "Firewall Troubleshooting", topics: ["Troubleshooting connectivity issues", "Firewall policy verification", "NAT and routing troubleshooting", "Session table inspection", "Packet capture and traffic analysis", "Log analysis and common firewall faults", "diagnose debug flow, diagnose sniffer packet, diagnose sys session list"] },
+      { title: "Upgrade and Configuration Backup", topics: ["Backing up a running configuration", "FortiOS firmware versions", "Pre-upgrade checks and compatibility", "Upgrade procedure and post-upgrade verification", "Restore and rollback", "Upgrade planning"] },
+      { title: "Single Sign-On (SSO)", topics: ["Single Sign-On and user identification", "The FortiGate SSO agent", "Active Directory integration", "User and group identification", "Policy for authenticated users", "Monitoring and troubleshooting SSO"] },
+      { title: "SSL Inspection", topics: ["SSL/TLS inspection and certificates", "Certificate-based vs deep inspection", "Inspection profiles and applying them to policy", "Certificate authority and client trust", "Antivirus, web filtering, IPS and application control", "SSL inspection troubleshooting"] },
+      { title: "SSL VPN", topics: ["Remote-access SSL VPN", "Portal configuration", "User and group authentication", "VPN access policy", "Client configuration and split tunneling", "Connectivity testing and troubleshooting"] },
+      { title: "Web Filtering", topics: ["URL filtering and website categories", "Web filter profiles: allow, block and monitor", "Overrides and exemptions", "Application control alongside web filtering", "Business access policy", "Web filtering logs and reporting"] },
+      { title: "IPsec VPN", topics: ["Site-to-site IPsec VPN", "Phase 1 and Phase 2", "IKE versions and negotiation settings", "Pre-shared key and certificate authentication", "Tunnel verification and routing over IPsec", "NAT and policy for VPN traffic", "Head office to branch connectivity and monitoring"] },
+      { title: "High Availability", topics: ["Active-Passive and Active-Active modes", "Cluster configuration and heartbeat interfaces", "Configuration and session synchronisation", "Failover and failback", "Primary and secondary unit management", "Troubleshooting HA"] },
+      { title: "FortiClient", topics: ["Features, installation and deployment", "Remote-access VPN configuration", "Endpoint security and monitoring", "Zero Trust Network Access (ZTNA) fundamentals", "Fabric Agent integration", "Troubleshooting the client"] },
+      { title: "FortiManager", topics: ["Centralised management and device onboarding", "Administrative domains (ADOMs) and policy packages", "Centralised firewall policy management", "Templates, provisioning and firmware management", "Configuration synchronisation", "Monitoring and troubleshooting"] },
+      { title: "FortiAnalyzer", topics: ["Centralised logging and device registration", "Log collection, filtering and investigation", "Reports, dashboards and FortiView", "Traffic and event log analysis", "FortiSwitch, FortiAP and FortiClient log integration", "Investigating an incident from logs"] },
+    ],
+    duration: CONSULT_NOTE,
+    deliveryFormats: ["Classroom", "Online (live)", "Corporate (on-site)"],
+    level: "Intermediate",
+    prerequisites: [
+      "Working knowledge of TCP/IP, routing and NAT",
+      "CCNA Advanced Training or equivalent experience",
+      "Comfortable working at a CLI",
+    ],
+    projects: [
+      { title: "Segmented policy build", summary: "Build LAN, DMZ and inter-zone policy with source and destination NAT from a written requirement, then verify each rule matches as intended." },
+      { title: "Branch tunnel under fault", summary: "Bring up a site-to-site IPsec tunnel to a misconfigured peer and diagnose each phase in turn using the diagnose commands." },
+      { title: "HA pair and failover", summary: "Build an Active-Passive cluster, confirm configuration and session synchronisation, then force a failover and account for what the traffic did." },
+    ],
+    certification: {
+      preparesFor: ["Fortinet FortiGate Firewall Administration"],
+      note: VENDOR_NOTE,
+    },
+    careers: [
+      { role: "Network Security Engineer", note: "Configures and manages FortiGate firewall deployments." },
+      { role: "SOC / Security Analyst", note: "Monitors, investigates and responds to firewall security events." },
+      { role: "Firewall Administrator", note: "Runs day-to-day policy, VPN and HA operations on FortiGate." },
+      { role: "Implementation Engineer", note: "Deploys and migrates firewall estates for clients." },
+    ],
+    faqs: [
+      { question: "Is this hands-on or lecture based?", answer: "Hands-on. Configuration, troubleshooting and the HA and VPN modules are all done on lab firewalls, and the diagnose commands are used throughout rather than demonstrated once." },
+      { question: "Do I need security experience?", answer: "No, but you do need solid TCP/IP, routing and NAT knowledge, because most FortiGate faults turn out to be routing or NAT faults. CCNA Advanced Training covers that ground." },
+      { question: "I already administer another vendor's firewall. Is this still useful?", answer: "Yes. The concepts carry over, so the value is in FortiGate's specifics: how it matches policy, how its session table and packet flow behave, and how FortiManager and FortiAnalyzer change the way an estate is run." },
+      { question: "Does this cover more than one firewall?", answer: "Yes. High Availability, FortiManager and FortiAnalyzer are part of the course, so it covers running an estate rather than configuring a single unit." },
+    ],
+    related: ["palo-alto-ngfw", "ccnp-enterprise-service-provider", "juniper-jncia"],
   },
 
   {

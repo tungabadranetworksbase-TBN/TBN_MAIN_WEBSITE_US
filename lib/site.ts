@@ -37,7 +37,7 @@ export const site = {
     "Tungabadra Networks is an industry-focused networking company founded in 2024 in Kurnool, Andhra Pradesh, India. It provides hands-on networking training, internships and placement support alongside an engineering division that designs, deploys and secures production enterprise networks.",
 
   description:
-    "Industry-focused networking training with real enterprise labs, physical Cisco and Palo Alto equipment, and placement support. Courses in CCNA, CCNP, Palo Alto, Aruba, Juniper, AWS, Linux and network automation.",
+    "Industry-focused networking training with real enterprise labs, physical Cisco and Palo Alto equipment, and placement support. Courses in CCNA, CCNP, Palo Alto, Fortinet, Aruba, Juniper, AWS, Linux and network automation.",
 
   contact: {
     email: "ussupport@tungabadranetworks.com",
@@ -106,7 +106,7 @@ export const site = {
     { label: "Engineers trained", value: "3,000+" },
     { label: "Placements", value: "1,000+" },
     { label: "Hiring relationships", value: "50+" },
-    { label: "Courses", value: "12" },
+    { label: "Courses", value: "13" },
     { label: "Teaching since", value: "2024" },
   ],
 

@@ -36,7 +36,7 @@ const offer = [
     icon: GraduationCap,
     title: "Networking courses",
     body: "CCNA and CCNP through security, cloud, Linux, Python and automation, and on into the GPU and AI infrastructure stack. Every module is taught on equipment, not slides.",
-    meta: "12 courses",
+    meta: "13 courses",
     cls: "offerCell--lead",
   },
   {
