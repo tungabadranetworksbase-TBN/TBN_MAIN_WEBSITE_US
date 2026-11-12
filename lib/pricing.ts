@@ -1,20 +1,30 @@
 /**
- * Course and internship pricing: India total -> USD.
+ * Course and internship pricing.
  *
  * SOURCE OF THESE NUMBERS
  * -----------------------
- * Every figure below is the fee published on tungabadranetworks.in, read from
- * the individual course pages (/courses/ccna, /courses/palo-alto, ...) and the
- * internship page (/internship). They are not estimates.
+ * Two kinds of figure live here, and the difference matters.
  *
- * The India pages quote a base fee plus a statutory tax component, and print
- * the combined total. `TAX_MULTIPLIER` reproduces that total exactly - checked
- * against the totals those pages publish, e.g. 18,000 -> 21,240 for CCNP and
- * 49,000 -> 57,820 for CCNA Automation. The USD price is that final total converted, so
- * what a buyer sees here is the all-in figure with nothing added at checkout.
+ * A `usd` fee is a US price set for this market directly. Nothing is derived
+ * from it and no conversion touches it.
+ *
+ * An `inr` fee is the fee published on tungabadranetworks.in, read from that
+ * course's page there, converted here. Those pages quote a base fee plus a
+ * statutory tax component and print the combined total; `TAX_MULTIPLIER`
+ * reproduces that total exactly - checked against the totals those pages
+ * publish, e.g. 18,000 -> 21,240 for CCNP and 49,000 -> 57,820 for CCNA
+ * Automation. The USD price is that final total converted, so the buyer sees
+ * the all-in figure with nothing added at checkout.
  *
  * Where the India page shows a struck-through "was" price, `wasInr` carries it
  * so the discount shown is the real one rather than an invented one.
+ *
+ * CHECKOUT CHARGES SEPARATELY
+ * ---------------------------
+ * These figures are what this site advertises. The money is taken by the LMS
+ * (tblearn.com), which holds its own catalogue, so a price changed here is NOT
+ * changed at checkout. Both have to move together or the buyer is quoted one
+ * figure and charged another.
  */
 
 import type { Course } from "./courses";
@@ -53,15 +63,18 @@ type Fee = { inr: number; wasInr?: number } | { usd: number; wasUsd?: number };
 
 export const COURSE_FEES: Record<string, Fee> = {
   "cloud-lab-access": { inr: 3000, wasInr: 5000 },
-  "aws-cloud-practitioner": { inr: 5000 },
-  "linux-for-network-engineers": { inr: 7000, wasInr: 9000 },
-  "aruba-certified-associate": { inr: 8000, wasInr: 10000 },
-  "juniper-jncia": { inr: 8500, wasInr: 10625 },
+  // Priced for the US market directly, so no struck-through "was" price: the
+  // old India-derived figures were all LOWER than these, and showing one would
+  // present a price rise as a discount.
+  "aws-cloud-practitioner": { usd: 120 },
+  "linux-for-network-engineers": { usd: 120 },
+  "aruba-certified-associate": { usd: 150 },
+  "juniper-jncia": { usd: 150 },
   "python-for-network-automation": { inr: 11000 },
-  "palo-alto-ngfw": { inr: 15000 },
+  "palo-alto-ngfw": { usd: 220 },
   "real-time-automation-projects": { inr: 15000 },
-  "ccna-advanced-training": { inr: 16000 },
-  "ccnp-enterprise-service-provider": { inr: 18000 },
+  "ccna-advanced-training": { usd: 220 },
+  "ccnp-enterprise-service-provider": { usd: 350 },
   "real-time-networking-projects": { inr: 22000 },
   "cisco-devnet-network-automation": { inr: 49000 },
 };
