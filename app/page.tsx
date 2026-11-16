@@ -176,7 +176,32 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 3. the catalog, as a dense index */}
+      {/* 3. the internship tracks, priced. Ahead of the catalog: a track is
+             the whole programme - courses, project work and placement
+             support in one - so it is the thing to put in front of someone
+             first, and the catalog below reads as the detail inside it. */}
+      <section className="section section--tight shell" aria-labelledby="tracks-h">
+        <div className={s.courseHead}>
+          <div>
+            <h2 className="d2" id="tracks-h">
+              Internship tracks
+            </h2>
+            <p className="lede" style={{ marginTop: 12 }}>
+              Each track bundles its courses, real-time project work and placement support into one
+              programme. Take one, or all three together.
+            </p>
+          </div>
+          <Link href="/internships" className="link-gold">
+            Compare tracks <ArrowRight size={15} weight="bold" />
+          </Link>
+        </div>
+
+        <Reveal>
+          <InternshipPricing />
+        </Reveal>
+      </section>
+
+      {/* 3a. the catalog, as a dense index */}
       <section className="section section--tight shell" aria-labelledby="courses-h">
         <div className={s.courseHead}>
           <div>
@@ -203,32 +228,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 3a. free demo sessions from the .in campaign backend; renders nothing when there are none */}
+      {/* 3b. free demo sessions from the .in campaign backend; renders nothing when there are none */}
       <DemoSessionsSection />
-
-      {/* 3b. the internship tracks, priced. Sits after the catalog because it
-             is the same question one step further on: having seen the
-             courses, which programme do I buy? */}
-      <section className="section section--tight shell" aria-labelledby="tracks-h">
-        <div className={s.courseHead}>
-          <div>
-            <h2 className="d2" id="tracks-h">
-              Internship tracks
-            </h2>
-            <p className="lede" style={{ marginTop: 12 }}>
-              Each track bundles its courses, real-time project work and placement support into one
-              programme. Take one, or all three together.
-            </p>
-          </div>
-          <Link href="/internships" className="link-gold">
-            Compare tracks <ArrowRight size={15} weight="bold" />
-          </Link>
-        </div>
-
-        <Reveal>
-          <InternshipPricing />
-        </Reveal>
-      </section>
 
       {/* 4. why - sticky heading beside a scrolling list */}
       <section className="section shell" aria-labelledby="why-h">
