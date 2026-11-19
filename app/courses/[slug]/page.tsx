@@ -10,7 +10,7 @@ import { buildMetadata } from "@/lib/seo";
 import { enrollHref, site } from "@/lib/site";
 import { breadcrumbSchema, courseSchema, faqSchema, graph, webPageSchema } from "@/lib/schema";
 import { courses, getCourse, getRelatedCourses } from "@/lib/courses";
-import { coursePrice, formatUsd } from "@/lib/pricing";
+import { IN_PERSON_ADDON_USD, coursePrice, formatUsd } from "@/lib/pricing";
 import styles from "../../detail.module.css";
 
 type Params = { params: Promise<{ slug: string }> };
@@ -39,6 +39,10 @@ export default async function CoursePage({ params }: Params) {
 
   const related = getRelatedCourses(course);
   const price = coursePrice(course);
+  // "Classroom" is the only format that means in person for an individual
+  // buyer. "Corporate (on-site)" is also in person but quoted per engagement,
+  // so it must not pull in the add-on line.
+  const offersInPerson = course.deliveryFormats.includes("Classroom");
   // Readable subject in the URL keeps the contact page free of catalog imports.
   const inquiryHref = `/contact?interest=course&subject=${encodeURIComponent(course.title)}`;
   const crumbs = [
@@ -293,16 +297,24 @@ export default async function CoursePage({ params }: Params) {
                     Fees, duration and the current batch dates are shared on the call.
                   </p>
                 )}
+                {price && offersInPerson && (
+                  <p className={styles.priceNote}>
+                    This is the online price. In-person training with hands-on device access is{" "}
+                    {formatUsd(IN_PERSON_ADDON_USD)} more, charged once per student rather than per
+                    course, however many courses you take. It is arranged on your consultation
+                    call, not at checkout, and is included at no extra cost in every{" "}
+                    <Link href="/internships" className="link-gold">
+                      internship track
+                    </Link>
+                    .
+                  </p>
+                )}
               </div>
 
               <dl className={styles.specs}>
                 <div className={styles.spec}>
                   <dt className={styles.specLabel}>Modules</dt>
                   <dd className={styles.specValue}>{course.curriculum.length}</dd>
-                </div>
-                <div className={styles.spec}>
-                  <dt className={styles.specLabel}>Projects</dt>
-                  <dd className={styles.specValue}>{course.projects.length}</dd>
                 </div>
                 <div className={styles.spec}>
                   <dt className={styles.specLabel}>Lab access</dt>

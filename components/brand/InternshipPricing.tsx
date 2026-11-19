@@ -78,7 +78,10 @@ export default function InternshipPricing() {
                   {price.wasUsd && <span className={s.was}>{formatUsd(price.wasUsd)}</span>}
                   {price.discountPct && <span className={s.off}>{price.discountPct}% off</span>}
                 </p>
-                <p className={s.note}>One-time. Programme access runs for a year.</p>
+                <p className={s.note}>
+                  One-time. Includes in-person training and device access. Programme access runs
+                  for a year.
+                </p>
               </>
             )}
 

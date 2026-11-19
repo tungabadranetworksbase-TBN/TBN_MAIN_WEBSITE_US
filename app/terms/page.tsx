@@ -120,6 +120,12 @@ export default function TermsPage() {
                   is in place.
                 </li>
                 <li>
+                  In-person training with device access is a one-time $120 per student, in addition
+                  to course fees and regardless of how many courses are taken. It is arranged and
+                  invoiced separately from online checkout, and is included at no extra cost in
+                  every internship track.
+                </li>
+                <li>
                   Corporate engagements are governed by the written proposal and any separate
                   agreement, which take precedence over these terms where they conflict.
                 </li>

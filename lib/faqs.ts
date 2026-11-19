@@ -76,7 +76,12 @@ export const faqGroups: FaqGroup[] = [
       {
         question: "How much do the courses cost?",
         answer:
-          "Every course page shows its fee in US dollars, alongside the full syllabus and what it prepares you for. Internship tracks are priced on the internships page. Enterprise services and corporate training are quoted per engagement, so those are agreed on a consultation call.",
+          "Every course page shows its fee in US dollars for online delivery, alongside the full syllabus and what it prepares you for. Internship tracks are priced on the internships page. Enterprise services and corporate training are quoted per engagement, so those are agreed on a consultation call.",
+      },
+      {
+        question: "Is in-person training extra?",
+        answer:
+          "Yes. The fee shown on each course page is the online price. In-person training with hands-on device access is $120 extra, charged once per student rather than per course, so taking three courses in person is still $120 in total. It is arranged on your consultation call and is not collected at online checkout. Every internship track includes in-person training and device access at no extra cost.",
       },
       {
         question: "Is there online delivery?",

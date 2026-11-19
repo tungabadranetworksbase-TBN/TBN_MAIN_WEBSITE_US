@@ -52,6 +52,29 @@ const TAX_MULTIPLIER = 1.18;
 const USD_ROUNDING = 5;
 
 /**
+ * In-person training with hands-on device access, on top of the online fee.
+ *
+ * Charged ONCE per student, not per course: three courses taken in person is
+ * still 120. That is why it is a site-wide constant rather than a field on
+ * each course, and why nothing here adds it to a course price - there is no
+ * course for which `usd + 120` is the right total for a multi-course buyer.
+ *
+ * Deliberately a plain number and not a `Fee`. A `Fee` feeds build() ->
+ * Price -> priceFor() -> the Offer in schema.ts, and this figure must never
+ * reach an Offer: see below.
+ *
+ * NOT COLLECTED AT CHECKOUT. The LMS catalogue publishes one US branch,
+ * "USA - ONLINE", and its course objects carry no add-on or variant field,
+ * so checkout can only take the online price. The in-person arrangement is
+ * made on the consultation call. Every piece of copy that mentions this has
+ * to stay true while that is so, and stay true if the LMS later gains an
+ * in-person option.
+ *
+ * Included at no extra cost in every internship track.
+ */
+export const IN_PERSON_ADDON_USD = 120;
+
+/**
  * A published fee.
  *
  * Courses are published in rupees on the India site and converted here.
