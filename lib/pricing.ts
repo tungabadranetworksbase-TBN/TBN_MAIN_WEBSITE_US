@@ -111,7 +111,7 @@ export const COURSE_FEES: Record<string, Fee> = {
  */
 export const INTERNSHIP_FEES: Record<string, Fee> = {
   "enterprise-networking-internship": { usd: 1199 },
-  "data-center-networking-internship": { usd: 1499 },
+  "data-center-server-virtualization-internship": { usd: 699 },
   "data-center-automation-internship": { usd: 1799 },
   "elite-career-path-bundle": { usd: 2299, wasUsd: 2999 },
 };

@@ -26,13 +26,13 @@ const HIGHLIGHTS: Record<string, string[]> = {
     "Project support on your build",
     "Placement support",
   ],
-  "data-center-networking-internship": [
-    "9 courses, including VMware ESXi",
-    "Data center architecture and compute",
-    "Incident handling and ticketing",
+  "data-center-server-virtualization-internship": [
+    "Six phases, CCNA Advanced through VMware",
+    "Enterprise server hardware, built and specified",
+    "RAID, SAN and iSCSI, with failure and rebuild labs",
+    "vSphere clusters: vCenter, vMotion, HA and DRS",
     "Real-Time Project Version 2.0",
     "1-on-1 doubt-clearing sessions",
-    "Project support on your lab build",
     "Placement support",
   ],
   "data-center-automation-internship": [

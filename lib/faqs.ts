@@ -98,7 +98,7 @@ export const faqGroups: FaqGroup[] = [
       {
         question: "What do the internships involve?",
         answer:
-          "Each internship bundles several courses into one career track, with real-time project work and lab sessions. Enterprise Networking is the usual entry point, covering the NOC to network engineer path; Data Center Networking covers infrastructure, virtualization and operations; and Data Center and Automation adds Python, Ansible, CI/CD and cloud on top. The Elite Career Path Bundle carries all three.",
+          "Each internship bundles several courses into one career track, with real-time project work and lab sessions. Enterprise Networking is the usual entry point, covering the NOC to network engineer path; Data Center Server and Virtualization covers server hardware, RAID and SAN storage and VMware vSphere; and Data Center and Automation adds Python, Ansible, CI/CD and cloud on top. The Elite Career Path Bundle carries all three.",
       },
       {
         question: "Which companies hire your students?",

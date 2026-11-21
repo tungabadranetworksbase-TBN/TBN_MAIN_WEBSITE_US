@@ -355,7 +355,7 @@ export const resources: Resource[] = [
       },
     ],
     related: ["how-to-prepare-for-a-technical-internship-interview", "how-to-start-a-career-in-network-engineering"],
-    ctaInternships: ["data-center-automation-internship", "data-center-networking-internship"],
+    ctaInternships: ["data-center-automation-internship", "data-center-server-virtualization-internship"],
   },
 
   {
