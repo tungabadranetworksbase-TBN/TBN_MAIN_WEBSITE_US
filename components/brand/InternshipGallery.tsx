@@ -50,13 +50,13 @@ const POSTERS: Record<string, Poster[]> = {
       src: "/images/internships/data-center-automation-internship/poster-1.jpg",
       w: 1600,
       h: 900,
-      alt: "Data Center and Automation Internship poster: automate, optimize, innovate, covering data center management, infrastructure automation and scripting.",
+      alt: "AI Data Center and Automation Internship poster: automate, optimize, innovate, covering data center management, infrastructure automation and scripting.",
     },
     {
       src: "/images/internships/data-center-automation-internship/poster-2.jpg",
       w: 1536,
       h: 1024,
-      alt: "Data Center and Automation Internship poster covering data center operations, automation with Ansible, cloud and virtualization, network configuration, security and monitoring, and Bash and Python scripting.",
+      alt: "AI Data Center and Automation Internship poster covering data center operations, automation with Ansible, cloud and virtualization, network configuration, security and monitoring, and Bash and Python scripting.",
     },
   ],
   "elite-career-path-bundle": [

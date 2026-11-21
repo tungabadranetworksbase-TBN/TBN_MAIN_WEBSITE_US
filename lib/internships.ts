@@ -463,7 +463,7 @@ export const internships: Internship[] = [
       {
         question: "Does this programme include automation?",
         answer:
-          "No. This track is hardware, storage and virtualization. If you want Python, Ansible and CI/CD on top of data center material, take the Data Center and Automation Internship instead.",
+          "No. This track is hardware, storage and virtualization. If you want Python, Ansible and CI/CD on top of data center material, take the AI Data Center and Automation Internship instead.",
       },
       {
         question: "Do I need virtualization experience?",
@@ -484,14 +484,14 @@ export const internships: Internship[] = [
   {
     slug: "data-center-automation-internship",
     lmsSlug: "data-center-and-automation-internship",
-    title: "Data Center and Automation Internship",
+    title: "AI Data Center and Automation Internship",
     track: "Advanced track: cloud, DevOps, network automation and AI-ready infrastructure",
     category: "Automation",
     featured: true,
     shortDescription:
       "The advanced track: spine-leaf and VXLAN, AWS hybrid cloud, then Python, Ansible, REST APIs and CI/CD on top, with real automation projects.",
     overview: [
-      "The Data Center and Automation Internship prepares you for modern data center and cloud infrastructure roles, with the automation, DevOps and cloud networking skills US enterprise environments now expect as standard.",
+      "The AI Data Center and Automation Internship prepares you for modern data center and cloud infrastructure roles, with the automation, DevOps and cloud networking skills US enterprise environments now expect as standard.",
       "It carries the networking sequence through CCNP with data center concepts, adds Palo Alto security, HPE Aruba Networking and AWS Cloud Practitioner, then builds the automation layer: Python and Netmiko, Ansible, REST APIs, Git and CI/CD pipelines across Jenkins, GitHub Actions and GitLab CI.",
       "Observability is treated as a first-class skill rather than an afterthought, with Prometheus, Grafana and Zabbix, and the programme closes on real automation projects rather than demonstrations.",
     ],
@@ -537,6 +537,14 @@ export const internships: Internship[] = [
       { title: "Real-Time Automation Project Version 2.0" },
     ],
     curriculum: [
+      {
+        title: "AI Data Center Basics",
+        topics: [
+          "GPU server deployment",
+          "GPU server networking",
+          "Cooling for GPU racks",
+        ],
+      },
       {
         title: "Advanced Data Center Networking",
         topics: [
@@ -612,6 +620,7 @@ export const internships: Internship[] = [
       },
     ],
     outcomes: [
+      "Understand GPU server deployment, networking and cooling",
       "Design and troubleshoot spine-leaf data center fabrics",
       "Build hybrid cloud connectivity on AWS and debug it",
       "Write Python that configures, backs up and audits a fleet",
@@ -656,7 +665,7 @@ export const internships: Internship[] = [
     shortDescription:
       "All three tracks together: enterprise networking, data center servers and virtualization, and the automation and cloud layer on top, at a single bundled price.",
     overview: [
-      "The Elite Career Path Bundle is all three internships taken as one sequence rather than bought separately: Enterprise Networking, Data Center Server and Virtualization, and Data Center and Automation.",
+      "The Elite Career Path Bundle is all three internships taken as one sequence rather than bought separately: Enterprise Networking, Data Center Server and Virtualization, and AI Data Center and Automation.",
       "Taken in order the tracks build rather than repeat. Enterprise networking establishes routing, switching, wireless and operations; the server track adds the hardware, storage and hypervisor layers; the automation track puts Python, Ansible, CI/CD and cloud on top of both.",
       "It is the widest route offered, and it is aimed at someone who wants to finish able to work in enterprise networking, data center infrastructure or automation, rather than having to pick one at the start.",
     ],
@@ -685,7 +694,7 @@ export const internships: Internship[] = [
     coursesIncluded: [
       { title: "Enterprise Networking Internship, in full" },
       { title: "Data Center Server and Virtualization Internship, in full" },
-      { title: "Data Center and Automation Internship, in full" },
+      { title: "AI Data Center and Automation Internship, in full" },
     ],
     curriculum: [
       {
@@ -709,7 +718,7 @@ export const internships: Internship[] = [
         ],
       },
       {
-        title: "Track Three: Data Center and Automation",
+        title: "Track Three: AI Data Center and Automation",
         topics: [
           "Spine-leaf, VXLAN and EVPN",
           "Advanced AWS and hybrid cloud design",

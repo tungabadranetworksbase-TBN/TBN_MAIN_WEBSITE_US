@@ -34,7 +34,7 @@ export const faqGroups: FaqGroup[] = [
       {
         question: "Do you teach network automation?",
         answer:
-          "Yes, and it runs against real devices rather than sample output. Python, Netmiko, Paramiko and Ansible are taught from first principles, alongside REST APIs, JSON and YAML, Git, and CI/CD pipelines in Jenkins, GitHub Actions and GitLab CI. The Data Center and Automation internship is the dedicated track for it, and Python for Network Automation and Cisco CCNA Automation are available as standalone courses.",
+          "Yes, and it runs against real devices rather than sample output. Python, Netmiko, Paramiko and Ansible are taught from first principles, alongside REST APIs, JSON and YAML, Git, and CI/CD pipelines in Jenkins, GitHub Actions and GitLab CI. The AI Data Center and Automation internship is the dedicated track for it, and Python for Network Automation and Cisco CCNA Automation are available as standalone courses.",
       },
       {
         question: "What equipment will I train on?",
@@ -98,7 +98,7 @@ export const faqGroups: FaqGroup[] = [
       {
         question: "What do the internships involve?",
         answer:
-          "Each internship bundles several courses into one career track, with real-time project work and lab sessions. Enterprise Networking is the usual entry point, covering the NOC to network engineer path; Data Center Server and Virtualization covers server hardware, RAID and SAN storage and VMware vSphere; and Data Center and Automation adds Python, Ansible, CI/CD and cloud on top. The Elite Career Path Bundle carries all three.",
+          "Each internship bundles several courses into one career track, with real-time project work and lab sessions. Enterprise Networking is the usual entry point, covering the NOC to network engineer path; Data Center Server and Virtualization covers server hardware, RAID and SAN storage and VMware vSphere; and AI Data Center and Automation adds Python, Ansible, CI/CD and cloud on top. The Elite Career Path Bundle carries all three.",
       },
       {
         question: "Which companies hire your students?",
