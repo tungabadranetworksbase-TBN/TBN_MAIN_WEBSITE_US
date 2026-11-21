@@ -5,6 +5,10 @@ import JsonLd from "@/components/JsonLd";
 import { InternshipCard } from "@/components/cards";
 import { AnswerBox, CtaBand, FaqList, Hero, StickyCta, stickyPadClass } from "@/components/ui";
 import InquiryForm from "@/components/InquiryForm";
+import InternshipGallery, {
+  InternshipLeadPoster,
+  hasPosters,
+} from "@/components/brand/InternshipGallery";
 import { ArrowRight, Certificate, Users } from "@/components/Icons";
 import { extProps } from "@/components/ui";
 import { buildMetadata } from "@/lib/seo";
@@ -102,6 +106,15 @@ export default async function InternshipPage({ params }: Params) {
                 </p>
               ))}
             </section>
+
+            {hasPosters(internship.slug) && (
+              <section className={styles.block} aria-labelledby="programme-gallery">
+                <h2 className={styles.blockTitle} id="programme-gallery">
+                  Inside the programme
+                </h2>
+                <InternshipGallery slug={internship.slug} />
+              </section>
+            )}
 
             <section className={styles.block} id="eligibility" aria-labelledby="eligibility-title">
               <h2 className={styles.blockTitle} id="eligibility-title">
@@ -262,6 +275,8 @@ export default async function InternshipPage({ params }: Params) {
           </div>
 
           <aside className={styles.aside} aria-label="Internship details and application">
+            <InternshipLeadPoster slug={internship.slug} />
+
             <div className={styles.asideCard}>
               {price && (
                 <div>

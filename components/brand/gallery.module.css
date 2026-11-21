@@ -1,0 +1,51 @@
+/* Internship programme posters.
+   Full-width frames stacked one per row: the posters carry their own
+   headline text, so they are shown whole rather than cropped into a grid of
+   equal tiles, and two different aspect ratios never sit side by side. */
+
+.gallery {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(14px, 2vw, 22px);
+}
+
+.frame {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--gold-line);
+  border-radius: var(--radius-lg);
+  background: var(--ink-1000, #000);
+  box-shadow: var(--shadow-lg);
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+/* A thin gold wash along the top edge, so the frame reads as part of the
+   brand rather than a bare screenshot. Behind the image, never over it. */
+.frame::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0.7;
+  z-index: 1;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@media (hover: hover) and (min-width: 900px) {
+  .frame:hover {
+    border-color: var(--gold);
+    transform: translateY(-2px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .frame { transition: none; }
+  .frame:hover { transform: none; }
+}
