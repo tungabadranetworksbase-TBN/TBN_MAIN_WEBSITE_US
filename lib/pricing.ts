@@ -156,11 +156,31 @@ function build(fee: Fee | undefined): Price | null {
   };
 }
 
+/**
+ * Whether individual course fees are shown to visitors.
+ *
+ * Off: course pages and cards fall back to the paths that already exist for
+ * a course with no fee configured - "Free consultation" with "Fees, duration
+ * and the current batch dates are shared on the call." on the detail page,
+ * the module count on the card - and schema.ts emits no Offer, because its
+ * guard only emits one when a price exists. So the figure is not merely
+ * hidden from view while still sitting in the structured data for a search
+ * engine to surface.
+ *
+ * COURSE_FEES keeps its real figures: this changes what is published, not
+ * what a course costs. Internship fees are unaffected and stay visible.
+ */
+export const SHOW_COURSE_PRICES = false;
+
 export function priceFor(slug: string): Price | null {
-  return build(COURSE_FEES[slug] ?? INTERNSHIP_FEES[slug]);
+  // Course slugs route through coursePrice so the switch above cannot be
+  // bypassed by the schema, which looks prices up by slug.
+  if (slug in COURSE_FEES) return coursePrice({ slug });
+  return build(INTERNSHIP_FEES[slug]);
 }
 
 export function coursePrice(course: Pick<Course, "slug">): Price | null {
+  if (!SHOW_COURSE_PRICES) return null;
   return build(COURSE_FEES[course.slug]);
 }
 
