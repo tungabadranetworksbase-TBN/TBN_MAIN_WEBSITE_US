@@ -32,7 +32,6 @@ const HIGHLIGHTS: Record<string, string[]> = {
     "RAID, SAN and iSCSI, with failure and rebuild labs",
     "vSphere clusters: vCenter, vMotion, HA and DRS",
     "Real-Time Project Version 2.0",
-    "1-on-1 doubt-clearing sessions",
     "Placement support",
   ],
   "data-center-automation-internship": [
@@ -40,12 +39,12 @@ const HIGHLIGHTS: Record<string, string[]> = {
     "Spine-leaf, VXLAN and AWS hybrid cloud",
     "Python, Ansible, REST APIs and CI/CD",
     "Real-Time Automation Project 2.0",
-    "1-on-1 mentoring and code review",
     "Project support through to deployment",
     "Placement support",
   ],
   "elite-career-path-bundle": [
     "All three tracks, taken in sequence",
+    "Data Center Server and Virtualization Internship and Automation Internship",
     "Everything in the three programmes",
     "A named mentor across all three",
     "Weekly 1-on-1 sessions",
