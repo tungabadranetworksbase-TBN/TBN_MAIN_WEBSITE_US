@@ -27,7 +27,7 @@ const HIGHLIGHTS: Record<string, string[]> = {
     "Placement support",
   ],
   "data-center-server-virtualization-internship": [
-    "Six phases, CCNA Advanced through VMware",
+    "Nine phases, CCNA Advanced through monitoring",
     "Enterprise server hardware, built and specified",
     "RAID, SAN and iSCSI, with failure and rebuild labs",
     "vSphere clusters: vCenter, vMotion, HA and DRS",

@@ -287,7 +287,7 @@ export const internships: Internship[] = [
       "The compute side of the data center: enterprise server hardware, RAID and SAN storage, out-of-band management, and VMware vSphere, on a CCNA Advanced networking base.",
     overview: [
       "The Data Center Server and Virtualization Internship covers what runs inside the rack rather than the fabric between racks: the servers themselves, the storage behind them, and the hypervisor layer on top.",
-      "It opens with CCNA Advanced Training, because a server engineer who cannot read a routing table or trace a VLAN cannot debug half of what goes wrong. From there it moves through data center fundamentals, enterprise server hardware, RAID and shared storage, out-of-band management, and VMware vSphere.",
+      "It opens with CCNA Advanced Training, because a server engineer who cannot read a routing table or trace a VLAN cannot debug half of what goes wrong. From there it moves through data center fundamentals, enterprise server hardware, RAID and shared storage, out-of-band management, and VMware vSphere, then Linux, AWS cloud fundamentals and the monitoring stack the estate is run from.",
       "The hardware is treated concretely: Dell PowerEdge, HPE ProLiant and Lenovo ThinkSystem, Intel Xeon and AMD EPYC, DIMM population and memory channels, NVMe and SAS, iDRAC and iLO. The storage phase is hands-on with array builds, simulated disk failure and rebuilds, and iSCSI.",
     ],
     duration: DURATION_NOTE,
@@ -311,6 +311,9 @@ export const internships: Internship[] = [
       "Fibre Channel, iSCSI, NFS and SMB",
       "VMware ESXi and vCenter Server",
       "Cisco routers and switches",
+      "Linux (Red Hat and Debian families)",
+      "AWS VPC, EC2 and IAM",
+      "SNMP, Syslog, Zabbix, Prometheus and Grafana",
     ],
     coursesIncluded: [
       { title: "CCNA Advanced (routing and switching)" },
@@ -319,6 +322,9 @@ export const internships: Internship[] = [
       { title: "RAID and Enterprise Storage" },
       { title: "Server Management and Firmware" },
       { title: "Enterprise Virtualization and VMware" },
+      { title: "Linux for Networking" },
+      { title: "AWS Cloud Practitioner (CLF-C02)" },
+      { title: "Monitoring Tools (SNMP, Syslog, Zabbix, Prometheus, Grafana)" },
       { title: "Real-Time Project Version 2.0" },
     ],
     curriculum: [
@@ -415,6 +421,47 @@ export const internships: Internship[] = [
           "Resource pools and clusters",
         ],
       },
+      {
+        // Topics follow the Linux for Network Engineers course, so the phase
+        // cannot drift from what that course actually teaches.
+        title: "Phase 7: Linux for Servers",
+        topics: [
+          "Linux architecture, distributions and the filesystem hierarchy",
+          "CLI basics, Bash and file and directory permissions",
+          "sudo, privilege and package management",
+          "Processes, monitoring and reading logs",
+          "ip, netstat, ss and tcpdump",
+          "DNS and DHCP on Linux",
+          "iptables and host firewalling",
+          "Bash scripting and cron scheduling",
+          "SSH configuration and key-based access",
+          "Lab: securing a Linux server",
+        ],
+      },
+      {
+        // Topics follow the AWS Certified Cloud Practitioner course.
+        title: "Phase 8: AWS Cloud",
+        topics: [
+          "Cloud vs data center, regions and availability zones",
+          "The VPC as a virtual data center",
+          "CIDR and subnet design, public vs private subnets",
+          "Route tables, internet gateway and NAT gateway",
+          "Security groups vs network ACLs",
+          "IAM users, roles and policies",
+          "EC2 instance types, auto scaling and load balancing",
+          "S3, EBS and EFS storage",
+          "CloudWatch and CloudTrail",
+          "Hybrid connectivity: VPN and Direct Connect",
+        ],
+      },
+      {
+        title: "Phase 9: Monitoring Tools",
+        topics: [
+          "SNMP and Syslog",
+          "Zabbix monitoring",
+          "Prometheus and Grafana",
+        ],
+      },
     ],
     projects: [
       RTP,
@@ -463,7 +510,7 @@ export const internships: Internship[] = [
       {
         question: "Does this programme include automation?",
         answer:
-          "No. This track is hardware, storage and virtualization. If you want Python, Ansible and CI/CD on top of data center material, take the AI Data Center and Automation Internship instead.",
+          "No. This track is hardware, storage, virtualization, Linux, AWS fundamentals and monitoring. If you want Python, Ansible and CI/CD on top of data center material, take the AI Data Center and Automation Internship instead.",
       },
       {
         question: "Do I need virtualization experience?",
@@ -649,7 +696,7 @@ export const internships: Internship[] = [
       {
         question: "How is this different from the Data Center Server and Virtualization Internship?",
         answer:
-          "That track is the compute side: server hardware, RAID and storage, out-of-band management and VMware. This one is the network and automation side: spine-leaf and VXLAN, then Python, Ansible, REST APIs, Git, CI/CD pipelines and Prometheus and Grafana observability.",
+          "That track is the compute side: server hardware, RAID and storage, out-of-band management, VMware, Linux and AWS fundamentals, with monitoring taught as operations. This one is the network and automation side: spine-leaf and VXLAN, GPU data center basics, then Python, Ansible, REST APIs, Git, CI/CD pipelines, and observability built and instrumented rather than operated.",
       },
       { question: "How long do I keep access?", answer: ACCESS_NOTE },
       { question: "How do I apply?", answer: APPLY_NOTE },
