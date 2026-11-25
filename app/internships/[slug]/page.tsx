@@ -15,7 +15,7 @@ import { buildMetadata } from "@/lib/seo";
 import { enrollHref, site } from "@/lib/site";
 import { breadcrumbSchema, faqSchema, graph, webPageSchema } from "@/lib/schema";
 import { getInternship, getRelatedInternships, internships } from "@/lib/internships";
-import { IN_PERSON_ADDON_USD, formatUsd, internshipPrice } from "@/lib/pricing";
+import { formatUsd, internshipPrice } from "@/lib/pricing";
 import styles from "../../detail.module.css";
 
 type Params = { params: Promise<{ slug: string }> };
@@ -296,9 +296,7 @@ export default async function InternshipPage({ params }: Params) {
                     )}
                   </p>
                   <p className={styles.priceNote}>
-                    Includes in-person training and hands-on device access at no extra cost. Taken
-                    as individual courses, in-person training is a one-time{" "}
-                    {formatUsd(IN_PERSON_ADDON_USD)} extra.
+                    Includes in-person training and hands-on device access at no extra cost.
                   </p>
                 </div>
               )}
