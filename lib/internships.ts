@@ -16,6 +16,7 @@
  * publishes no salary or placement statistics.
  */
 
+import { courses } from "./courses";
 import type { Faq, Module } from "./courses";
 
 export type InternshipCategory =
@@ -715,6 +716,7 @@ export const internships: Internship[] = [
       "The Elite Career Path Bundle is all three internships taken as one sequence rather than bought separately: Enterprise Networking, Data Center Server and Virtualization, and AI Data Center and Automation.",
       "Taken in order the tracks build rather than repeat. Enterprise networking establishes routing, switching, wireless and operations; the server track adds the hardware, storage and hypervisor layers; the automation track puts Python, Ansible, CI/CD and cloud on top of both.",
       "It is the widest route offered, and it is aimed at someone who wants to finish able to work in enterprise networking, data center infrastructure or automation, rather than having to pick one at the start.",
+      "Every course in the catalog is assigned to bundle students, not only the ones the three tracks sequence.",
     ],
     duration: DURATION_NOTE,
     commitment: "Structured sessions across all three tracks, with lab access throughout.",
@@ -738,10 +740,15 @@ export const internships: Internship[] = [
       "Prometheus, Grafana and Zabbix",
       "GLPI, ServiceNow and JIRA",
     ],
+    // The three tracks, then every course in the catalog by name. Spread from
+    // `courses` rather than retyped, so a course added, renamed or removed
+    // there reaches this list without anyone remembering it exists - the way
+    // the list fell behind the catalog in the first place.
     coursesIncluded: [
       { title: "Enterprise Networking Internship, in full" },
       { title: "Data Center Server and Virtualization Internship, in full" },
       { title: "AI Data Center and Automation Internship, in full" },
+      ...courses.map((c) => ({ title: c.title })),
     ],
     curriculum: [
       {

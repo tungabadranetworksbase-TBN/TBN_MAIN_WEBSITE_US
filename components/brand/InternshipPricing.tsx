@@ -45,7 +45,7 @@ const HIGHLIGHTS: Record<string, string[]> = {
   "elite-career-path-bundle": [
     "All three tracks, taken in sequence",
     "Data Center Server and Virtualization Internship and Automation Internship",
-    "Everything in the three programmes",
+    "Every course in the catalog, not only the three tracks",
     "A named mentor across all three",
     "Weekly 1-on-1 sessions",
     "Project support on every track",
