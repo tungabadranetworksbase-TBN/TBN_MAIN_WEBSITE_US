@@ -295,9 +295,6 @@ export default async function InternshipPage({ params }: Params) {
                       </s>
                     )}
                   </p>
-                  <p className={styles.priceNote}>
-                    Includes in-person training and hands-on device access at no extra cost.
-                  </p>
                 </div>
               )}
 
